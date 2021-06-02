@@ -89,6 +89,9 @@ PROCESSAMENTO
 
     10. Premição de conclusão de nível
     Função para restaurar uma vida, caso esteja incompleta ou adicionar um bônus a pontuação caso esteja completa.
+    
+    11. Ranking
+    Função que será executada no final do jogo, para atulizar a API com os dados do jogador(nome e score)
 
 
 SAÍDAS
