@@ -1,0 +1,53 @@
+*{
+  font-family: "8BIT WONDER";
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  background-image: url(../img/background-image.png);
+ 
+}
+#container{
+  display: flex;
+  flex-direction: column;
+}
+#settings-button{
+  background: none;
+  border: none;
+  position: fixed;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+#btn-box{
+  height:80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  bottom:20%;
+  align-items:center;
+}
+#principal-title{
+  font-size:5rem;
+  margin-top:100px;
+
+}
+#pressStart{
+  position: relative;
+  width: 25rem;
+  height: 3rem;
+  background:none;
+  border-radius: 50px;
+  color: #F223EE;
+  font-size:1.5rem;
+  border-color: #FFFFFF;
+}
+#pressStart:hover{
+  background-color: #F223EE;
+  color:#F2EA23;
+  border:none;
+  transition:0.3s ;
+}
