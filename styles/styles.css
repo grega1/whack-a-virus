@@ -7,9 +7,10 @@
 }
 
 body{
-  background-image: url(../img/background-image.png);
- 
+  background-image: url(../img/background.svg);
+  background-repeat: no-repeat;
 }
+/* Principal Game Page */ 
 #container{
   display: flex;
   flex-direction: column;
@@ -50,4 +51,10 @@ body{
   color:#F2EA23;
   border:none;
   transition:0.3s ;
+}
+/* Select Language Page */ 
+#modal-language{
+  width: 80%;
+  height: 80%;
+  background:#fff;
 }
