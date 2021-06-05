@@ -132,12 +132,16 @@ body{
 
 .btn-sec{
   width: 20rem;
-  height: 5rem;
+  height: 4rem;
   background-color:#233679;
   color: #FFFFFF;
   border-radius: 25px;
-  font-size:30px;
+  font-size:20px;
   border: none
+  }
+  .btn-sec:hover{
+    background-color:#233679;
+    opacity:0.7;
   }
 
   /* Nickname Page */
@@ -152,4 +156,34 @@ body{
     height: 90vh;
     background:#000023;
     border-radius: 25px;
+  }
+  #input-nickname input{
+    width: 500px;
+    height: 60px;
+    background-color:#A79DE1;
+    border:none;
+    border-radius:25px;
+    text-align: center;
+    font-size:25px;
+  }
+  /* Instructions Page */
+  #modal-instructions, #modal-instructions-ingame, #modal-instructions-menu{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top:3%;
+    align-self: center;
+    position: relative;
+    width: 80%;
+    height: 90vh;
+    background:#000023;
+    border-radius: 25px;
+  }
+  #text-instructions p{
+    align-items: center;
+    justify-content: center;
+    padding:40px 40px 0 40px;
+  }
+  #back-to-menu{
+    width: 400px;
   }
