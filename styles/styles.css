@@ -57,6 +57,7 @@ body{
 #modal-language{
   display: flex;
   align-items: center;
+  justify-content: center;
   margin-top:3%;
   align-self: center;
   position: relative;
@@ -69,13 +70,14 @@ body{
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   align-self: center;
   width: 90%;
   height: 80vh;
   background-color: none;
   border: 4px solid #E35C17;
   border-radius: 25px;
+  position:relative;
 }
 .circles{
   height: 1rem;
@@ -87,4 +89,44 @@ body{
 #circle1{
   left: 40px;
   top: 50px;
+}
+#circle2{
+  right: 40px;
+  top: 50px;
+}
+#circle3{
+  left: 40px;
+  bottom: 50px;
+}
+#circle4{
+  right: 40px;
+  bottom: 50px;
+}
+#language{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+#language img{
+  margin-right: 30px;
+  width: 150px;
+}
+#language label{
+  display: flex;
+
+  align-items: center;
+}
+#language input[type="radio"]{
+  display: none;
+}
+#flag-EN,#flag-ptBR{
+  -ms-interpolation-mode: nearest-neighbor;
+  image-rendering: pixelated;
+}
+
+
+.btn-sec{
+  width: 20rem;
+  height: 5rem;
+
 }
