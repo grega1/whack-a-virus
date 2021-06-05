@@ -187,3 +187,35 @@ body{
   #back-to-menu{
     width: 400px;
   }
+  /* GamePage */
+  #game-box{
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    width: 1200px;
+    height: auto;
+    gap:20px;
+  }
+  right-box{
+    
+  }
+
+  #modal-ranking{
+    width:352px;
+    height: 200px;
+  }
+  #modal-ranking .modal-with-border{
+   width: 90%;
+    height: 40vh;
+   }
+  #modal-info-game{
+    width:352px;
+    height:559px;
+  }
+  #modal-info-game .modal-with-border{
+    width: 90%;
+    height: 40vh;
+
+  }
