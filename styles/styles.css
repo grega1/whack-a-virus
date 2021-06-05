@@ -63,7 +63,7 @@ body{
   position: relative;
   width: 80%;
   height: 90vh;
-  background:#233679;
+  background:#000023;
   border-radius: 25px;
 }
 .modal-with-border{
@@ -87,20 +87,20 @@ body{
   position:absolute
 }
 #circle1{
-  left: 40px;
-  top: 50px;
+  left: 30px;
+  top: 30px;
 }
 #circle2{
-  right: 40px;
-  top: 50px;
+  right: 30px;
+  top: 30px;
 }
 #circle3{
-  left: 40px;
-  bottom: 50px;
+  left: 30px;
+  bottom: 30px;
 }
 #circle4{
-  right: 40px;
-  bottom: 50px;
+  right: 30px;
+  bottom: 30px;
 }
 #language{
   display: flex;
@@ -124,9 +124,32 @@ body{
   image-rendering: pixelated;
 }
 
+.modal-titles{
+  text-shadow: 3px 3px 3px #F33123;
+  font-size:38px;
+
+}
 
 .btn-sec{
   width: 20rem;
   height: 5rem;
+  background-color:#233679;
+  color: #FFFFFF;
+  border-radius: 25px;
+  font-size:30px;
+  border: none
+  }
 
-}
+  /* Nickname Page */
+  #modal-nickname{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top:3%;
+    align-self: center;
+    position: relative;
+    width: 80%;
+    height: 90vh;
+    background:#000023;
+    border-radius: 25px;
+  }
