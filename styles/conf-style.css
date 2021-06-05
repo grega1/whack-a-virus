@@ -10,6 +10,10 @@ body{
     background-size: cover;
 }
 
+h3{
+    text-shadow: 3px 3px 3px #E35C17;
+}
+
 #container{
     display: flex;
     flex-direction: column;
@@ -115,7 +119,7 @@ body{
     flex-direction: column;
     gap: 25px;
     width: 100%;
-    
+
 }
 
 .slider{
@@ -130,9 +134,7 @@ body{
 
 /* Teclas de atalho */
 
-h3{
-    text-shadow: 3px 3px 3px #E35C17;
-}
+
 
 p{
     text-align: center;
@@ -166,7 +168,7 @@ label{
     background-color:#000023;
     color: #FFFFFF;
     border: 1px solid #EAE9E9;
-    border-radius: 25px;
+    border-radius: 15px;
     font-size:25px;
     font-size: 25px;
 }
@@ -174,6 +176,6 @@ label{
 .btns{
    display: flex;
    flex-direction: column;
-   gap: 10px; 
+   gap: 10px;
 }
 
