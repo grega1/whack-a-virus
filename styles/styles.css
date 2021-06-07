@@ -13,15 +13,24 @@ body{
 }
 /* Principal Game Page */ 
 #container{
+  height:100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 #settings-button{
-  background: none;
+  background: transparent;
   border: none;
   position: fixed;
   margin-left: 20px;
   margin-top: 20px;
+}
+#help-button{
+  background: transparent;
+  border: none;
+  position: fixed;
+  margin-left: 20px;
+  margin-top: 150px;
 }
 
 #btn-box{
@@ -167,15 +176,14 @@ body{
     font-size:25px;
   }
   /* Instructions Page */
-  #modal-instructions, #modal-instructions-ingame, #modal-instructions-menu{
+  #modal-instructions, #modal-instructions-ingame, #modal-instructions-menu, #modal-ingame{
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-top:3%;
+    justify-content: center;    
     align-self: center;
     position: relative;
     width: 80%;
-    height: 90vh;
+    height: 800px;
     background:#000023;
     border-radius: 25px;
   }
@@ -194,28 +202,99 @@ body{
     justify-content: center;
     align-items: center;
     align-self: center;
-    width: 1200px;
-    height: auto;
-    gap:20px;
+    width: 1279px;
+    background-color: #000023;
+    height: 800px;
+    gap:24px;
   }
-  right-box{
-    
+  #right-box{
+    display: flex;
+    flex-direction: column;
+    gap:24px;
+    height:750px;
+    padding-right: 17px;  
+      
+  }
+  #modal-ingame .modal-with-border{
+    height: 750px; 
+    background-color: #E35C17;
   }
 
   #modal-ranking{
     width:352px;
     height: 200px;
+    background-color: #000023;
+    border-radius: 25px;
   }
   #modal-ranking .modal-with-border{
-   width: 90%;
-    height: 40vh;
+    width: 350px;
+    height: 198px;
    }
   #modal-info-game{
     width:352px;
     height:559px;
+    background-color: #000023;
+    border-radius: 25px;
   }
   #modal-info-game .modal-with-border{
-    width: 90%;
-    height: 40vh;
+    width: 350px;
+    height: 534px;
+  }
+  .background-with-crocodile{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+    height: 303px;
+    background-color: #963200;
+    border-radius: 25px 25px 0 0;
+    align-items: flex-end;
+  }
+  .background-with-crocodile img{
+    width:293.5px;
+    height:91px;
+    
+  }
+  #game-section{
+    display:flex;
+    width:100%;
+    height: 439px;
+    flex-wrap: wrap;
+    gap:30px;
+    padding-left:120px;
+    padding-top:44px;
+  }
+  #game-section .spots{
+    width:150px;
+    height:92px;
+  }
+  #modal-ranking .modal-with-border{
+    display: flex;
+    flex-direction:row;
+
+    
+  }
+  #modal-ranking hr{
+    width:6px;
+    height:136px;
+    background-color:#E35C17;
+    border:transparent;
+  }
+  #title-ranking{
+    position: fixed;
+    top:90px
+  }
+  #next-level {
+    background:transparent;
+    border: transparent;
+  }
+  #next-level img{
+    background:transparent;
+    -ms-interpolation-mode: nearest-neighbor;
+    image-rendering: pixelated;
+  }
+  #masks img{
+    -ms-interpolation-mode: nearest-neighbor;
+    image-rendering: pixelated;
 
   }
