@@ -1,0 +1,300 @@
+*{
+  font-family: "8BIT WONDER";
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  background-image: url(../img/background.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+/* Principal Game Page */ 
+#container{
+  height:100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#settings-button{
+  background: transparent;
+  border: none;
+  position: fixed;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+#help-button{
+  background: transparent;
+  border: none;
+  position: fixed;
+  margin-left: 20px;
+  margin-top: 150px;
+}
+
+#btn-box{
+  height:80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  bottom:20%;
+  align-items:center;
+}
+#principal-title{
+  font-size:5rem;
+  margin-top:100px;
+
+}
+#pressStart{
+  position: relative;
+  width: 25rem;
+  height: 3rem;
+  background:none;
+  border-radius: 50px;
+  color: #F223EE;
+  font-size:1.5rem;
+  border-color: #FFFFFF;
+}
+#pressStart:hover{
+  background-color: #F223EE;
+  color:#F2EA23;
+  border:none;
+  transition:0.3s ;
+}
+/* Select Language Page */ 
+#modal-language{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top:3%;
+  align-self: center;
+  position: relative;
+  width: 80%;
+  height: 90vh;
+  background:#000023;
+  border-radius: 25px;
+}
+.modal-with-border{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  align-self: center;
+  width: 90%;
+  height: 80vh;
+  background-color: none;
+  border: 4px solid #E35C17;
+  border-radius: 25px;
+  position:relative;
+}
+.circles{
+  height: 1rem;
+  width: 1rem;
+  border-radius: 50%;
+  background-color: #E35C17;
+  position:absolute
+}
+#circle1{
+  left: 30px;
+  top: 30px;
+}
+#circle2{
+  right: 30px;
+  top: 30px;
+}
+#circle3{
+  left: 30px;
+  bottom: 30px;
+}
+#circle4{
+  right: 30px;
+  bottom: 30px;
+}
+#language{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+#language img{
+  margin-right: 30px;
+  width: 150px;
+}
+#language label{
+  display: flex;
+
+  align-items: center;
+}
+#language input[type="radio"]{
+  display: none;
+}
+#flag-EN,#flag-ptBR{
+  -ms-interpolation-mode: nearest-neighbor;
+  image-rendering: pixelated;
+}
+
+.modal-titles{
+  text-shadow: 3px 3px 3px #F33123;
+  font-size:38px;
+
+}
+
+.btn-sec{
+  width: 20rem;
+  height: 4rem;
+  background-color:#233679;
+  color: #FFFFFF;
+  border-radius: 25px;
+  font-size:20px;
+  border: none
+  }
+  .btn-sec:hover{
+    background-color:#233679;
+    opacity:0.7;
+  }
+
+  /* Nickname Page */
+  #modal-nickname{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top:3%;
+    align-self: center;
+    position: relative;
+    width: 80%;
+    height: 90vh;
+    background:#000023;
+    border-radius: 25px;
+  }
+  #input-nickname input{
+    width: 500px;
+    height: 60px;
+    background-color:#A79DE1;
+    border:none;
+    border-radius:25px;
+    text-align: center;
+    font-size:25px;
+  }
+  /* Instructions Page */
+  #modal-instructions, #modal-instructions-ingame, #modal-instructions-menu, #modal-ingame{
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+    align-self: center;
+    position: relative;
+    width: 80%;
+    height: 800px;
+    background:#000023;
+    border-radius: 25px;
+  }
+  #text-instructions p{
+    align-items: center;
+    justify-content: center;
+    padding:40px 40px 0 40px;
+  }
+  #back-to-menu{
+    width: 400px;
+  }
+  /* GamePage */
+  #game-box{
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    width: 1279px;
+    background-color: #000023;
+    height: 800px;
+    gap:24px;
+  }
+  #right-box{
+    display: flex;
+    flex-direction: column;
+    gap:24px;
+    height:750px;
+    padding-right: 17px;  
+      
+  }
+  #modal-ingame .modal-with-border{
+    height: 750px; 
+    background-color: #E35C17;
+  }
+
+  #modal-ranking{
+    width:352px;
+    height: 200px;
+    background-color: #000023;
+    border-radius: 25px;
+  }
+  #modal-ranking .modal-with-border{
+    width: 350px;
+    height: 198px;
+   }
+  #modal-info-game{
+    width:352px;
+    height:559px;
+    background-color: #000023;
+    border-radius: 25px;
+  }
+  #modal-info-game .modal-with-border{
+    width: 350px;
+    height: 534px;
+  }
+  .background-with-crocodile{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+    height: 303px;
+    background-color: #963200;
+    border-radius: 25px 25px 0 0;
+    align-items: flex-end;
+  }
+  .background-with-crocodile img{
+    width:293.5px;
+    height:91px;
+    
+  }
+  #game-section{
+    display:flex;
+    width:100%;
+    height: 439px;
+    flex-wrap: wrap;
+    gap:30px;
+    padding-left:120px;
+    padding-top:44px;
+  }
+  #game-section .spots{
+    width:150px;
+    height:92px;
+  }
+  #modal-ranking .modal-with-border{
+    display: flex;
+    flex-direction:row;
+
+    
+  }
+  #modal-ranking hr{
+    width:6px;
+    height:136px;
+    background-color:#E35C17;
+    border:transparent;
+  }
+  #title-ranking{
+    position: fixed;
+    top:90px
+  }
+  #next-level {
+    background:transparent;
+    border: transparent;
+  }
+  #next-level img{
+    background:transparent;
+    -ms-interpolation-mode: nearest-neighbor;
+    image-rendering: pixelated;
+  }
+  #masks img{
+    -ms-interpolation-mode: nearest-neighbor;
+    image-rendering: pixelated;
+
+  }
