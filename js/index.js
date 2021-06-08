@@ -391,18 +391,3 @@ function showVirus() {
 };
   showVirus();
 };
-
-//Faz o virus aparecer
-/*function showVirus() {
-  
-  for(let i= 0; i < slotSequence.length; i++){
-    let slotNumber = slotSequence[i];
-    let slotVirus = document.getElementById(`slot${slotNumber}`);
-    slotVirus.innerHTML += `<img src="img/virus-icon.svg"  class="virus"/>`
-      newGame.setCallbackTimeOut(()=>{
-        slotVirus.innerHTML -= `<img src="img/virus-icon.svg"  class="virus"/>`
-    },3000)
-    newGame.setCallbackTimeOut(()=>{},2000)
-  }
-};*/
-//sorteio da lista de aparições do vírus
