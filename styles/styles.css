@@ -7,7 +7,7 @@
     src: local('8BIT WONDER Nominal'), url('../fonts/8-BIT WONDER.woff') format('woff');
     }
 *{
-  font-family: "8BIT WONDER Nominal";
+  font-family: "Super Legend Boy";
   color: #fff;
   margin: 0;
   padding: 0;
@@ -18,6 +18,9 @@ body{
   background-image: url(../img/background.svg);
   background-repeat: no-repeat;
   background-size: cover;
+}
+h1,h2{
+  font-family: "8BIT WONDER Nominal";
 }
 /* Principal Game Page */ 
 #container{
