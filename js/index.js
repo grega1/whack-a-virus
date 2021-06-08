@@ -1,8 +1,9 @@
 class Game {
-  constructor(_name, _lifes = 3, _score = 0, _time, _currentTime, _timerInterval = 100, _callbackTimeout, _callbackTimeInterval, _internalTimer, _internalTimeout) {
+  constructor(_name, _lifes = 3, _score = 0, _currentLevel = 3, _time, _currentTime, _timerInterval = 100, _callbackTimeout, _callbackTimeInterval, _internalTimer, _internalTimeout) {
     this.name = _name;
     this.lifes = _lifes;
     this.score = _score;
+    this.currentLevel = _currentLevel;
     this.time = _time;
     this.currentTime = _currentTime;
     this.timerInterval = _timerInterval;
@@ -27,6 +28,32 @@ class Game {
 
   getScore() {
     return this.score;
+  }
+  getIntervalByLevel(){
+    switch(this.currentLevel){
+      case 1:
+        return 1500;
+        break;
+      case 2:
+        return 1200;
+        break;
+      case 3:
+        return 1000;
+        break;
+    }
+  }
+  getPointsByLevel(){
+    switch(this.currentLevel){
+      case 1:
+        return 10;
+        break;
+      case 2:
+        return 20;
+        break;
+      case 3:
+        return 30;
+        break;
+    }
   }
 
   setLifeStatus(_lifes = 3) {
@@ -371,6 +398,8 @@ function gameStart() {
   }
 
   function showVirus() {
+    const virusValue = newGame.getPointsByLevel();
+    const intervalByLevel = newGame.getIntervalByLevel();
     let interval1 = setInterval(() => {
       let drawRange = newGame.drawSlots(1, 9);
       let captureVirus = document.getElementById(`virus${drawRange}`);
@@ -381,8 +410,7 @@ function gameStart() {
       captureHole.classList.add(`invisible`);
       captureHole.classList.remove(`visible`);
       captureVirus.addEventListener('click', () => {
-        const virusValue = 10;
-        let storageScore = newGame.increaseScore(virusValue);
+         let storageScore = newGame.increaseScore(virusValue);
         newGame.setScore(storageScore);
         captureScore.innerHTML = `Score:${newGame.getScore()}`
         console.log(newGame.getScore());
@@ -394,7 +422,7 @@ function gameStart() {
       })
 
 
-    }, 1000)
+    }, intervalByLevel)
     let interval2 = setInterval(() => {
 
       let drawRange = newGame.drawSlots(1, 9);
