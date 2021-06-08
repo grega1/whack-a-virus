@@ -1,5 +1,5 @@
 class Game {
-  constructor(_name, _lifes = 3, _score, _time, _currentTime, _timerInterval = 100, _callbackTimeout, _callbackTimeInterval, _internalTimer, _internalTimeout) {
+  constructor(_name, _lifes = 3, _score = 0, _time, _currentTime, _timerInterval = 100, _callbackTimeout, _callbackTimeInterval, _internalTimer, _internalTimeout) {
     this.name = _name;
     this.lifes = _lifes;
     this.score = _score;
@@ -132,9 +132,44 @@ class Game {
 
 
 let newGame = new Game();
-//Manipulação das Telas do Jogo
 
-//
+//Manipulação das Telas do Jogo
+//Sequência das Configurações da Tela do Jogo
+let captureSettings = document.getElementById("settings-button");
+captureSettings.addEventListener('click',()=>{
+  let removeBtnBox = document.getElementById('btn-box');
+  removeBtnBox.parentNode.removeChild(removeBtnBox);
+  captureSettings.innerHTML+= ` <section id="modal-configuration" class="modal">
+            
+            <section class="modal-with-border">
+                <div id="circle1" class="circles">
+                </div>
+                <div id="circle2" class="circles">
+                </div>
+                <div id="circle3" class="circles">
+                </div>
+                <div id="circle4" class="circles">
+                </div>
+
+                <h3>Ajustes</h3>
+
+                <section id="main-menu" class="main-menu">
+
+                <button id="btn-sound-configuration" class="sound"> Sons </button>
+                <button id="btn-shortcut-key" class="shortcut-key"> Teclas de Atalho</button>
+                <button id="btn-help" class="menu-help">Ajuda</button>
+
+                </section>
+
+                <button id="btn-return-game" class="return-game">Voltar para o Jogo</button>
+                
+            </section>
+            
+        </section>`
+
+})
+
+//Sequência do Jogo
 let pressStart = document.getElementById("pressStart");
 let captureContainer = document.getElementById("container");
 pressStart.addEventListener('click', () => {
@@ -167,7 +202,7 @@ pressStart.addEventListener('click', () => {
 });
 
 let langPTBR = document.getElementById('select-language');
-//langPTBR.addEventListener('click',
+
 function portugueseRoute() {
   let modalLanguage = document.getElementById('modal-language');
   modalLanguage.parentNode.removeChild(modalLanguage);
@@ -225,11 +260,13 @@ function showInstructions() {
     </div>
     </div>`
 }
+let slotSequence = [];
+
 function gameStart() {
   let userName = newGame.getName();
   newGame.setScore();
   let userScore = newGame.getScore();
-  newGame.setLifeStatus(1);
+  newGame.setLifeStatus(3);
   let userLifes = newGame.getLifeStatus();
   let modalInstructions = document.getElementById('modal-instructions');
   modalInstructions.parentNode.removeChild(modalInstructions);
@@ -244,46 +281,46 @@ function gameStart() {
           <section class="background-with-crocodile">
             <div id="showNameAndScore">
             <h4> Name:${userName}</h4>
-            <h4> Score:${userScore}</h4>
+            <h4 id="score">Score:0 </h4>
             </div>
-            <img src="img/croco.png" />
+            <img src="img/Jacarezin.png" />
           </section>
           <section id="game-section">
             <div id="slot1" class="spots">
               <img src="img/spots.svg" id="hole1"/>
-              <img src="img/coroninha-no-buraco.svg" id="virus1"  class="virus invisible" onclick="console.log('oi')"/>
+              <img src="img/coroninha-no-buraco.svg" id="virus1"  class="virus invisible" />
             </div>
             <div id="slot2" class="spots">
               <img src="img/spots.svg" id="hole2"/>
-              <img src="img/coroninha-no-buraco.svg" id="virus2"  class="virus invisible" onclick="console.log('oi')"/>
+              <img src="img/coroninha-no-buraco.svg" id="virus2"  class="virus invisible" />
             </div>
             <div id="slot3" class="spots">
               <img src="img/spots.svg" id="hole3" />
-              <img src="img/coroninha-no-buraco.svg" id="virus3"  class="virus invisible" onclick="console.log('oi')"/>
+              <img src="img/coroninha-no-buraco.svg" id="virus3"  class="virus invisible" />
             </div>
             <div id="slot4" class="spots">
               <img src="img/spots.svg" id="hole4"/>
-              <img src="img/coroninha-no-buraco.svg" id="virus4"  class="virus invisible" onclick="console.log('oi')"/>
+              <img src="img/coroninha-no-buraco.svg" id="virus4"  class="virus invisible" />
             </div>
             <div id="slot5" class="spots">
               <img src="img/spots.svg" id="hole5" />
-              <img src="img/coroninha-no-buraco.svg" id="virus5"  class="virus invisible" onclick="console.log('oi')"/>
+              <img src="img/coroninha-no-buraco.svg" id="virus5"  class="virus invisible" />
             </div>
             <div id="slot6" class="spots">
               <img src="img/spots.svg" id="hole6" />
-              <img src="img/coroninha-no-buraco.svg" id="virus6"  class="virus invisible" onclick="console.log('oi')"/>
+              <img src="img/coroninha-no-buraco.svg" id="virus6"  class="virus invisible" />
             </div>
             <div id="slot7" class="spots">
               <img src="img/spots.svg" id="hole7"/>
-              <img src="img/coroninha-no-buraco.svg" id="virus7"  class="virus invisible" onclick="console.log('oi')"/>
+              <img src="img/coroninha-no-buraco.svg" id="virus7"  class="virus invisible" />
             </div>
             <div id="slot8" class="spots">
               <img src="img/spots.svg" id="hole8"/>
-              <img src="img/coroninha-no-buraco.svg" id="virus8"  class="virus invisible" onclick="console.log('oi')"/>
+              <img src="img/coroninha-no-buraco.svg" id="virus8"  class="virus invisible" />
             </div>
             <div id="slot9" class="spots">
               <img src="img/spots.svg" id="hole9" />
-              <img src="img/coroninha-no-buraco.svg" id="virus9"  class="virus invisible" onclick="console.log('oi')"/>
+              <img src="img/coroninha-no-buraco.svg" id="virus9"  class="virus invisible" />
             </div>
           </section>
         </section>
@@ -301,6 +338,7 @@ function gameStart() {
             <hr></hr>
             <div id="score-rank">
               <h4>Pontuação</h4>
+            
             </div>
           </section>
         </section>
@@ -332,62 +370,48 @@ function gameStart() {
 
   }
 
-  /*{
-    let clock = clocks[id];
-    let convertedDisplay = parseInput(id);
-  
-    clock.setTimer(convertedDisplay);
-    clock.setTimerInterval();
-  
-    clock.setCallbackTimeInterval(() => {
-      timers[id].value = clock.currentTimeString;
-    });
-  
-    clock.setCallbackTimeout(() => {
-      audio();
-    });
-    clock.startTimer();
-  }*/
-  let slotSequence = [];
-  for (let i = 0; i < 20; i++) {
-  let drawRange = newGame.drawSlots(1, 9);
-  slotSequence.push(drawRange);
-  }
-console.log(slotSequence);
-function showVirus() {
-  
-  for(let i= 0; i < slotSequence.length; i++){
-    /*let slotNumber = slotSequence[i];
-    console.log(slotNumber);
-    let captureVirus = document.getElementById(`virus${slotNumber}`);
-    let captureHole = document.getElementById(`hole${slotNumber}`);*/
-    //let captureVirus = document.getElementById(`virus${i}`);
-   //let removeVirus = captureVirus.parentNode.removeChild(captureVirus);   
-      let interval1 =setInterval(() => {    
-        let slotNumber = slotSequence[i];
-        console.log(slotNumber);
-        let captureVirus = document.getElementById(`virus${slotNumber}`);
-        let captureHole = document.getElementById(`hole${slotNumber}`);  
-        captureVirus.classList.add(`visible`);
-        captureVirus.classList.remove(`invisible`);
-        captureHole.classList.add(`invisible`);
-        captureHole.classList.remove(`visible`);  
-                      
-      },100*i)
-    let interval2 = setInterval(() => { 
-      let slotNumber = slotSequence[i];
-      let captureVirus = document.getElementById(`virus${slotNumber}`);
-      let captureHole = document.getElementById(`hole${slotNumber}`);  
+  function showVirus() {
+    let interval1 = setInterval(() => {
+      let drawRange = newGame.drawSlots(1, 9);
+      let captureVirus = document.getElementById(`virus${drawRange}`);
+      let captureHole = document.getElementById(`hole${drawRange}`);
+      let captureScore = document.getElementById(`score`)
+      captureVirus.classList.add(`visible`);
+      captureVirus.classList.remove(`invisible`);
+      captureHole.classList.add(`invisible`);
+      captureHole.classList.remove(`visible`);
+      captureVirus.addEventListener('click', () => {
+        const virusValue = 10;
+        let storageScore = newGame.increaseScore(virusValue);
+        newGame.setScore(storageScore);
+        captureScore.innerHTML = `Score:${newGame.getScore()}`
+        console.log(newGame.getScore());
+        captureVirus.classList.remove(`visible`)
+        captureVirus.classList.add(`invisible`);
+        captureHole.classList.add(`visible`);
+        captureHole.classList.remove(`invisible`);
+
+      })
+
+
+    }, 1000)
+    let interval2 = setInterval(() => {
+
+      let drawRange = newGame.drawSlots(1, 9);
+      let captureVirus = document.getElementById(`virus${drawRange}`);
+      let captureHole = document.getElementById(`hole${drawRange}`);
+
       captureVirus.classList.add(`invisible`);
       captureVirus.classList.remove(`visible`);
       captureHole.classList.add(`visible`);
       captureHole.classList.remove(`invisible`);
-     },2000*i) 
-       setTimeout(()=>{
-        clearInterval(interval1);
-        clearInterval(interval2);
-        },10000*i)
-};
-};
+    }, 2000)
+    setTimeout(() => {
+      clearInterval(interval1);
+      clearInterval(interval2);
+    }, 60000)
+
+  };
   showVirus();
 };
+
