@@ -218,8 +218,9 @@ body{
   #modal-ingame .modal-with-border{
     height: 750px; 
     background-color: #E35C17;
-    cursor: url(./img/alcool-select.png) 4 12, auto;
-    cursor: url(./img/alcool-select.png) 0 0, pointer;
+    cursor: url(../img/alcool-click.svg), grabbing;    
+    cursor: url(../img/alcool.svg) 4 12, url(../img/alcool.svg), auto;  
+
   }
 
   #modal-ranking{
