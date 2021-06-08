@@ -166,7 +166,8 @@ let captureSettings = document.getElementById("settings-button");
 captureSettings.addEventListener('click',()=>{
   let removeBtnBox = document.getElementById('btn-box');
   removeBtnBox.parentNode.removeChild(removeBtnBox);
-  captureSettings.innerHTML+= ` <section id="modal-configuration" class="modal">
+  captureContainer.innerHTML+= ` 
+            <section id="modal-configuration" class="modal">
             
             <section class="modal-with-border">
                 <div id="circle1" class="circles">
