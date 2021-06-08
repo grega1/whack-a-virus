@@ -299,9 +299,16 @@ body{
 
   }
   /* Game Manipulation Styles */
-  .spots{
+.spots{
     
   }
-  .virus{
-    
-  }
+.virus{
+    margin-top:-37px;
+}
+.visible{
+  display:block;
+}
+.invisible{
+  display:none;
+}
+

@@ -193,38 +193,7 @@ function portugueseRoute() {
     </div>`
 };
 
-function showInstructions() {
-  let captureName = document.getElementById("user-input").value;
-  newGame.setName(captureName);
-  console.log(newGame.getName());
-  let modalNickName = document.getElementById('modal-nickname');
-  modalNickName.parentNode.removeChild(modalNickName);
-  captureContainer.innerHTML += ` <div id="modal-instructions" class="modal">
-      <div class="modal-with-border">
-        <div id="circle1" class="circles">        
-        </div>
-        <div id="circle2" class="circles">        
-        </div>
-        <div id="circle3" class="circles">        
-        </div>
-        <div id="circle4" class="circles">        
-        </div>
-        <h2 class="modal-titles"> Instructions
-        </h2>
-        <div id="text-instructions">
-         
-          <p>Hit corona vírus with alcohol spray to score</p>
-          <p>If you break the vacine you will lose and can continue using your mask, but think fast! You will have a short to use it!</p>
-          <p>Each level of dificulty clear you will win a mask</p>
-                  
-        </div>
-      <div>
-          <button id="play-game" class="btn-sec"> Game Start </button>
-      </div>
-    </div>
-    </div>`
 
-}
 function showInstructions() {
   let captureName = document.getElementById("user-input").value;
   newGame.setName(captureName);
@@ -281,32 +250,40 @@ function gameStart() {
           </section>
           <section id="game-section">
             <div id="slot1" class="spots">
-              <img src="img/spots.svg" />
-
+              <img src="img/spots.svg" id="hole1"/>
+              <img src="img/coroninha-no-buraco.svg" id="virus1"  class="virus invisible" onclick="console.log('oi')"/>
             </div>
             <div id="slot2" class="spots">
-              <img src="img/spots.svg" />
+              <img src="img/spots.svg" id="hole2"/>
+              <img src="img/coroninha-no-buraco.svg" id="virus2"  class="virus invisible" onclick="console.log('oi')"/>
             </div>
             <div id="slot3" class="spots">
-              <img src="img/spots.svg" />
+              <img src="img/spots.svg" id="hole3" />
+              <img src="img/coroninha-no-buraco.svg" id="virus3"  class="virus invisible" onclick="console.log('oi')"/>
             </div>
             <div id="slot4" class="spots">
-              <img src="img/spots.svg" />
+              <img src="img/spots.svg" id="hole4"/>
+              <img src="img/coroninha-no-buraco.svg" id="virus4"  class="virus invisible" onclick="console.log('oi')"/>
             </div>
             <div id="slot5" class="spots">
-              <img src="img/spots.svg" />
+              <img src="img/spots.svg" id="hole5" />
+              <img src="img/coroninha-no-buraco.svg" id="virus5"  class="virus invisible" onclick="console.log('oi')"/>
             </div>
             <div id="slot6" class="spots">
-              <img src="img/spots.svg" />
+              <img src="img/spots.svg" id="hole6" />
+              <img src="img/coroninha-no-buraco.svg" id="virus6"  class="virus invisible" onclick="console.log('oi')"/>
             </div>
             <div id="slot7" class="spots">
-              <img src="img/spots.svg" />
+              <img src="img/spots.svg" id="hole7"/>
+              <img src="img/coroninha-no-buraco.svg" id="virus7"  class="virus invisible" onclick="console.log('oi')"/>
             </div>
             <div id="slot8" class="spots">
-              <img src="img/spots.svg" />
+              <img src="img/spots.svg" id="hole8"/>
+              <img src="img/coroninha-no-buraco.svg" id="virus8"  class="virus invisible" onclick="console.log('oi')"/>
             </div>
             <div id="slot9" class="spots">
-              <img src="img/spots.svg" />
+              <img src="img/spots.svg" id="hole9" />
+              <img src="img/coroninha-no-buraco.svg" id="virus9"  class="virus invisible" onclick="console.log('oi')"/>
             </div>
           </section>
         </section>
@@ -373,28 +350,44 @@ function gameStart() {
   }*/
   let slotSequence = [];
   for (let i = 0; i < 20; i++) {
-  let drawRange = newGame.drawSlots(1, 3);
+  let drawRange = newGame.drawSlots(1, 9);
   slotSequence.push(drawRange);
   }
 console.log(slotSequence);
 function showVirus() {
   
   for(let i= 0; i < slotSequence.length; i++){
-    let slotNumber = slotSequence[i];
+    /*let slotNumber = slotSequence[i];
     console.log(slotNumber);
-    let slotVirus = document.getElementById(`slot${slotNumber}`);
+    let captureVirus = document.getElementById(`virus${slotNumber}`);
+    let captureHole = document.getElementById(`hole${slotNumber}`);*/
     //let captureVirus = document.getElementById(`virus${i}`);
    //let removeVirus = captureVirus.parentNode.removeChild(captureVirus);   
-      setInterval(() => {      
-        slotVirus.innerHTML += `<img src="img/virus-icon.svg" id="virus${i}"  class="virus"/>`
-        setInterval(() => { 
-          let captureVirus = document.getElementById(`virus${i}`);
-           captureVirus.parentNode.removeChild(captureVirus);
-        },2000)
-       
-    },2000)
-      setInterval(()=>{},2000)
-  }
+      let interval1 =setInterval(() => {    
+        let slotNumber = slotSequence[i];
+        console.log(slotNumber);
+        let captureVirus = document.getElementById(`virus${slotNumber}`);
+        let captureHole = document.getElementById(`hole${slotNumber}`);  
+        captureVirus.classList.add(`visible`);
+        captureVirus.classList.remove(`invisible`);
+        captureHole.classList.add(`invisible`);
+        captureHole.classList.remove(`visible`);  
+                      
+      },100*i)
+    let interval2 = setInterval(() => { 
+      let slotNumber = slotSequence[i];
+      let captureVirus = document.getElementById(`virus${slotNumber}`);
+      let captureHole = document.getElementById(`hole${slotNumber}`);  
+      captureVirus.classList.add(`invisible`);
+      captureVirus.classList.remove(`visible`);
+      captureHole.classList.add(`visible`);
+      captureHole.classList.remove(`invisible`);
+     },2000*i) 
+       setTimeout(()=>{
+        clearInterval(interval1);
+        clearInterval(interval2);
+        },10000*i)
+};
 };
   showVirus();
 };
@@ -413,4 +406,3 @@ function showVirus() {
   }
 };*/
 //sorteio da lista de aparições do vírus
-
