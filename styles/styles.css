@@ -1,5 +1,13 @@
+@import url('http://fonts.cdnfonts.com/css/eight-bit-dragon');
+@import url('http://fonts.cdnfonts.com/css/super-legend-boy');                
+@font-face {
+    font-family: '8BIT WONDER Nominal';
+    font-style: normal;
+    font-weight: normal;
+    src: local('8BIT WONDER Nominal'), url('../fonts/8-BIT WONDER.woff') format('woff');
+    }
 *{
-  font-family: "8BIT WONDER";
+  font-family: "8BIT WONDER Nominal";
   color: #fff;
   margin: 0;
   padding: 0;
@@ -188,6 +196,7 @@ body{
     border-radius: 25px;
   }
   #text-instructions p{
+    font-family: "Super Legend Boy";
     align-items: center;
     justify-content: center;
     padding:40px 40px 0 40px;
