@@ -82,7 +82,7 @@ h1,h2{
   align-self: center;
   position: relative;
   width: 80%;
-  height: 90vh;
+  height: 800px;
   background:#000023;
   border-radius: 25px;
 }
@@ -93,11 +93,12 @@ h1,h2{
   justify-content: space-around;
   align-self: center;
   width: 90%;
-  height: 80vh;
+  height: 750px;
   background-color: none;
   border: 4px solid #E35C17;
   border-radius: 25px;
-  position:relative;
+  position: relative;
+
 }
 .circles{
   height: 1rem;
@@ -173,7 +174,7 @@ h1,h2{
     align-self: center;
     position: relative;
     width: 80%;
-    height: 90vh;
+    height: 800px;
     background:#000023;
     border-radius: 25px;
   }
@@ -326,4 +327,113 @@ h1,h2{
 .invisible{
   display:none;
 }
+
+/* Configurations Modals */
+#modal-configuration{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top:3%;
+  align-self: center;
+  position: relative;
+  width: 40%;
+  height: 800px;
+  background:#000023;
+  border-radius: 25px;
+}
+.main-menu{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.main-menu button{
+  width: 350px;
+  height: 50px;
+  background-color:#000023;
+  color: #FFFFFF;
+  border: 1px solid #EAE9E9;
+  border-radius: 25px;
+  font-size:25px;
+
+}
+
+.return-game{
+  width: 350px;
+  height: 60px;
+  background-color:#233679;
+  color: #FFFFFF;
+  border-radius: 15px;
+  font-size:25px;
+  border: none
+}
+
+/* Ajustes de sons */
+
+.sound-menu{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 25px;
+  width: 100%;
+
+}
+
+.slider{
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  appearance: none;
+  width: 400px;
+  height: 5px;
+  background: #f221ef;
+}
+
+/* Teclas de atalho */
+
+
+
+p{
+  text-align: center;
+}
+
+.row{
+  display: flex;
+  justify-content: center;
+  margin-left: 45px;
+}
+
+.slot-with-label{
+  display: flex;
+  width: 25%;
+  margin-top: 25px;
+}
+
+.slot{
+  width: 10%;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+label{
+  margin-top: 10px;
+}
+
+.save{
+  width: 350px;
+  height: 50px;
+  background-color:#000023;
+  color: #FFFFFF;
+  border: 1px solid #EAE9E9;
+  border-radius: 15px;
+  font-size:25px;
+  font-size: 25px;
+}
+
+.btns{
+ display: flex;
+ flex-direction: column;
+ gap: 10px;
+}
+
 
