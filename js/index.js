@@ -1,18 +1,10 @@
 class Game {
-  constructor(_name, _lifes = 3, _score = 0, _currentLevel = 3, _time, _currentTime, _timerInterval = 100, _callbackTimeout, _callbackTimeInterval, _internalTimer, _internalTimeout) {
+  constructor(_name, _lifes = 3, _score = 0, _currentLevel) {
     this.name = _name;
     this.lifes = _lifes;
     this.score = _score;
     this.currentLevel = _currentLevel;
-    this.time = _time;
-    this.currentTime = _currentTime;
-    this.timerInterval = _timerInterval;
-    this.callbackTimeout = _callbackTimeout;
-    this.callbackTimeInterval = _callbackTimeInterval;
-    this.internalTimer = _internalTimer;
-    this.internalTimeout = _internalTimeout;
   }
-
 
   setName(_name) {
     this.name = _name;
@@ -29,8 +21,8 @@ class Game {
   getScore() {
     return this.score;
   }
-  getIntervalByLevel(){
-    switch(this.currentLevel){
+  getIntervalByLevel() {
+    switch (this.currentLevel) {
       case 1:
         return 1500;
         break;
@@ -42,8 +34,8 @@ class Game {
         break;
     }
   }
-  getPointsByLevel(){
-    switch(this.currentLevel){
+  getPointsByLevel() {
+    switch (this.currentLevel) {
       case 1:
         return 10;
         break;
@@ -86,7 +78,24 @@ class Game {
     }
   }
 
-  //Timer
+  rankingData() {
+
+    return { name: this.name, score: this.score };
+
+  }
+};
+ //Timer
+class Timer {
+  constructor(_time, _currentTime, _timerInterval = 100, _callbackTimeout, _callbackTimeInterval, _internalTimer, _internalTimeout) {
+    this.time = _time;
+    this.currentTime = _currentTime;
+    this.timerInterval = _timerInterval;
+    this.callbackTimeout = _callbackTimeout;
+    this.callbackTimeInterval = _callbackTimeInterval;
+    this.internalTimer = _internalTimer;
+    this.internalTimeout = _internalTimeout;
+  }
+ 
   setTimer(_time) {
     this.time = _time;
   }
@@ -148,26 +157,31 @@ class Game {
 
     return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
   }
-
-
-  rankingData() {
-
-    return { name: this.name, score: this.score };
-
-  }
-};
-
-
+}
+// Instances
 let newGame = new Game();
+let virusTimer = new Timer();
+let gameTimer = new Timer();
+
+//Audios//
+let btnSelectSound =new Audio('../audio/btn-select.wav');
+let maskUpSound = new Audio('../audio/mask-up.wav');
+let levelUpSound = new Audio('../audio/level-up.wav');
+let gameStartSound = new Audio('../audio/game-start.ogg');
+let virusExplosionSound = new Audio('../audio/virus-explosion.wav');
+let sprayClicksSound = new Audio('../audio/spray-click.wav');
+let gameWinSound = new Audio('../audio/game-win.wav');
+let vaxxBreakingSound = new Audio('../audio/vaxx-breaking.wav');
+
+
 
 //Manipulação das Telas do Jogo
 //Sequência das Configurações da Tela do Jogo
 let captureContainer = document.getElementById("container");
 let captureSettings = document.getElementById("settings-button");
-captureSettings.addEventListener('click',()=>{
-  let removeBtnBox = document.getElementById('btn-box');
-  removeBtnBox.parentNode.removeChild(removeBtnBox);
-  captureContainer.innerHTML+= ` 
+//captureSettings.addEventListener('click',()=>
+function makeSettings() {
+  captureContainer.innerHTML += ` 
             <section id="modal-configuration" class="modal">
             
             <section class="modal-with-border">
@@ -196,16 +210,26 @@ captureSettings.addEventListener('click',()=>{
             
         </section>`
 
-});
+};
+makeSettings();
+let captureModalConfigurations = document.getElementById("modal-configuration");
+captureModalConfigurations.style.display = 'none'
+function openSetting() {
+  let removeBtnBox = document.getElementById('btn-box');
+  removeBtnBox.classList.add(`relative-with-blur`);
+  captureModalConfigurations.style.display = 'flex'
+  makeSettings();
+
+}
 
 let captureSoundConfigurations = document.getElementById("btn-sound-configuration");
 let captureShorcutKeys = document.getElementById("btn-shortcut-key");
 let captureHelps = document.getElementById("btn-help");
 
-function openConfigSound(){
-    let captureModalConfigurations = document.getElementById("modal-configuration");
-    captureModalConfigurations.parentNode.removeChild(captureModalConfigurations);
-    captureContainer.innerHTML += `<section id="modal-configuration" class="modal">
+function openConfigSound() {
+
+  captureModalConfigurations.parentNode.removeChild(captureModalConfigurations);
+  captureContainer.innerHTML += `<section id="modal-configuration" class="modal">
             
     <section class="modal-with-border">
         <div id="circle1" class="circles">
@@ -243,6 +267,7 @@ function openConfigSound(){
     </section>
     
 </section>`
+
 };
 
 //Sequência do Jogo
@@ -301,6 +326,7 @@ function portugueseRoute() {
       </div>
     </div>
     </div>`
+    makeSettings();
 };
 
 
@@ -458,7 +484,7 @@ function gameStart() {
       captureHole.classList.add(`invisible`);
       captureHole.classList.remove(`visible`);
       captureVirus.addEventListener('click', () => {
-         let storageScore = newGame.increaseScore(virusValue);
+        let storageScore = newGame.increaseScore(virusValue);
         newGame.setScore(storageScore);
         captureScore.innerHTML = `Score:${newGame.getScore()}`
         console.log(newGame.getScore());
