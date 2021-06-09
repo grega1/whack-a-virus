@@ -162,6 +162,7 @@ let newGame = new Game();
 
 //Manipulação das Telas do Jogo
 //Sequência das Configurações da Tela do Jogo
+let captureContainer = document.getElementById("container");
 let captureSettings = document.getElementById("settings-button");
 captureSettings.addEventListener('click',()=>{
   let removeBtnBox = document.getElementById('btn-box');
@@ -183,7 +184,7 @@ captureSettings.addEventListener('click',()=>{
 
                 <section id="main-menu" class="main-menu">
 
-                <button id="btn-sound-configuration" class="sound"> Sons </button>
+                <button id="btn-sound-configuration" class="sound" onclick="openConfigSound()"> Sons </button>
                 <button id="btn-shortcut-key" class="shortcut-key"> Teclas de Atalho</button>
                 <button id="btn-help" class="menu-help">Ajuda</button>
 
@@ -195,11 +196,57 @@ captureSettings.addEventListener('click',()=>{
             
         </section>`
 
-})
+});
+
+let captureSoundConfigurations = document.getElementById("btn-sound-configuration");
+let captureShorcutKeys = document.getElementById("btn-shortcut-key");
+let captureHelps = document.getElementById("btn-help");
+
+function openConfigSound(){
+    let captureModalConfigurations = document.getElementById("modal-configuration");
+    captureModalConfigurations.parentNode.removeChild(captureModalConfigurations);
+    captureContainer.innerHTML += `<section id="modal-configuration" class="modal">
+            
+    <section class="modal-with-border">
+        <div id="circle1" class="circles">
+        </div>
+        <div id="circle2" class="circles">
+        </div>
+        <div id="circle3" class="circles">
+        </div>
+        <div id="circle4" class="circles">
+        </div>
+
+        <h3>Sound</h3>
+
+        <section id="sound-configuration" class="sound-menu">
+
+            <div id="slider-main-volume">
+                <label for="main-volume">Volume Principal:</label>
+                <input type="range" min="1" max="100" value="50" class="slider" id="main-volume">
+              </div>
+
+              <div id="slider-sound-volume">
+                <label for="sound-volume">Sound Volume:</label>
+                <input type="range" min="1" max="100" value="50" class="slider" id="sound-volume">
+              </div>
+
+              <div id="slider-sound-effects">
+                <label for="sound-effects">Sound Effects:</label>
+                <input type="range" min="1" max="100" value="50" class="slider" id="sound-effects">
+            </div>
+
+        </section>
+
+        <button id="btn-return-game" class="return-game">Return to Main Menu</button>
+        
+    </section>
+    
+</section>`
+};
 
 //Sequência do Jogo
 let pressStart = document.getElementById("pressStart");
-let captureContainer = document.getElementById("container");
 pressStart.addEventListener('click', () => {
   let newGame = new Game();
   let removeBtnBox = document.getElementById('btn-box');
