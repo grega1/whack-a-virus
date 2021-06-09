@@ -476,3 +476,55 @@ img{
   font-size:25px;
   border: none
 }
+
+/* Next lvl */
+
+.background-with-crocodile{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#player-scoreboard{
+  display: flex;
+  flex-direction: column;
+  align-self:center;
+  font-size: xx-large;
+  
+}
+
+#modal-next-level{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top:3%;
+  align-self: center;
+  width: 350px;
+  height: 110px;
+  background:#000023;
+  border-radius: 25px;
+}
+
+.orange-stroke{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  align-self: center;
+  width: 95%;
+  height: 90px;
+  background-color: none;
+  border: 4px solid #E35C17;
+  border-radius: 20px;
+  }
+
+.happy-crocodile{
+  align-self: flex-end;
+  margin-bottom: 0;
+}
+#scoreboard-footer{
+  display: flex;
+  gap: 80px;
+  margin-left: auto;
+  margin-right: auto;
+}
