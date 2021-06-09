@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles/styles.css">
+  <link rel="shortcut icon" href="favicon/favicon.ico" type="image/x-icon">
   
   <title>Whack a Virus</title>
 </head>
@@ -20,11 +21,23 @@
         <img src="img/help-icon.png" />
       </button>
     </header>
+    
     <div id="game-box">
       <section id="modal-ingame" class="modal">
         <section class="modal-with-border">
           <section class="background-with-crocodile">
-            <img src="img/croco.png">
+            <div id="player-scoreboard">
+                <p>Nome Jogador</p>
+                <p>Pontuação: 0000</p>
+            </div>
+            <div id="scoreboard-footer">
+                <section id="modal-next-level">
+                    <div class="orange-stroke">
+                    <p>Próximo nível desbloqueado!</p>
+                    </div>
+                  </section>
+                <img class="happy-crocodile" src="img/happy-jacarezin.svg">
+            </div>
           </section>
           <section id="game-section">
             <div id="slot1" class="spots">
@@ -63,7 +76,7 @@
         <section id="modal-ranking" class="modal">
          
           <section class="modal-with-border">
-            <p id="title-ranking"> Top 5 Score</p>
+            <p id="title-ranking"> Pontuação Top 5 </p>
             <div id="name-rank">
               <h4>Nome</h4>
             </div>
@@ -76,7 +89,7 @@
         <section id="modal-info-game" class="modal">
           <section class="modal-with-border">
             <div id="lifes">
-              <h4 id=>Máscaras restantes</h4>
+              <h4 id=>Máscaras Restantes</h4>
               <div id="masks">
                 <img src="img/icon-heart.png">
                 <img src="img/icon-heart.png">
@@ -84,7 +97,7 @@
               </div>
             </div>
             <div id="time-remain">
-              <h4>Tempo restante</h4>
+              <h4>Tempo Restante</h4>
             
             </div>
             <div id="next">

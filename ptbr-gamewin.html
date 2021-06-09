@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles/styles.css">
+  <link rel="shortcut icon" href="favicon/favicon.ico" type="image/x-icon">
   <title>Whack a Virus</title>
 </head>
 
@@ -16,7 +17,7 @@
         <img src="img/settings-btn.svg" />
       </button>
     </header>
-    <div id="modal-nickname" class="modal">
+    <div id="modal-language" class="modal">
       <div class="modal-with-border">
         <div id="circle1" class="circles">        
         </div>
@@ -26,13 +27,18 @@
         </div>
         <div id="circle4" class="circles">        
         </div>
-      <h2 class="modal-titles"> Insert your nickname
+      <h2 class="modal-titles"> Voce Ganhou 
       </h2>
-      <div id="input-nickname" >
-        <input type="text" name="nickname" id="user-input">           
+      <div id="icon" class="happy-alligator">
+        <img src="/img/happy-jacarezin.svg" alt="happy-alligator">
+
+        <p>Sua pontuação: <br />
+            0000
+        </p>
       </div>
-      <div>
-          <button id="play-game" class="btn-sec"> Play </button>
+      <div id="btn-retry-and-return">
+          <button id="btn-retry" class="retry">Tentar Novamente </button>
+          <button id="btn-return-start" class="return-start">Voltar ao Início </button>
       </div>
     </div>
     </div>
