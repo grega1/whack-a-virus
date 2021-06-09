@@ -327,6 +327,11 @@ h1,h2{
 .invisible{
   display:none;
 }
+.relative-with-blur{
+  z-index: 0;
+  filter:blur(8px);
+
+}
 
 /* Configurations Modals */
 #modal-configuration{
@@ -340,6 +345,7 @@ h1,h2{
   height: 50rem;
   background:#000023;
   border-radius: 25px;
+  position: absolute;
 }
 .main-menu{
   display: flex;

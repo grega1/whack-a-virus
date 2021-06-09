@@ -1,18 +1,12 @@
 class Game {
-  constructor(_name, _lifes = 3, _score = 0, _currentLevel = 3, _time, _currentTime, _timerInterval = 100, _callbackTimeout, _callbackTimeInterval, _internalTimer, _internalTimeout) {
+  constructor(_name, _lifes = 3, _score = 0, _currentLevel, _playMusic = true , _soundEffects = true) {
     this.name = _name;
     this.lifes = _lifes;
     this.score = _score;
     this.currentLevel = _currentLevel;
-    this.time = _time;
-    this.currentTime = _currentTime;
-    this.timerInterval = _timerInterval;
-    this.callbackTimeout = _callbackTimeout;
-    this.callbackTimeInterval = _callbackTimeInterval;
-    this.internalTimer = _internalTimer;
-    this.internalTimeout = _internalTimeout;
+    this.playMusic = _playMusic;
+    this.soundEffects = _soundEffects;
   }
-
 
   setName(_name) {
     this.name = _name;
@@ -29,8 +23,8 @@ class Game {
   getScore() {
     return this.score;
   }
-  getIntervalByLevel(){
-    switch(this.currentLevel){
+  getIntervalByLevel() {
+    switch (this.currentLevel) {
       case 1:
         return 1500;
         break;
@@ -42,8 +36,8 @@ class Game {
         break;
     }
   }
-  getPointsByLevel(){
-    switch(this.currentLevel){
+  getPointsByLevel() {
+    switch (this.currentLevel) {
       case 1:
         return 10;
         break;
@@ -75,6 +69,19 @@ class Game {
     return Math.round(Math.random() * (_lastSlot - _firstSlot)) + _firstSlot;
 
   }
+  setPlayMusic(_playMusic) {
+    this.playMusic = _playMusic;
+  }
+  setSoundEffects(_soundEffects) {
+    this.soundEffects = _soundEffects;
+  }
+  getPlayMusic() {
+    return this.playMusic;
+  }
+  getSoundEffects() {
+    return this.soundEffects;
+  }
+  //criar função fora para mutar e executar
 
   // _levelBonus = Bônus recebido ao final da fase, caso o jogador tenha todas as vidas
   levelAward(_levelBonus) {
@@ -86,7 +93,28 @@ class Game {
     }
   }
 
-  //Timer
+  rankingData() {
+
+    return { name: this.name, score: this.score };
+
+  }
+  ismuted(){
+
+  }
+
+};
+ //Timer
+class Timer {
+  constructor(_time, _currentTime, _timerInterval = 100, _callbackTimeout, _callbackTimeInterval, _internalTimer, _internalTimeout) {
+    this.time = _time;
+    this.currentTime = _currentTime;
+    this.timerInterval = _timerInterval;
+    this.callbackTimeout = _callbackTimeout;
+    this.callbackTimeInterval = _callbackTimeInterval;
+    this.internalTimer = _internalTimer;
+    this.internalTimeout = _internalTimeout;
+  }
+ 
   setTimer(_time) {
     this.time = _time;
   }
@@ -148,26 +176,36 @@ class Game {
 
     return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
   }
-
-
-  rankingData() {
-
-    return { name: this.name, score: this.score };
-
-  }
-};
-
-
+}
+// Instances
 let newGame = new Game();
+let virusTimer = new Timer();
+let gameTimer = new Timer();
+
+//Audios//
+let btnSelectSound ='../audio/btn-select.wav'; // guardar o caminho como strig
+let maskUpSound = '../audio/mask-up.wav';
+let levelUpSound = '../audio/level-up.wav';
+let gameStartSound = '../audio/game-start.ogg';
+let virusExplosionSound = '../audio/virus-explosion.wav';
+let sprayClicksSound = '../audio/spray-click.wav';
+let gameWinSound = '../audio/game-win.wav';
+let vaxxBreakingSound = '../audio/vaxx-breaking.wav';
+
+function playAudio(sound){
+  const audioToPlay = new Audio(sound);
+  if(newGame.getSoundEffects()){
+    audioToPlay.play();
+  }
+}
 
 //Manipulação das Telas do Jogo
 //Sequência das Configurações da Tela do Jogo
 let captureContainer = document.getElementById("container");
 let captureSettings = document.getElementById("settings-button");
-captureSettings.addEventListener('click',()=>{
-  let removeBtnBox = document.getElementById('btn-box');
-  removeBtnBox.parentNode.removeChild(removeBtnBox);
-  captureContainer.innerHTML+= ` 
+//captureSettings.addEventListener('click',()=>
+function makeSettings() {
+  captureContainer.innerHTML += ` 
             <section id="modal-configuration" class="modal">
             
             <section class="modal-with-border">
@@ -196,16 +234,27 @@ captureSettings.addEventListener('click',()=>{
             
         </section>`
 
-});
+};
+makeSettings();
+let removeBtnBox = document.getElementById('btn-box');
+let captureModalConfigurations = document.getElementById("modal-configuration");
+captureModalConfigurations.style.display = 'none'
+function openSetting() {  
+  removeBtnBox.classList.add(`relative-with-blur`);
+  console.log(removeBtnBox)
+  captureModalConfigurations.style.display = 'flex'
+  makeSettings();
+
+}
 
 let captureSoundConfigurations = document.getElementById("btn-sound-configuration");
 let captureShorcutKeys = document.getElementById("btn-shortcut-key");
 let captureHelps = document.getElementById("btn-help");
 
-function openConfigSound(){
-    let captureModalConfigurations = document.getElementById("modal-configuration");
-    captureModalConfigurations.parentNode.removeChild(captureModalConfigurations);
-    captureContainer.innerHTML += `<section id="modal-configuration" class="modal">
+function openConfigSound() {
+
+  captureModalConfigurations.parentNode.removeChild(captureModalConfigurations);
+  captureContainer.innerHTML += `<section id="modal-configuration" class="modal">
             
     <section class="modal-with-border">
         <div id="circle1" class="circles">
@@ -243,13 +292,13 @@ function openConfigSound(){
     </section>
     
 </section>`
+
 };
 
 //Sequência do Jogo
 let pressStart = document.getElementById("pressStart");
 pressStart.addEventListener('click', () => {
   let newGame = new Game();
-  let removeBtnBox = document.getElementById('btn-box');
   removeBtnBox.parentNode.removeChild(removeBtnBox);
   captureContainer.innerHTML += `<div id="modal-language" class="modal">
        <div class="modal-with-border">
@@ -274,13 +323,14 @@ pressStart.addEventListener('click', () => {
        </div>
      </div>
      </div>`
+     removeBtnBox = document.getElementById(`modal-language`)
 });
 
 let langPTBR = document.getElementById('select-language');
 
 function portugueseRoute() {
   let modalLanguage = document.getElementById('modal-language');
-  modalLanguage.parentNode.removeChild(modalLanguage);
+  modalLanguage.styles.display ='none';
   captureContainer.innerHTML += `<div id="modal-nickname" class="modal">
       <div class="modal-with-border">
         <div id="circle1" class="circles">        
@@ -301,6 +351,7 @@ function portugueseRoute() {
       </div>
     </div>
     </div>`
+    makeSettings();
 };
 
 
@@ -458,7 +509,7 @@ function gameStart() {
       captureHole.classList.add(`invisible`);
       captureHole.classList.remove(`visible`);
       captureVirus.addEventListener('click', () => {
-         let storageScore = newGame.increaseScore(virusValue);
+        let storageScore = newGame.increaseScore(virusValue);
         newGame.setScore(storageScore);
         captureScore.innerHTML = `Score:${newGame.getScore()}`
         console.log(newGame.getScore());
