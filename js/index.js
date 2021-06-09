@@ -1,9 +1,11 @@
 class Game {
-  constructor(_name, _lifes = 3, _score = 0, _currentLevel) {
+  constructor(_name, _lifes = 3, _score = 0, _currentLevel, _playMusic = true , _soundEffects = true) {
     this.name = _name;
     this.lifes = _lifes;
     this.score = _score;
     this.currentLevel = _currentLevel;
+    this.playMusic = _playMusic;
+    this.soundEffects = _soundEffects;
   }
 
   setName(_name) {
@@ -67,6 +69,19 @@ class Game {
     return Math.round(Math.random() * (_lastSlot - _firstSlot)) + _firstSlot;
 
   }
+  setPlayMusic(_playMusic) {
+    this.playMusic = _playMusic;
+  }
+  setSoundEffects(_soundEffects) {
+    this.soundEffects = _soundEffects;
+  }
+  getPlayMusic() {
+    return this.playMusic;
+  }
+  getSoundEffects() {
+    return this.soundEffects;
+  }
+  //criar função fora para mutar e executar
 
   // _levelBonus = Bônus recebido ao final da fase, caso o jogador tenha todas as vidas
   levelAward(_levelBonus) {
@@ -83,6 +98,10 @@ class Game {
     return { name: this.name, score: this.score };
 
   }
+  ismuted(){
+
+  }
+
 };
  //Timer
 class Timer {
@@ -164,16 +183,21 @@ let virusTimer = new Timer();
 let gameTimer = new Timer();
 
 //Audios//
-let btnSelectSound =new Audio('../audio/btn-select.wav');
-let maskUpSound = new Audio('../audio/mask-up.wav');
-let levelUpSound = new Audio('../audio/level-up.wav');
-let gameStartSound = new Audio('../audio/game-start.ogg');
-let virusExplosionSound = new Audio('../audio/virus-explosion.wav');
-let sprayClicksSound = new Audio('../audio/spray-click.wav');
-let gameWinSound = new Audio('../audio/game-win.wav');
-let vaxxBreakingSound = new Audio('../audio/vaxx-breaking.wav');
+let btnSelectSound ='../audio/btn-select.wav'; // guardar o caminho como strig
+let maskUpSound = '../audio/mask-up.wav';
+let levelUpSound = '../audio/level-up.wav';
+let gameStartSound = '../audio/game-start.ogg';
+let virusExplosionSound = '../audio/virus-explosion.wav';
+let sprayClicksSound = '../audio/spray-click.wav';
+let gameWinSound = '../audio/game-win.wav';
+let vaxxBreakingSound = '../audio/vaxx-breaking.wav';
 
-
+function playAudio(sound){
+  const audioToPlay = new Audio(sound);
+  if(newGame.getSoundEffects()){
+    audioToPlay.play();
+  }
+}
 
 //Manipulação das Telas do Jogo
 //Sequência das Configurações da Tela do Jogo
@@ -212,11 +236,12 @@ function makeSettings() {
 
 };
 makeSettings();
+let removeBtnBox = document.getElementById('btn-box');
 let captureModalConfigurations = document.getElementById("modal-configuration");
 captureModalConfigurations.style.display = 'none'
-function openSetting() {
-  let removeBtnBox = document.getElementById('btn-box');
+function openSetting() {  
   removeBtnBox.classList.add(`relative-with-blur`);
+  console.log(removeBtnBox)
   captureModalConfigurations.style.display = 'flex'
   makeSettings();
 
@@ -274,7 +299,6 @@ function openConfigSound() {
 let pressStart = document.getElementById("pressStart");
 pressStart.addEventListener('click', () => {
   let newGame = new Game();
-  let removeBtnBox = document.getElementById('btn-box');
   removeBtnBox.parentNode.removeChild(removeBtnBox);
   captureContainer.innerHTML += `<div id="modal-language" class="modal">
        <div class="modal-with-border">
@@ -299,13 +323,14 @@ pressStart.addEventListener('click', () => {
        </div>
      </div>
      </div>`
+     removeBtnBox = document.getElementById(`modal-language`)
 });
 
 let langPTBR = document.getElementById('select-language');
 
 function portugueseRoute() {
   let modalLanguage = document.getElementById('modal-language');
-  modalLanguage.parentNode.removeChild(modalLanguage);
+  modalLanguage.styles.display ='none';
   captureContainer.innerHTML += `<div id="modal-nickname" class="modal">
       <div class="modal-with-border">
         <div id="circle1" class="circles">        
