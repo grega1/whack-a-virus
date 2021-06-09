@@ -436,4 +436,37 @@ label{
  gap: 10px;
 }
 
+/* Game over */
 
+img{
+  margin-bottom: 50px;
+}
+
+.sad-alligator{
+  font-size: larger;
+}
+
+#btn-retry-and-return{
+  display: flex;
+  gap: 24px;
+}
+
+.retry{
+  width: 350px;
+  height: 60px;
+  background-color:#233679;
+  color: #FFFFFF;
+  border-radius: 15px;
+  font-size:25px;
+  border: none
+}
+
+.return-start{
+  width: 350px;
+  height: 60px;
+  background-color:#233679;
+  color: #FFFFFF;
+  border-radius: 15px;
+  font-size:25px;
+  border: none
+}
