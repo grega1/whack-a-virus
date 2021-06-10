@@ -188,7 +188,7 @@ h1,h2{
     font-size:1.563rem;
   }
   /* Instructions Page */
-  #modal-instructions, #modal-instructions-ingame, #modal-instructions-menu, #modal-ingame{
+  #modal-instructions, #modal-instructions-ingame, #modal-instructions-menu, #modal-ingame, #modal-gameover{
     display: flex;
     align-items: center;
     justify-content: center;    
@@ -453,6 +453,13 @@ img{
   display: flex;
   gap: 24px;
 }
+#modal-gameover{
+  width:50%;
+}
+#modal-gameover button{
+  font-size:1rem;
+  width: 21.875rem;
+}
 
 .retry{
   width: 21.875rem;
@@ -533,4 +540,7 @@ img{
 }
 #normal{
   display:block;
+}
+#modal-gameover{
+  position: absolute;
 }

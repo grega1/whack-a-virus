@@ -685,32 +685,31 @@ function showVirus(level = newGame.getCurrentLevel()) {
     })
 
     setTimeout(() => {
-      captureVirus.classList.add("invisible");
-      captureVirus.classList.remove("visible");
-      captureHole.classList.add("visible");
-      captureHole.classList.remove("invisible");
-
       let life = newGame.getLifeStatus();
       let decreaseLife = document.getElementById(`mask${life}`);
-
-
-      //Precisamos colocar essa condição no lugar correto, pq ela está executando, mesmo quando o coroninha recebe click
-      if (life <= 0) {
-        clearInterval(interval1)
-        console.log("Perdeu playboy!") // Inserir a chamada da tela de Game Over
-      } else {
+      if(captureVirus.classList.contains("visible") && decreaseLife.parentNode.hasChildNodes()) {        
         decreaseLife.parentNode.removeChild(decreaseLife);
         newGame.setLifeStatus((life - 1));
         console.log("Total de vidas: " + life);
       }
+      captureVirus.classList.add("invisible");
+      captureVirus.classList.remove("visible");
+      captureHole.classList.add("visible");
+      captureHole.classList.remove("invisible");   
+      //Precisamos colocar essa condição no lugar correto, pq ela está executando, mesmo quando o coroninha recebe click
+      if (newGame.getLifeStatus() <= 0) {
+        clearInterval(interval1);
+        clearTimeout(gameTimeout);
+        console.log("Perdeu playboy!");
+        showGameLost(); // Inserir a chamada da tela de Game Over
+      } 
 
 
 
     }, (intervalByLevel / 1.5))
 
-  }, intervalByLevel);
-
-  setTimeout(() => {
+  }, intervalByLevel);  
+  let gameTimeout = setTimeout(() => {
     clearInterval(interval1);
     nextLevel();
   }, 10000)
@@ -749,4 +748,31 @@ function startNextLevel() {
   let incrementedLevel = newGame.getCurrentLevel();
   showVirus(incrementedLevel);
 }
+function showGameLost(){
+  removeBtnBox.classList.add(`relative-with-blur`);
+  captureContainer.innerHTML +=` <div id="modal-gameover" class="modal">
+  <div class="modal-with-border">
+    <div id="circle1" class="circles">        
+    </div>
+    <div id="circle2" class="circles">        
+    </div>
+    <div id="circle3" class="circles">        
+    </div>
+    <div id="circle4" class="circles">        
+    </div>
+  <h2 class="modal-titles"> Game Over
+  </h2>
+  <div id="icon" class="sad-alligator">
+    <img src="/img/sad-jacarezin.svg" alt="sad crocodile">
 
+    <p>Your Score: <br />
+        0000
+    </p>
+  </div>
+  <div id="btn-retry-and-return">
+      <button id="btn-retry" class="retry" onclick="">Retry </button>
+      <button id="btn-return-start" class="return-start">Return to Start </button>
+  </div>
+</div>
+</div>`
+}
