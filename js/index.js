@@ -706,6 +706,6 @@ function nextLevel(){
     nextLevelBtn.style.display = "block";
     playAudio(gameWinSound);
     newGame.levelAward();
-    newGame.setCurrentLevel(newGame.getCurrentLevel() +1)
+    newGame.setCurrentLevel(newGame.getCurrentLevel() +1);
 
 }
