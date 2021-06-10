@@ -553,7 +553,7 @@ function gameStart() {
       <section class="modal-with-border">
           <section class="background-with-crocodile">
             <div id="player-scoreboard">
-              <h4> Name:${userName}</h4>
+              <h4> Name: ${userName}</h4>
               <h4 id="score">Score:0 </h4>
             </div>
             <div id="scoreboard-footer">
@@ -569,39 +569,39 @@ function gameStart() {
           <section id="game-section">
             <div id="slot1" class="spots">
               <img src="img/spots.svg" id="hole1"/>
-              <img src="img/coroninha-no-buraco.svg" id="virus1"  class="virus invisible" />
+              <img src="img/coroninha-no-buraco.svg" id="virus1"  class="virus invisible" onclick="hitVirus(1)" />
             </div>
             <div id="slot2" class="spots">
               <img src="img/spots.svg" id="hole2"/>
-              <img src="img/coroninha-no-buraco.svg" id="virus2"  class="virus invisible" />
+              <img src="img/coroninha-no-buraco.svg" id="virus2"  class="virus invisible" onclick="hitVirus(2)" />
             </div>
             <div id="slot3" class="spots">
               <img src="img/spots.svg" id="hole3" />
-              <img src="img/coroninha-no-buraco.svg" id="virus3"  class="virus invisible" />
+              <img src="img/coroninha-no-buraco.svg" id="virus3"  class="virus invisible" onclick="hitVirus(3)" />
             </div>
             <div id="slot4" class="spots">
               <img src="img/spots.svg" id="hole4"/>
-              <img src="img/coroninha-no-buraco.svg" id="virus4"  class="virus invisible" />
+              <img src="img/coroninha-no-buraco.svg" id="virus4"  class="virus invisible" onclick="hitVirus(4)" />
             </div>
             <div id="slot5" class="spots">
               <img src="img/spots.svg" id="hole5" />
-              <img src="img/coroninha-no-buraco.svg" id="virus5"  class="virus invisible" />
+              <img src="img/coroninha-no-buraco.svg" id="virus5"  class="virus invisible" onclick="hitVirus(5)" />
             </div>
             <div id="slot6" class="spots">
               <img src="img/spots.svg" id="hole6" />
-              <img src="img/coroninha-no-buraco.svg" id="virus6"  class="virus invisible" />
+              <img src="img/coroninha-no-buraco.svg" id="virus6"  class="virus invisible" onclick="hitVirus(6)" />
             </div>
             <div id="slot7" class="spots">
               <img src="img/spots.svg" id="hole7"/>
-              <img src="img/coroninha-no-buraco.svg" id="virus7"  class="virus invisible" />
+              <img src="img/coroninha-no-buraco.svg" id="virus7"  class="virus invisible" onclick="hitVirus(7)" />
             </div>
             <div id="slot8" class="spots">
               <img src="img/spots.svg" id="hole8"/>
-              <img src="img/coroninha-no-buraco.svg" id="virus8"  class="virus invisible" />
+              <img src="img/coroninha-no-buraco.svg" id="virus8"  class="virus invisible" onclick="hitVirus(8)" />
             </div>
             <div id="slot9" class="spots">
               <img src="img/spots.svg" id="hole9" />
-              <img src="img/coroninha-no-buraco.svg" id="virus9"  class="virus invisible" />
+              <img src="img/coroninha-no-buraco.svg" id="virus9"  class="virus invisible" onclick="hitVirus(9)" />
             </div>
           </section>
         </section>
@@ -659,34 +659,39 @@ function gameStart() {
 function showVirus(level = newGame.getCurrentLevel()) {
   console.log("Nível " + level); //remover
   newGame.setCurrentLevel(level);
-  const virusValue = newGame.getPointsByLevel(level);
+  let hasClickProcessor =  true;  
   const intervalByLevel = newGame.getIntervalByLevel(level);
   console.log("Intervalo de tempo " + intervalByLevel); //remover
+  let life = newGame.getLifeStatus();
+  let decreaseLife = document.getElementById(`mask${life}`);
   let interval1 = setInterval(() => {
+    newGame.getScore()
     let drawRange = newGame.drawSlots(1, 9);
     let captureVirus = document.getElementById(`virus${drawRange}`);
     let captureHole = document.getElementById(`hole${drawRange}`);
-    let captureScore = document.getElementById("score")
-    captureVirus.classList.add("visible");
-    captureVirus.classList.remove("invisible");
-    captureHole.classList.add("invisible");
-    captureHole.classList.remove("visible");
-    captureVirus.addEventListener("click", () => {
+    
+    
+      captureVirus.classList.add("visible");
+      captureVirus.classList.remove("invisible");
+      captureHole.classList.add("invisible");
+      captureHole.classList.remove("visible");
+    
+    /*captureVirus.addEventListener("click", () => {
+      if(hasClickProcessor){
       let storageScore = newGame.increaseScore(virusValue);
-      console.log(storageScore);
+      //console.log(storageScore);
+      console.log('foi clicado');
       newGame.setScore(storageScore);
-      captureScore.innerHTML = `Score:${newGame.getScore()}`
+      captureScore.innerHTML = `Score: ${newGame.getScore()}`
       console.log(newGame.getScore());
       captureVirus.classList.remove("visible")
       captureVirus.classList.add("invisible");
       captureHole.classList.add("visible");
       captureHole.classList.remove("invisible");
       playAudio(sprayClicksSound);
-    })
-
-    setTimeout(() => {
-      let life = newGame.getLifeStatus();
-      let decreaseLife = document.getElementById(`mask${life}`);
+    })*/
+    
+    setTimeout(() => {     
       if(captureVirus.classList.contains("visible") && decreaseLife.parentNode.hasChildNodes()) {        
         decreaseLife.parentNode.removeChild(decreaseLife);
         newGame.setLifeStatus((life - 1));
@@ -708,13 +713,42 @@ function showVirus(level = newGame.getCurrentLevel()) {
 
     }, (intervalByLevel / 1.5))
 
-  }, intervalByLevel);  
+  }, intervalByLevel);
+  //jogar dentro de uma variável e limpar no gameLost
   let gameTimeout = setTimeout(() => {
-    clearInterval(interval1);
-    nextLevel();
+    clearInterval(interval1);   
+    for (let i = 1; i <= 9; i++) {
+      let clearVirus = document.getElementById(`virus${[i]}`);
+      let clearHole = document.getElementById(`hole${[i]}`);
+      clearVirus.classList.add("invisible");
+      clearVirus.classList.remove("visible");
+      clearHole.classList.add("visible");
+      clearHole.classList.remove("invisible"); 
+      console.log(i);      
+    }  
+    nextLevel();  
   }, 10000)
 
 };
+function hitVirus(id, level = newGame.getCurrentLevel()) {  
+  newGame.getScore();
+  let captureScore = document.getElementById("score")
+  let virusValue = newGame.getPointsByLevel(level);
+  let captureVirus = document.getElementById(`virus${id}`);
+  let captureHole = document.getElementById(`hole${id}`);     
+  let storageScore = newGame.increaseScore(virusValue);
+    console.log(storageScore);
+    console.log('foi clicado');
+    newGame.setScore(storageScore);
+    captureScore.innerHTML = `Score: ${newGame.getScore()}`
+    console.log(newGame.getScore());
+    captureVirus.classList.remove("visible")
+    captureVirus.classList.add("invisible");
+    captureHole.classList.add("visible");
+    captureHole.classList.remove("invisible");
+    playAudio(sprayClicksSound);
+  
+}
 
 function nextLevel() {
   const happyCrocodyle = document.getElementById("happy");
@@ -727,14 +761,15 @@ function nextLevel() {
   nextLevelBtn.style.display = "block";
   playAudio(gameWinSound);
   newGame.levelAward(newGame.getCurrentLevel());
+  
 }
 
 //Restaura a tela de jogo e reinicia a partida de acordo com o novo nível
 function startNextLevel() {
-  let userLifes = newGame.getLifeStatus();
+  /*let userLifes = newGame.getLifeStatus();
   for (let i = 1; i <= userLifes; i++) {
     masks.innerHTML += `<img src="img/icon-heart.png" id="mask${i}"/>`
-  }
+  }*/
   const happyCrocodyle = document.getElementById("happy");
   const normalCrocodyle = document.getElementById("normal");
   const nextLevelModal = document.getElementById("modal-next-level");
@@ -745,8 +780,9 @@ function startNextLevel() {
   nextLevelBtn.style.display = "none";
 
   newGame.setCurrentLevel(newGame.getCurrentLevel() + 1);
-  let incrementedLevel = newGame.getCurrentLevel();
+  let incrementedLevel = newGame.getCurrentLevel();  
   showVirus(incrementedLevel);
+    
 }
 function showGameLost(){
   removeBtnBox.classList.add(`relative-with-blur`);
