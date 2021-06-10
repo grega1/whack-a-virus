@@ -1,11 +1,12 @@
 class Game {
-  constructor(_name, _lifes = 3, _score = 0, _currentLevel, _playMusic = true , _soundEffects = true) {
+  constructor(_name, _lifes = 3, _score = 0, _currentLevel = 1, _playMusic = true, _soundEffects = true, _levelBonus) {
     this.name = _name;
     this.lifes = _lifes;
     this.score = _score;
     this.currentLevel = _currentLevel;
     this.playMusic = _playMusic;
     this.soundEffects = _soundEffects;
+    this.levelBonus = _levelBonus;
   }
 
   setName(_name) {
@@ -19,7 +20,12 @@ class Game {
   setScore(_score = 0) {
     this.score = _score;
   }
-
+  setCurrentLevel(_currentLevel = 1){
+    this.currentLevel = _currentLevel;
+  }
+  getCurrentLevel(){
+    return this.currentLevel;
+  }
   getScore() {
     return this.score;
   }
@@ -34,6 +40,12 @@ class Game {
       case 3:
         return 1000;
         break;
+      case 4:
+        return 800;
+        break;
+      case 5:
+        return 500;
+        break;
     }
   }
   getPointsByLevel() {
@@ -46,6 +58,12 @@ class Game {
         break;
       case 3:
         return 30;
+        break;
+      case 4:
+        return 40;
+        break;
+      case 5:
+        return 50;
         break;
     }
   }
@@ -83,13 +101,33 @@ class Game {
   }
   //criar função fora para mutar e executar
 
+
+
   // _levelBonus = Bônus recebido ao final da fase, caso o jogador tenha todas as vidas
-  levelAward(_levelBonus) {
-    let lifesOfPlayer = this.lifes;
-    if (lifesOfPlayer < 3) {
+  levelAward() {
+    switch (this.levelBonus) {
+      case 1:
+        return 100;
+        break;
+      case 2:
+        return 200;
+        break;
+      case 3:
+        return 300;
+        break;
+      case 4:
+        return 400;
+        break;
+      case 5:
+        return 500;
+        break;
+    };
+
+    let lifesPlayer = this.lifes;
+    if (lifesPlayer < 3) {
       return this.lifes += 1
     } else {
-      return this.score += _levelBonus;
+      return this.score += this.levelBonus;
     }
   }
 
@@ -98,12 +136,12 @@ class Game {
     return { name: this.name, score: this.score };
 
   }
-  ismuted(){
+  ismuted() {
 
   }
 
 };
- //Timer
+//Timer
 class Timer {
   constructor(_time, _currentTime, _timerInterval = 100, _callbackTimeout, _callbackTimeInterval, _internalTimer, _internalTimeout) {
     this.time = _time;
@@ -114,7 +152,7 @@ class Timer {
     this.internalTimer = _internalTimer;
     this.internalTimeout = _internalTimeout;
   }
- 
+
   setTimer(_time) {
     this.time = _time;
   }
@@ -183,18 +221,18 @@ let virusTimer = new Timer();
 let gameTimer = new Timer();
 
 //Audios//
-let btnSelectSound ='../audio/btn-select.wav'; // guardar o caminho como strig
-let maskUpSound = '../audio/mask-up.wav';
-let levelUpSound = '../audio/level-up.wav';
-let gameStartSound = '../audio/game-start.ogg';
-let virusExplosionSound = '../audio/virus-explosion.wav';
-let sprayClicksSound = '../audio/spray-click.wav';
-let gameWinSound = '../audio/game-win.wav';
-let vaxxBreakingSound = '../audio/vaxx-breaking.wav';
+let btnSelectSound = "../audio/btn-select.wav"; // guardar o caminho como strig
+let maskUpSound = "../audio/mask-up.wav";
+let levelUpSound = "../audio/level-up.wav";
+let gameStartSound = "../audio/game-start.ogg";
+let virusExplosionSound = "../audio/virus-explosion.wav";
+let sprayClicksSound = "../audio/spray-click.wav";
+let gameWinSound = "../audio/game-win.wav";
+let vaxxBreakingSound = "../audio/vaxx-breaking.wav";
 
-function playAudio(sound){
+function playAudio(sound) {
   const audioToPlay = new Audio(sound);
-  if(newGame.getSoundEffects()){
+  if (newGame.getSoundEffects()) {
     audioToPlay.play();
   }
 }
@@ -203,7 +241,7 @@ function playAudio(sound){
 //Sequência das Configurações da Tela do Jogo
 let captureContainer = document.getElementById("container");
 let captureSettings = document.getElementById("settings-button");
-//captureSettings.addEventListener('click',()=>
+//captureSettings.addEventListener("click",()=>
 function makeSettings() {
   captureContainer.innerHTML += ` 
             <section id="modal-configuration" class="modal">
@@ -223,12 +261,12 @@ function makeSettings() {
                 <section id="main-menu" class="main-menu">
 
                 <button id="btn-sound-configuration" class="sound" onclick="openConfigSound()"> Sons </button>
-                <button id="btn-shortcut-key" class="shortcut-key"> Teclas de Atalho</button>
-                <button id="btn-help" class="menu-help">Ajuda</button>
+                <button id="btn-shortcut-key" class="shortcut-key" onclick="openShortcutKeys()"> Teclas de Atalho</button>
+                <button id="btn-help" class="menu-help" onclick="openHelp()">Ajuda</button>
 
                 </section>
 
-                <button id="btn-return-game" class="return-game">Voltar para o Jogo</button>
+                <button id="btn-return-game" class="return-game" onclick="" >Voltar para o Jogo</button>
                 
             </section>
             
@@ -236,13 +274,12 @@ function makeSettings() {
 
 };
 makeSettings();
-let removeBtnBox = document.getElementById('btn-box');
+let removeBtnBox = document.getElementById("btn-box");
 let captureModalConfigurations = document.getElementById("modal-configuration");
-captureModalConfigurations.style.display = 'none'
-function openSetting() {  
-  removeBtnBox.classList.add(`relative-with-blur`);
-  console.log(removeBtnBox)
-  captureModalConfigurations.style.display = 'flex'
+captureModalConfigurations.style.display = "none";
+function openSetting() {
+  removeBtnBox.classList.add("relative-with-blur");
+  captureModalConfigurations.style.display = "flex"
   makeSettings();
 
 }
@@ -252,8 +289,8 @@ let captureShorcutKeys = document.getElementById("btn-shortcut-key");
 let captureHelps = document.getElementById("btn-help");
 
 function openConfigSound() {
-
-  captureModalConfigurations.parentNode.removeChild(captureModalConfigurations);
+  let captureModalConfigurations = document.getElementById("modal-configuration");
+  captureModalConfigurations.style.display = "none";
   captureContainer.innerHTML += `<section id="modal-configuration" class="modal">
             
     <section class="modal-with-border">
@@ -287,17 +324,126 @@ function openConfigSound() {
 
         </section>
 
-        <button id="btn-return-game" class="return-game">Return to Main Menu</button>
+        <button id="btn-return-game" class="return-game" onclick="makeSettings()">Return to Main Menu</button>
         
     </section>
     
 </section>`
 
 };
+function openShortcutKeys(){
+  let captureModalConfigurations = document.getElementById("modal-configuration");
+  captureModalConfigurations.style.display = "none";
+  captureContainer.innerHTML += `<section id="modal-configuration" class="modal">
+            
+            <section class="modal-with-border">
+                <div id="circle1" class="circles">
+                </div>
+                <div id="circle2" class="circles">
+                </div>
+                <div id="circle3" class="circles">
+                </div>
+                <div id="circle4" class="circles">
+                </div>
+
+                <h3>Shortcut Keys</h3>
+                <p>Select a slot and press <br />the shortcut key to configure</p>
+
+                <section id="input-slot">
+                    <div class="row">
+
+                        <div class="slot-with-label">
+                        <input type="text" id="splt1" class="slot">
+                        <label for="splt1">Slot 1</label>
+                        </div>
+
+                        <div class="slot-with-label">
+                        <input type="text" id="splt2" class="slot">
+                        <label for="slot2">Slot 2</label>
+                        </div>
+
+                        <div class="slot-with-label">
+                        <input type="text" id="slot3" class="slot">
+                        <label for="slo3t">Slot 3</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="slot-with-label">
+                        <input type="text" id="slot4" class="slot">
+                        <label for="slot4">Slot 4</label>
+                        </div>
+                        
+                        <div class="slot-with-label">
+                        <input type="text" id="slot5" class="slot">
+                        <label for="slot5">Slot 5</label>
+                        </div>
+
+                        <div class="slot-with-label">
+                        <input type="text" id="slot6" class="slot">
+                        <label for="slot6">Slot 6</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="slot-with-label">
+                        <input type="text" id="slot7" class="slot">
+                        <label for="slot7">Slot 7</label>
+                        </div>
+
+                        <div class="slot-with-label">
+                        <input type="text" id="slot8" class="slot">
+                        <label for="slot8">Slot 8</label>
+                        </div>
+                        
+                        <div class="slot-with-label">
+                        <input type="text" id="slot9" class="slot">
+                        <label for="slot9">Slot 9</label>
+                        </div>
+
+                    </div>
+                    
+                </section>
+                <div class="btns">
+                <button id="btn-save" class="save"> Save configuration </button>
+
+                <button id="btn-return-game" class="return-game" onclick="makeSettings()">Return to Main Menu</button>
+                </div>
+            </section>
+            
+        </section>`
+}
+function openHelp(){
+  let captureModalConfigurations = document.getElementById("modal-configuration");
+  captureModalConfigurations.style.display = "none";
+  captureContainer.innerHTML +=`  <div id="modal-instructions-menu" class="modal">
+      <div class="modal-with-border">
+        <div id="circle1" class="circles">        
+        </div>
+        <div id="circle2" class="circles">        
+        </div>
+        <div id="circle3" class="circles">        
+        </div>
+        <div id="circle4" class="circles">        
+        </div>
+        <h2 class="modal-titles"> HELP
+        </h2>
+        <div id="text-instructions">
+         
+          <p>Hit corona vírus with alcohol spray to score</p>
+          <p>If you break the vacine you will lose and can continue using your mask, but think fast! You will have a short to use it!</p>
+          <p>Each level of dificulty clear you will win a mask</p>
+                  
+        </div>
+      <div>
+          <button id="back-to-menu" class="btn-sec" onclick="makeSettings()"> Return to main menu </button>
+      </div>
+    </div>
+    </div>`
+
+}
 
 //Sequência do Jogo
 let pressStart = document.getElementById("pressStart");
-pressStart.addEventListener('click', () => {
+pressStart.addEventListener("click", () => {
   let newGame = new Game();
   removeBtnBox.parentNode.removeChild(removeBtnBox);
   captureContainer.innerHTML += `<div id="modal-language" class="modal">
@@ -323,14 +469,14 @@ pressStart.addEventListener('click', () => {
        </div>
      </div>
      </div>`
-     removeBtnBox = document.getElementById(`modal-language`)
+  removeBtnBox = document.getElementById("modal-language")
 });
 
-let langPTBR = document.getElementById('select-language');
+let langPTBR = document.getElementById("select-language");
 
 function portugueseRoute() {
-  let modalLanguage = document.getElementById('modal-language');
-  modalLanguage.styles.display ='none';
+  let modalLanguage = document.getElementById("modal-language");
+  modalLanguage.parentNode.removeChild(modalLanguage);
   captureContainer.innerHTML += `<div id="modal-nickname" class="modal">
       <div class="modal-with-border">
         <div id="circle1" class="circles">        
@@ -351,7 +497,7 @@ function portugueseRoute() {
       </div>
     </div>
     </div>`
-    makeSettings();
+  removeBtnBox = document.getElementById("modal-nickname")
 };
 
 
@@ -359,7 +505,7 @@ function showInstructions() {
   let captureName = document.getElementById("user-input").value;
   newGame.setName(captureName);
   console.log(newGame.getName());
-  let modalNickName = document.getElementById('modal-nickname');
+  let modalNickName = document.getElementById("modal-nickname");
   modalNickName.parentNode.removeChild(modalNickName);
   captureContainer.innerHTML += ` <div id="modal-instructions" class="modal">
       <div class="modal-with-border">
@@ -385,6 +531,7 @@ function showInstructions() {
       </div>
     </div>
     </div>`
+  removeBtnBox = document.getElementById("modal-instructions")
 }
 let slotSequence = [];
 
@@ -394,7 +541,7 @@ function gameStart() {
   let userScore = newGame.getScore();
   newGame.setLifeStatus(3);
   let userLifes = newGame.getLifeStatus();
-  let modalInstructions = document.getElementById('modal-instructions');
+  let modalInstructions = document.getElementById("modal-instructions");
   modalInstructions.parentNode.removeChild(modalInstructions);
   captureContainer.innerHTML += `<header>      
       <button id="help-button">
@@ -403,13 +550,21 @@ function gameStart() {
     </header>
     <div id="game-box">
       <section id="modal-ingame" class="modal">
-        <section class="modal-with-border">
+      <section class="modal-with-border">
           <section class="background-with-crocodile">
-            <div id="showNameAndScore">
-            <h4> Name:${userName}</h4>
-            <h4 id="score">Score:0 </h4>
+            <div id="player-scoreboard">
+              <h4> Name:${userName}</h4>
+              <h4 id="score">Score:0 </h4>
             </div>
-            <img src="img/Jacarezin.png" />
+            <div id="scoreboard-footer">
+                <section id="modal-next-level" class="invisible">
+                    <div class="orange-stroke invisible">
+                    <p>Next level unlocked!</p>
+                    </div>
+                  </section>
+                <img class="happy-crocodile invisible" src="img/happy-jacarezin.svg" id="happy" />
+                <img class="happy-crocodile " src="img/Jacarezin.png"  id="normal"/>
+            </div>
           </section>
           <section id="game-section">
             <div id="slot1" class="spots">
@@ -483,13 +638,14 @@ function gameStart() {
             
             </div>
             <div id="next">
-              <button id="next-level">
+              <button id="btn-next-level" onclick="">
                 <img src="img/next-btn.png">
               </button>
             </div>
           </section>
         </section>
       </div>`
+  removeBtnBox = document.getElementById("modal-ingame")
   let masks = document.getElementById("masks");
   for (let i = 1; i <= userLifes; i++) {
     masks.innerHTML += `<img src="img/icon-heart.png"/>`
@@ -497,48 +653,59 @@ function gameStart() {
   }
 
   function showVirus() {
-    const virusValue = newGame.getPointsByLevel();
-    const intervalByLevel = newGame.getIntervalByLevel();
+    newGame.setCurrentLevel(1);
+    const virusValue = newGame.getPointsByLevel(1);
+    const intervalByLevel = newGame.getIntervalByLevel(1);
     let interval1 = setInterval(() => {
-      let drawRange = newGame.drawSlots(1, 9);
+      let drawRange = newGame.drawSlots(1, 3);     
       let captureVirus = document.getElementById(`virus${drawRange}`);
       let captureHole = document.getElementById(`hole${drawRange}`);
-      let captureScore = document.getElementById(`score`)
-      captureVirus.classList.add(`visible`);
-      captureVirus.classList.remove(`invisible`);
-      captureHole.classList.add(`invisible`);
-      captureHole.classList.remove(`visible`);
-      captureVirus.addEventListener('click', () => {
+      let captureScore = document.getElementById("score")
+      captureVirus.classList.add("visible");
+      captureVirus.classList.remove("invisible");
+      captureHole.classList.add("invisible");
+      captureHole.classList.remove("visible");
+      captureVirus.addEventListener("click", () => {
         let storageScore = newGame.increaseScore(virusValue);
-        newGame.setScore(storageScore);
+        console.log(storageScore);
+        newGame.setScore(storageScore);        
         captureScore.innerHTML = `Score:${newGame.getScore()}`
         console.log(newGame.getScore());
-        captureVirus.classList.remove(`visible`)
-        captureVirus.classList.add(`invisible`);
-        captureHole.classList.add(`visible`);
-        captureHole.classList.remove(`invisible`);
-
+        captureVirus.classList.remove("visible")
+        captureVirus.classList.add("invisible");
+        captureHole.classList.add("visible");
+        captureHole.classList.remove("invisible");
       })
+        setTimeout(() => {
+          captureVirus.classList.add("invisible");
+          captureVirus.classList.remove("visible");
+          captureHole.classList.add("visible");
+          captureHole.classList.remove("invisible");
+        }, 200)
+     
 
 
-    }, intervalByLevel)
-    let interval2 = setInterval(() => {
-
-      let drawRange = newGame.drawSlots(1, 9);
-      let captureVirus = document.getElementById(`virus${drawRange}`);
-      let captureHole = document.getElementById(`hole${drawRange}`);
-
-      captureVirus.classList.add(`invisible`);
-      captureVirus.classList.remove(`visible`);
-      captureHole.classList.add(`visible`);
-      captureHole.classList.remove(`invisible`);
-    }, 2000)
+    }, 3000);
     setTimeout(() => {
       clearInterval(interval1);
-      clearInterval(interval2);
-    }, 60000)
+      nextLevel();
+    }, 10000)
 
   };
   showVirus();
 };
+//Function a ser chamada quando a pessoa ganhar(Fazer condição de acordo com o score minimo)
+function nextLevel(){
+  const happyCrocodyle = document.getElementById("happy");
+  const normalCrocodyle = document.getElementById("normal");
+  const nextLevelModal = document.getElementById("modal-next-level");
+  const nextLevelBtn = document.getElementById("btn-next-level");
+    happyCrocodyle.style.display = "block";
+    normalCrocodyle.style.display = "none";
+    nextLevelModal.style.display = "flex";
+    nextLevelBtn.style.display = "block";
+    playAudio(gameWinSound);
+    newGame.levelAward();
+    newGame.setCurrentLevel(newGame.getCurrentLevel() +1)
 
+}
