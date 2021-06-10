@@ -638,7 +638,7 @@ function gameStart() {
             
             </div>
             <div id="next">
-              <button id="btn-next-level" onclick="">
+              <button id="btn-next-level" onclick="startNextLevel()">
                 <img src="img/next-btn.png">
               </button>
             </div>
@@ -648,76 +648,104 @@ function gameStart() {
   removeBtnBox = document.getElementById("modal-ingame")
   let masks = document.getElementById("masks");
   for (let i = 1; i <= userLifes; i++) {
-    masks.innerHTML += `<img src="img/icon-heart.png"/>`
-
+    masks.innerHTML += `<img src="img/icon-heart.png" id="mask${i}"/>`
   }
-
-  function showVirus() {
-    newGame.setCurrentLevel(1);
-    const virusValue = newGame.getPointsByLevel(1);
-    const intervalByLevel = newGame.getIntervalByLevel(1);
-    let interval1 = setInterval(() => {
-      let drawRange = newGame.drawSlots(1, 9);
-      let captureVirus = document.getElementById(`virus${drawRange}`);
-      let captureHole = document.getElementById(`hole${drawRange}`);
-      let captureScore = document.getElementById("score")
-      captureVirus.classList.add("visible");
-      captureVirus.classList.remove("invisible");
-      captureHole.classList.add("invisible");
-      captureHole.classList.remove("visible");
-      captureVirus.addEventListener("click", () => {
-        let storageScore = newGame.increaseScore(virusValue);
-        console.log(storageScore);
-        newGame.setScore(storageScore);
-        captureScore.innerHTML = `Score:${newGame.getScore()}`
-        console.log(newGame.getScore());
-        captureVirus.classList.remove("visible")
-        captureVirus.classList.add("invisible");
-        captureHole.classList.add("visible");
-        captureHole.classList.remove("invisible");
-        playAudio(sprayClicksSound);
-      })
-      
-      let decreaseLife = newGame.getLifeStatus();
-
-      setTimeout(() => {
-        captureVirus.classList.add("invisible");
-        captureVirus.classList.remove("visible");
-        captureHole.classList.add("visible");
-        captureHole.classList.remove("invisible");
-        if (decreaseLife <= 0){
-          clearInterval(interval1)
-          console.log("Perdeu playboy!")
-        } else {
-        newGame.setLifeStatus((decreaseLife - 1))
-        console.log(decreaseLife);
-        }
-      }, (intervalByLevel / 1.5))
-      
-    }, intervalByLevel);
-    
-    //Precisa de uma condição para só ser executada quando a pesoa ganhar
-    setTimeout(() => {
-      clearInterval(interval1);
-      nextLevel();
-    }, 10000)
-
-  };
+  //Substitui pela chamada da função  
   showVirus();
 };
-//Function a ser chamada quando a pessoa ganhar(Fazer condição de acordo com o score mínimo)
+
+//Movi a showVirus para o escopo global, para poder ser chamada pelo botão de troca de fases
+//Criei um parâmetro para receber o getCurrentLevel e substitui todas as passagens de parâmetro referentes ao nível por ele, para generalizar a função
+function showVirus(level = newGame.getCurrentLevel()) {
+  console.log("Nível " + level);
+  newGame.setCurrentLevel(level);
+  const virusValue = newGame.getPointsByLevel(level);
+  const intervalByLevel = newGame.getIntervalByLevel(level);
+  let interval1 = setInterval(() => {
+    let drawRange = newGame.drawSlots(1, 9);
+    let captureVirus = document.getElementById(`virus${drawRange}`);
+    let captureHole = document.getElementById(`hole${drawRange}`);
+    let captureScore = document.getElementById("score")
+    captureVirus.classList.add("visible");
+    captureVirus.classList.remove("invisible");
+    captureHole.classList.add("invisible");
+    captureHole.classList.remove("visible");
+    captureVirus.addEventListener("click", () => {
+      let storageScore = newGame.increaseScore(virusValue);
+      console.log(storageScore);
+      newGame.setScore(storageScore);
+      captureScore.innerHTML = `Score:${newGame.getScore()}`
+      console.log(newGame.getScore());
+      captureVirus.classList.remove("visible")
+      captureVirus.classList.add("invisible");
+      captureHole.classList.add("visible");
+      captureHole.classList.remove("invisible");
+      playAudio(sprayClicksSound);
+    })
+
+    setTimeout(() => {
+      captureVirus.classList.add("invisible");
+      captureVirus.classList.remove("visible");
+      captureHole.classList.add("visible");
+      captureHole.classList.remove("invisible");
+
+      let life = newGame.getLifeStatus();
+      let decreaseLife = document.getElementById(`mask${life}`);
+
+
+      //Precisamos colocar essa condição no lugar correto, pq ela está executando, mesmo quando o coroninha recebe click
+      if (life <= 0) {
+        clearInterval(interval1)
+        console.log("Perdeu playboy!") // Inserir a chamada da tela de Game Over
+      } else {
+        decreaseLife.parentNode.removeChild(decreaseLife);
+        newGame.setLifeStatus((life - 1));
+        console.log("Total de vidas: " + life);
+      }
+
+
+
+    }, (intervalByLevel / 1.5))
+
+  }, intervalByLevel);
+
+  setTimeout(() => {
+    clearInterval(interval1);
+    nextLevel();
+  }, 10000)
+
+};
+
 function nextLevel() {
   const happyCrocodyle = document.getElementById("happy");
   const normalCrocodyle = document.getElementById("normal");
   const nextLevelModal = document.getElementById("modal-next-level");
   const nextLevelBtn = document.getElementById("btn-next-level");
-    happyCrocodyle.style.display = "block";
-    normalCrocodyle.style.display = "none";
-    nextLevelModal.style.display = "flex";
-    nextLevelBtn.style.display = "block";
-    playAudio(gameWinSound);
-    newGame.levelAward();
-    newGame.setCurrentLevel(newGame.getCurrentLevel() +1);
-
+  happyCrocodyle.style.display = "block";
+  normalCrocodyle.style.display = "none";
+  nextLevelModal.style.display = "flex";
+  nextLevelBtn.style.display = "block";
+  playAudio(gameWinSound);
+  newGame.levelAward(newGame.getCurrentLevel());
 }
- 
+
+//Restaura a tela de jogo e reinicia a partida de acordo com o novo nível
+function startNextLevel() {
+  let userLifes = newGame.getLifeStatus();
+  for (let i = 1; i <= userLifes; i++) {
+    masks.innerHTML += `<img src="img/icon-heart.png" id="mask${i}"/>`
+  }
+  const happyCrocodyle = document.getElementById("happy");
+  const normalCrocodyle = document.getElementById("normal");
+  const nextLevelModal = document.getElementById("modal-next-level");
+  const nextLevelBtn = document.getElementById("btn-next-level");
+  happyCrocodyle.style.display = "none";
+  normalCrocodyle.style.display = "block";
+  nextLevelModal.style.display = "none";
+  nextLevelBtn.style.display = "none";
+
+  newGame.setCurrentLevel(newGame.getCurrentLevel() + 1);
+  let incrementedLevel = newGame.getCurrentLevel();
+  showVirus(incrementedLevel);
+}
+
