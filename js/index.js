@@ -657,10 +657,11 @@ function gameStart() {
 //Movi a showVirus para o escopo global, para poder ser chamada pelo botão de troca de fases
 //Criei um parâmetro para receber o getCurrentLevel e substitui todas as passagens de parâmetro referentes ao nível por ele, para generalizar a função
 function showVirus(level = newGame.getCurrentLevel()) {
-  console.log("Nível " + level);
+  console.log("Nível " + level); //remover
   newGame.setCurrentLevel(level);
   const virusValue = newGame.getPointsByLevel(level);
   const intervalByLevel = newGame.getIntervalByLevel(level);
+  console.log("Intervalo de tempo " + intervalByLevel); //remover
   let interval1 = setInterval(() => {
     let drawRange = newGame.drawSlots(1, 9);
     let captureVirus = document.getElementById(`virus${drawRange}`);
