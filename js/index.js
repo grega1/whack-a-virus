@@ -221,14 +221,16 @@ let virusTimer = new Timer();
 let gameTimer = new Timer();
 
 //Audios//
-let btnSelectSound = "../audio/btn-select.wav"; // guardar o caminho como strig
-let maskUpSound = "../audio/mask-up.wav";
-let levelUpSound = "../audio/level-up.wav";
+let btnSelectSound = "../audio/btn-select.mp3"; // guardar o caminho como strig
+let maskUpSound = "../audio/mask-up.mp3";
+let levelUpSound = "../audio/level-up.mp3";
 let gameStartSound = "../audio/game-start.ogg";
-let virusExplosionSound = "../audio/virus-explosion.wav";
-let sprayClicksSound = "../audio/spray-click.wav";
-let gameWinSound = "../audio/game-win.wav";
-let vaxxBreakingSound = "../audio/vaxx-breaking.wav";
+let virusExplosionSound = "../audio/virus-explosion.mp3";
+let sprayClicksSound = "../audio/spray-click.mp3";
+let gameWinSound = "../audio/game-win.mp3";
+let vaxxBreakingSound = "../audio/vaxx-breaking.mp3";
+let backgroundSound = "../audio/background-sound.mp3";
+let increaseSound = "../audio/increase-sound.mp3";
 
 function playAudio(sound) {
   const audioToPlay = new Audio(sound);
@@ -731,7 +733,7 @@ function showVirus(level = newGame.getCurrentLevel()) {
 
 };
 function hitVirus(id, level = newGame.getCurrentLevel()) {  
-  newGame.getScore();
+  newGame.getScore();  
   let captureScore = document.getElementById("score")
   let virusValue = newGame.getPointsByLevel(level);
   let captureVirus = document.getElementById(`virus${id}`);
@@ -740,13 +742,18 @@ function hitVirus(id, level = newGame.getCurrentLevel()) {
     console.log(storageScore);
     console.log('foi clicado');
     newGame.setScore(storageScore);
-    captureScore.innerHTML = `Score: ${newGame.getScore()}`
+    
     console.log(newGame.getScore());
     captureVirus.classList.remove("visible")
     captureVirus.classList.add("invisible");
     captureHole.classList.add("visible");
     captureHole.classList.remove("invisible");
     playAudio(sprayClicksSound);
+    setTimeout(() => {
+      playAudio(increaseSound);
+      captureScore.innerHTML = `Score: ${newGame.getScore()}`;
+    }, 300);
+
   
 }
 
