@@ -20,10 +20,10 @@ class Game {
   setScore(_score = 0) {
     this.score = _score;
   }
-  setCurrentLevel(_currentLevel = 1){
+  setCurrentLevel(_currentLevel = 1) {
     this.currentLevel = _currentLevel;
   }
-  getCurrentLevel(){
+  getCurrentLevel() {
     return this.currentLevel;
   }
   getScore() {
@@ -331,7 +331,7 @@ function openConfigSound() {
 </section>`
 
 };
-function openShortcutKeys(){
+function openShortcutKeys() {
   let captureModalConfigurations = document.getElementById("modal-configuration");
   captureModalConfigurations.style.display = "none";
   captureContainer.innerHTML += `<section id="modal-configuration" class="modal">
@@ -411,10 +411,10 @@ function openShortcutKeys(){
             
         </section>`
 }
-function openHelp(){
+function openHelp() {
   let captureModalConfigurations = document.getElementById("modal-configuration");
   captureModalConfigurations.style.display = "none";
-  captureContainer.innerHTML +=`  <div id="modal-instructions-menu" class="modal">
+  captureContainer.innerHTML += `  <div id="modal-instructions-menu" class="modal">
       <div class="modal-with-border">
         <div id="circle1" class="circles">        
         </div>
@@ -657,7 +657,7 @@ function gameStart() {
     const virusValue = newGame.getPointsByLevel(1);
     const intervalByLevel = newGame.getIntervalByLevel(1);
     let interval1 = setInterval(() => {
-      let drawRange = newGame.drawSlots(1, 3);     
+      let drawRange = newGame.drawSlots(1, 9);
       let captureVirus = document.getElementById(`virus${drawRange}`);
       let captureHole = document.getElementById(`hole${drawRange}`);
       let captureScore = document.getElementById("score")
@@ -668,24 +668,35 @@ function gameStart() {
       captureVirus.addEventListener("click", () => {
         let storageScore = newGame.increaseScore(virusValue);
         console.log(storageScore);
-        newGame.setScore(storageScore);        
+        newGame.setScore(storageScore);
         captureScore.innerHTML = `Score:${newGame.getScore()}`
         console.log(newGame.getScore());
         captureVirus.classList.remove("visible")
         captureVirus.classList.add("invisible");
         captureHole.classList.add("visible");
         captureHole.classList.remove("invisible");
+        playAudio(sprayClicksSound);
       })
-        setTimeout(() => {
-          captureVirus.classList.add("invisible");
-          captureVirus.classList.remove("visible");
-          captureHole.classList.add("visible");
-          captureHole.classList.remove("invisible");
-        }, 200)
-     
+      
+      let decreaseLife = newGame.getLifeStatus();
 
-
-    }, 3000);
+      setTimeout(() => {
+        captureVirus.classList.add("invisible");
+        captureVirus.classList.remove("visible");
+        captureHole.classList.add("visible");
+        captureHole.classList.remove("invisible");
+        if (decreaseLife <= 0){
+          clearInterval(interval1)
+          console.log("Perdeu playboy!")
+        } else {
+        newGame.setLifeStatus((decreaseLife - 1))
+        console.log(decreaseLife);
+        }
+      }, (intervalByLevel / 1.5))
+      
+    }, intervalByLevel);
+    
+    //Precisa de uma condição para só ser executada quando a pesoa ganhar
     setTimeout(() => {
       clearInterval(interval1);
       nextLevel();
@@ -694,18 +705,18 @@ function gameStart() {
   };
   showVirus();
 };
-//Function a ser chamada quando a pessoa ganhar(Fazer condição de acordo com o score minimo)
-function nextLevel(){
+//Function a ser chamada quando a pessoa ganhar(Fazer condição de acordo com o score mínimo)
+function nextLevel() {
   const happyCrocodyle = document.getElementById("happy");
   const normalCrocodyle = document.getElementById("normal");
   const nextLevelModal = document.getElementById("modal-next-level");
   const nextLevelBtn = document.getElementById("btn-next-level");
-    happyCrocodyle.style.display = "block";
-    normalCrocodyle.style.display = "none";
-    nextLevelModal.style.display = "flex";
-    nextLevelBtn.style.display = "block";
-    playAudio(gameWinSound);
-    newGame.levelAward();
-    newGame.setCurrentLevel(newGame.getCurrentLevel() +1)
+  happyCrocodyle.style.display = "block";
+  normalCrocodyle.style.display = "none";
+  nextLevelModal.style.display = "flex";
+  nextLevelBtn.style.display = "block";
+  playAudio(gameWinSound);
+  newGame.levelAward();
+  newGame.setCurrentLevel(newGame.getCurrentLevel() + 1)
 
 }
