@@ -102,8 +102,6 @@ class Game {
   }
   //criar função fora para mutar e executar
 
-
-
   // _levelBonus = Bônus recebido ao final da fase, caso o jogador tenha todas as vidas
   levelAward() {
     switch (this.currentLevel) {
@@ -215,6 +213,7 @@ class Timer {
     return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
   }
 }
+
 // Instances
 let newGame = new Game();
 let virusTimer = new Timer();
@@ -516,7 +515,7 @@ function portugueseRoute() {
 function showInstructions() {
   let captureName = document.getElementById("user-input").value;
   newGame.setName(captureName);
-  console.log(newGame.getName());
+  //console.log(newGame.getName());
   let modalNickName = document.getElementById("modal-nickname");
   modalNickName.parentNode.removeChild(modalNickName);
   captureContainer.innerHTML += ` <div id="modal-instructions" class="modal">
@@ -550,8 +549,7 @@ let slotSequence = [];
 function gameStart() {
   let userName = newGame.getName();
   newGame.setScore();
-  let userScore = newGame.getScore();
-  newGame.setLifeStatus(3);
+  newGame.setLifeStatus();
   let userLifes = newGame.getLifeStatus();
   let modalInstructions = document.getElementById("modal-instructions");
   modalInstructions.parentNode.removeChild(modalInstructions);
@@ -566,7 +564,7 @@ function gameStart() {
           <section class="background-with-crocodile">
             <div id="player-scoreboard">
               <h4> Name: ${userName}</h4>
-              <h4 id="score">Score:0 </h4>
+              <h4 id="score">Score: 0 </h4>
             </div>
             <div id="scoreboard-footer">
                 <section id="modal-next-level" class="invisible">
@@ -671,13 +669,17 @@ function gameStart() {
 function showVirus(level = newGame.getCurrentLevel()) {
   console.log("Nível " + level); //remover
   newGame.setCurrentLevel(level);
-  let hasClickProcessor =  true;  
   const intervalByLevel = newGame.getIntervalByLevel(level);
-  console.log("Intervalo de tempo " + intervalByLevel); //remover
-  let life = newGame.getLifeStatus();
-  let decreaseLife = document.getElementById(`mask${life}`);
+  console.log("Intervalo de tempo " + intervalByLevel / 1.5); //remover
+  //let life = newGame.getLifeStatus();
+  let decreaseLife = document.getElementById(`mask${newGame.getLifeStatus()}`);
+
+ /*  let decreaseLife1 = document.getElementById(`mask1`);
+  let decreaseLife2 = document.getElementById(`mask2`);
+  let decreaseLife3 = document.getElementById(`mask3`)
+ */
+
   let interval1 = setInterval(() => {
-    newGame.getScore()
     let drawRange = newGame.drawSlots(1, 9);
     let captureVirus = document.getElementById(`virus${drawRange}`);
     let captureHole = document.getElementById(`hole${drawRange}`);
@@ -703,12 +705,14 @@ function showVirus(level = newGame.getCurrentLevel()) {
       playAudio(sprayClicksSound);
     })*/
     
-    setTimeout(() => {     
+    setTimeout(() => {
+  
       if(captureVirus.classList.contains("visible") && decreaseLife.parentNode.hasChildNodes()) {        
-        decreaseLife.parentNode.removeChild(decreaseLife);
-        newGame.setLifeStatus((life - 1));
-        console.log("Total de vidas: " + life);
+        //decreaseLife.parentNode.removeChild(decreaseLife);
+        newGame.setLifeStatus((newGame.getLifeStatus() - 1));
+        console.log("Total de vidas: " + newGame.getLifeStatus());
       }
+      
       captureVirus.classList.add("invisible");
       captureVirus.classList.remove("visible");
       captureHole.classList.add("visible");
@@ -729,18 +733,17 @@ function showVirus(level = newGame.getCurrentLevel()) {
   //jogar dentro de uma variável e limpar no gameLost
   let gameTimeout = setTimeout(() => {
     clearInterval(interval1);   
-    for (let i = 1; i <= 9; i++) {
+     for (let i = 1; i <= 9; i++) {
       let clearVirus = document.getElementById(`virus${[i]}`);
       let clearHole = document.getElementById(`hole${[i]}`);
       clearVirus.classList.add("invisible");
       clearVirus.classList.remove("visible");
       clearHole.classList.add("visible");
       clearHole.classList.remove("invisible"); 
-      console.log(i);      
-    }  
+      //console.log(i);      
+    } 
     nextLevel();  
   }, 10000)
-
 };
 
 function hitVirus(id, level = newGame.getCurrentLevel()) {  
@@ -748,7 +751,7 @@ function hitVirus(id, level = newGame.getCurrentLevel()) {
   let captureScore = document.getElementById("score")
   let virusValue = newGame.getPointsByLevel(level);
   let captureVirus = document.getElementById(`virus${id}`);
-  let captureHole = document.getElementById(`hole${id}`);     
+  let captureHole = document.getElementById(`hole${id}`);
   //let storageScore = newGame.increaseScore(virusValue);
   newGame.increaseScore(virusValue);
   //  console.log(storageScore);
@@ -760,13 +763,12 @@ function hitVirus(id, level = newGame.getCurrentLevel()) {
     captureVirus.classList.add("invisible");
     captureHole.classList.add("visible");
     captureHole.classList.remove("invisible");
-    playAudio(sprayClicksSound);
+    //playAudio(sprayClicksSound); //AtivarSom
     setTimeout(() => {
-      playAudio(increaseSound);
+      //playAudio(increaseSound);  //AtivarSom
       captureScore.innerHTML = `Score: ${newGame.getScore()}`;
     }, 300);
 
-  
 }
 
 function nextLevel() {
@@ -778,7 +780,7 @@ function nextLevel() {
   normalCrocodyle.style.display = "none";
   nextLevelModal.style.display = "flex";
   nextLevelBtn.style.display = "block";
-  playAudio(gameWinSound);
+  //playAudio(gameWinSound); //AtivarSom
   newGame.levelAward(newGame.getCurrentLevel());
   
 }
