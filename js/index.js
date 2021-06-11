@@ -235,10 +235,10 @@ let increaseSound = "../audio/increase-sound.mp3";
 function playAudio(sound) {
   const audioToPlay = new Audio(sound);
   if (newGame.getSoundEffects()) {
+    audioToPlay.volume = parseInt(localStorage.getItem('mainVolume'));
     audioToPlay.play();
   }
 }
-
 //Manipulação das Telas do Jogo
 //Sequência das Configurações da Tela do Jogo
 let captureContainer = document.getElementById("container");
@@ -290,6 +290,7 @@ let captureSoundConfigurations = document.getElementById("btn-sound-configuratio
 let captureShorcutKeys = document.getElementById("btn-shortcut-key");
 let captureHelps = document.getElementById("btn-help");
 
+
 function openConfigSound() {
   let captureModalConfigurations = document.getElementById("modal-configuration");
   captureModalConfigurations.style.display = "none";
@@ -331,8 +332,17 @@ function openConfigSound() {
     </section>
     
 </section>`
-
+let captureSoundMainVol = document.getElementById("main-volume");
+let captureSoundVol = document.getElementById("sound-volume");
+let captureSoundEffectsVol = document.getElementById("sound-effects");
+captureSoundMainVol.addEventListener("change", function(e) {
+  localStorage.setItem('mainVolume',e.currentTarget.value / 100);
+  playAudio(backgroundSound);
+  });
 };
+
+
+
 function openShortcutKeys() {
   let captureModalConfigurations = document.getElementById("modal-configuration");
   captureModalConfigurations.style.display = "none";
