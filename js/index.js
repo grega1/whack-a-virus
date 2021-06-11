@@ -77,10 +77,11 @@ class Game {
   }
 
   //actionPoint = Pontuação recebida por destruir o alvo
-  increaseScore(_actionPoint) {
-    let scoreOfPlayer = this.score;
+  increaseScore(_actionPoint = 5) {
+    /* let scoreOfPlayer = this.score;
     let updatedScore = scoreOfPlayer + _actionPoint;
-    return updatedScore;
+    return updatedScore; */
+    this.score = this.score + parseInt(_actionPoint);    
   }
 
   drawSlots(_firstSlot, _lastSlot) {
@@ -105,26 +106,25 @@ class Game {
 
   // _levelBonus = Bônus recebido ao final da fase, caso o jogador tenha todas as vidas
   levelAward() {
-    switch (this.levelBonus) {
+    switch (this.currentLevel) {
       case 1:
-        return 100;
+        this.levelBonus = 100;
         break;
       case 2:
-        return 200;
+        this.levelBonus = 200;
         break;
       case 3:
-        return 300;
+        this.levelBonus = 300;
         break;
       case 4:
-        return 400;
+        this.levelBonus = 400;
         break;
       case 5:
-        return 500;
+        this.levelBonus = 500;
         break;
     };
 
-    let lifesPlayer = this.lifes;
-    if (lifesPlayer < 3) {
+    if (this.lifes < 3) {
       return this.lifes += 1
     } else {
       return this.score += this.levelBonus;
@@ -732,18 +732,20 @@ function showVirus(level = newGame.getCurrentLevel()) {
   }, 10000)
 
 };
+
 function hitVirus(id, level = newGame.getCurrentLevel()) {  
   newGame.getScore();  
   let captureScore = document.getElementById("score")
   let virusValue = newGame.getPointsByLevel(level);
   let captureVirus = document.getElementById(`virus${id}`);
   let captureHole = document.getElementById(`hole${id}`);     
-  let storageScore = newGame.increaseScore(virusValue);
-    console.log(storageScore);
-    console.log('foi clicado');
-    newGame.setScore(storageScore);
+  //let storageScore = newGame.increaseScore(virusValue);
+  newGame.increaseScore(virusValue);
+  //  console.log(storageScore);
+  //  console.log('foi clicado');
+  //  newGame.setScore(storageScore);
     
-    console.log(newGame.getScore());
+    //console.log(newGame.getScore());
     captureVirus.classList.remove("visible")
     captureVirus.classList.add("invisible");
     captureHole.classList.add("visible");
