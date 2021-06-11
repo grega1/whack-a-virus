@@ -840,6 +840,16 @@ function startNextLevel() {
   for (let i = 1; i <= userLifes; i++) {
     masks.innerHTML += `<img src="img/icon-heart.png" id="mask${i}"/>`
   }*/
+ 
+
+  //Atualização das vidas na tela quando troca de nível.
+  let upadateLives = document.getElementById(`masks`);
+  let remainLives = ''; 
+  for (let i = 1; i <= newGame.getLifeStatus(); i++) {
+    remainLives += `<img src="img/icon-heart.png" id="mask${i}" />`
+  }  
+  upadateLives.innerHTML = remainLives;
+
   const happyCrocodyle = document.getElementById("happy");
   const normalCrocodyle = document.getElementById("normal");
   const nextLevelModal = document.getElementById("modal-next-level");

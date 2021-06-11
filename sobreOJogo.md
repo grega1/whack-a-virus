@@ -1,4 +1,4 @@
-# WHACK A VIRUS
+# WHACK VIRUS
     - Objetivo:
     Matar o coroninha utilizando o spray de álcool 70, para acumular pontos e garantir uma colocação no ranking, que terá a exibição das 5 primeiras posições.
 
