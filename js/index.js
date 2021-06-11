@@ -230,19 +230,34 @@ let gameWinSound = "../audio/game-win.mp3";
 let vaxxBreakingSound = "../audio/vaxx-breaking.mp3";
 let backgroundSound = "../audio/background-sound.mp3";
 let increaseSound = "../audio/increase-sound.mp3";
-
+let mainMusic = new Audio(backgroundSound);
+mainMusic.play();
+mainMusic.loop = true;
 function playAudio(sound) {
   const audioToPlay = new Audio(sound);
-  if (newGame.getSoundEffects()) {
-    audioToPlay.volume = parseInt(localStorage.getItem('mainVolume'));
+  audioToPlay.play();
+  /*if (newGame.getSoundEffects()) {
     audioToPlay.play();
-  }
+    audioToPlay.volume = parseInt(localStorage.getItem('mainVolume'));
+    
+  }*/
 }
+//ShortKeyUps
+let arrKeys=['Q','W','E','R','T','A','S','D','F'];
+document.addEventListener('keydown', (event) => {
+  const keyName = event.key;
+  if(arrKeys.indexOf(keyName) != -1){
+  	console.log('keydown event\n\n' + 'key: ' + keyName);
+     //count++;
+  } 
+  console.log(arrKeys)
+});
+
 //Manipulação das Telas do Jogo
 //Sequência das Configurações da Tela do Jogo
 let captureContainer = document.getElementById("container");
 let captureSettings = document.getElementById("settings-button");
-//captureSettings.addEventListener("click",()=>
+//captureSettings.addEventListener("click'"','()=>
 function makeSettings() {
   captureContainer.innerHTML += ` 
             <section id="modal-configuration" class="modal">
@@ -267,7 +282,7 @@ function makeSettings() {
 
                 </section>
 
-                <button id="btn-return-game" class="return-game" onclick="" >Voltar para o Jogo</button>
+                <button id="btn-return-game" class="return-game" onclick="closeSettings()">Voltar para o Jogo</button>
                 
             </section>
             
@@ -275,13 +290,24 @@ function makeSettings() {
 
 };
 makeSettings();
+let btnReturnGame = document.getElementById("btn-return-game");
 let removeBtnBox = document.getElementById("btn-box");
 let captureModalConfigurations = document.getElementById("modal-configuration");
 captureModalConfigurations.style.display = "none";
-function openSetting() {
+function openSettings() {
   removeBtnBox.classList.add("relative-with-blur");
   captureModalConfigurations.style.display = "flex"
   makeSettings();
+
+}
+function changeVol(volume,audio){
+
+}
+function closeSettings(){
+  console.log("entrei")
+  captureModalConfigurations.style.display = "none";
+  removeBtnBox.classList.remove("relative-with-blur");
+  removeBtnBox.style.display = "flex";
 
 }
 
@@ -334,13 +360,13 @@ function openConfigSound() {
 let captureSoundMainVol = document.getElementById("main-volume");
 let captureSoundVol = document.getElementById("sound-volume");
 let captureSoundEffectsVol = document.getElementById("sound-effects");
-captureSoundMainVol.addEventListener("change", function(e) {
-  localStorage.setItem('mainVolume',e.currentTarget.value / 100);
-  playAudio(backgroundSound);
+captureSoundVol.addEventListener("change", function(e) {
+  let eventVol = e.currentTarget.value / 100;
+  mainMusic.volume= eventVol;
+  //localStorage.setItem('mainVolume',e.currentTarget.value / 100);  
   });
 };
-
-
+//
 
 function openShortcutKeys() {
   let captureModalConfigurations = document.getElementById("modal-configuration");
@@ -364,49 +390,49 @@ function openShortcutKeys() {
                     <div class="row">
 
                         <div class="slot-with-label">
-                        <input type="text" id="splt1" class="slot">
-                        <label for="splt1">Slot 1</label>
+                        <input data-index="0" type="text" id="slot1" class="slot">
+                        <label for="slot1">Slot 1</label>
                         </div>
 
                         <div class="slot-with-label">
-                        <input type="text" id="splt2" class="slot">
+                        <input data-index="1" type="text" id="slot2" class="slot">
                         <label for="slot2">Slot 2</label>
                         </div>
 
                         <div class="slot-with-label">
-                        <input type="text" id="slot3" class="slot">
-                        <label for="slo3t">Slot 3</label>
+                        <input data-index="2" type="text" id="slot3" class="slot">
+                        <label for="slot3">Slot 3</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="slot-with-label">
-                        <input type="text" id="slot4" class="slot">
+                        <input data-index="3" type="text" id="slot4" class="slot">
                         <label for="slot4">Slot 4</label>
                         </div>
                         
                         <div class="slot-with-label">
-                        <input type="text" id="slot5" class="slot">
+                        <input data-index="4" type="text" id="slot5" class="slot">
                         <label for="slot5">Slot 5</label>
                         </div>
 
                         <div class="slot-with-label">
-                        <input type="text" id="slot6" class="slot">
+                        <input data-index="5" type="text" id="slot6" class="slot">
                         <label for="slot6">Slot 6</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="slot-with-label">
-                        <input type="text" id="slot7" class="slot">
+                        <input data-index="6" type="text" id="slot7" class="slot">
                         <label for="slot7">Slot 7</label>
                         </div>
 
                         <div class="slot-with-label">
-                        <input type="text" id="slot8" class="slot">
+                        <input data-index="7"type="text" id="slot8" class="slot">
                         <label for="slot8">Slot 8</label>
                         </div>
                         
                         <div class="slot-with-label">
-                        <input type="text" id="slot9" class="slot">
+                        <input data-index="8" type="text" id="slot9" class="slot">
                         <label for="slot9">Slot 9</label>
                         </div>
 
@@ -421,6 +447,18 @@ function openShortcutKeys() {
             </section>
             
         </section>`
+  //função que vai guardar e substituir as KeyUps
+  let saveShortKeys= document.getElementById("btn-save");
+  saveShortKeys.addEventListener('click', () =>{  
+    let slots = document.querySelectorAll('.slot');
+    let newSlots= slots.filter((slot) => slot.value !=""); //só retorna os campos preenchidos
+    console.log(slots);
+    console.log(newSlots);
+    for(let i=0; i<newSlots.length; i++){
+      let captureData = newSlots[i].dataset.index;
+      arrKeys[captureData] = newSlots[i].value;
+    }
+  })
 }
 function openHelp() {
   let captureModalConfigurations = document.getElementById("modal-configuration");
@@ -672,7 +710,7 @@ function showVirus(level = newGame.getCurrentLevel()) {
   const intervalByLevel = newGame.getIntervalByLevel(level);
   console.log("Intervalo de tempo " + intervalByLevel / 1.5); //remover
   //let life = newGame.getLifeStatus();
-  let decreaseLife = document.getElementById(`mask${newGame.getLifeStatus()}`);
+ 
 
  /*  let decreaseLife1 = document.getElementById(`mask1`);
   let decreaseLife2 = document.getElementById(`mask2`);
@@ -706,10 +744,15 @@ function showVirus(level = newGame.getCurrentLevel()) {
     })*/
     
     setTimeout(() => {
+      let decreaseLife = document.getElementById(`masks`);
+      let remainLives = '';
   
-      if(captureVirus.classList.contains("visible") && decreaseLife.parentNode.hasChildNodes()) {        
-        //decreaseLife.parentNode.removeChild(decreaseLife);
+      if(captureVirus.classList.contains("visible") && decreaseLife.hasChildNodes()) {    
         newGame.setLifeStatus((newGame.getLifeStatus() - 1));
+        for (let i = 1; i <= newGame.getLifeStatus(); i++) {
+          remainLives += `<img src="img/icon-heart.png" id="mask${i}" />`
+        }
+        decreaseLife.innerHTML = remainLives;
         console.log("Total de vidas: " + newGame.getLifeStatus());
       }
       
@@ -721,7 +764,7 @@ function showVirus(level = newGame.getCurrentLevel()) {
       if (newGame.getLifeStatus() <= 0) {
         clearInterval(interval1);
         clearTimeout(gameTimeout);
-        console.log("Perdeu playboy!");
+        //console.log("Perdeu playboy!");
         showGameLost(); // Inserir a chamada da tela de Game Over
       } 
 

@@ -409,18 +409,24 @@ p{
 
 .slot-with-label{
   display: flex;
-  width: 25%;
+  width: 45%;
   margin-top: 1.563rem;
+  
 }
 
 .slot{
-  width: 10%;
+  width: 70px;
   padding: 0.625rem;
   margin-right: 0.625rem;
+  color:#000023;
+  text-align: center;
+  
 }
 
 label{
   margin-top: 0.625rem;
+  padding-right: 20px;
+  
 }
 
 .save{
