@@ -550,3 +550,7 @@ img{
 #modal-gameover{
   position: absolute;
 }
+.absolute-with-blur{
+  z-index: 1;
+  display: flex;
+}

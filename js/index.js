@@ -295,10 +295,10 @@ let removeBtnBox = document.getElementById("btn-box");
 let captureModalConfigurations = document.getElementById("modal-configuration");
 captureModalConfigurations.style.display = "none";
 function openSettings() {
-  removeBtnBox.classList.add("relative-with-blur");
-  captureModalConfigurations.style.display = "flex"
-  makeSettings();
-
+  captureModalConfigurations.classList.add("absolute-with-blur");
+  captureModalConfigurations.style.display = "flex";
+  removeBtnBox.classList.add("relative-with-blur"); 
+  
 }
 function changeVol(volume,audio){
 
@@ -314,6 +314,8 @@ function closeSettings(){
 let captureSoundConfigurations = document.getElementById("btn-sound-configuration");
 let captureShorcutKeys = document.getElementById("btn-shortcut-key");
 let captureHelps = document.getElementById("btn-help");
+let captureSoundVol;
+
 
 
 function openConfigSound() {
@@ -352,13 +354,13 @@ function openConfigSound() {
 
         </section>
 
-        <button id="btn-return-game" class="return-game" onclick="makeSettings()">Return to Main Menu</button>
+        <button id="btn-return-game" class="return-game" onclick="closeSettings()">Return to Main Menu</button>
         
     </section>
     
 </section>`
 let captureSoundMainVol = document.getElementById("main-volume");
-let captureSoundVol = document.getElementById("sound-volume");
+  captureSoundVol = document.getElementById("sound-volume");
 let captureSoundEffectsVol = document.getElementById("sound-effects");
 captureSoundVol.addEventListener("change", function(e) {
   let eventVol = e.currentTarget.value / 100;
@@ -518,7 +520,8 @@ pressStart.addEventListener("click", () => {
        </div>
      </div>
      </div>`
-  removeBtnBox = document.getElementById("modal-language")
+  removeBtnBox = document.getElementById("modal-language");
+  captureModalConfigurations = document.getElementById("modal-configuration");
 });
 
 let langPTBR = document.getElementById("select-language");
@@ -546,7 +549,8 @@ function portugueseRoute() {
       </div>
     </div>
     </div>`
-  removeBtnBox = document.getElementById("modal-nickname")
+  removeBtnBox = document.getElementById("modal-nickname");
+  captureModalConfigurations = document.getElementById("modal-configuration");
 };
 
 
@@ -580,7 +584,8 @@ function showInstructions() {
       </div>
     </div>
     </div>`
-  removeBtnBox = document.getElementById("modal-instructions")
+  removeBtnBox = document.getElementById("modal-instructions");
+  captureModalConfigurations = document.getElementById("modal-configuration");
 }
 let slotSequence = [];
 
@@ -693,7 +698,8 @@ function gameStart() {
           </section>
         </section>
       </div>`
-  removeBtnBox = document.getElementById("modal-ingame")
+  removeBtnBox = document.getElementById("modal-ingame");
+  captureModalConfigurations = document.getElementById("modal-configuration");
   let masks = document.getElementById("masks");
   for (let i = 1; i <= userLifes; i++) {
     masks.innerHTML += `<img src="img/icon-heart.png" id="mask${i}"/>`
