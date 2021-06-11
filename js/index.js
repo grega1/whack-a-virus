@@ -542,7 +542,7 @@ function portugueseRoute() {
       <h2 class="modal-titles"> Insert your nickname
       </h2>
       <div id="input-nickname" >
-        <input type="text" name="nickname" id="user-input">           
+        <input type="text" name="nickname" id="user-input" value="Player1">           
       </div>
       <div>
           <button id="play-game" class="btn-sec" onclick="showInstructions()"> Play </button>
