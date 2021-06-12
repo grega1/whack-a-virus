@@ -291,6 +291,7 @@ function makeSettings() {
 
 };
 makeSettings();
+
 let btnReturnGame = document.getElementById("btn-return-game");
 let removeBtnBox = document.getElementById("btn-box");
 let captureModalConfigurations = document.getElementById("modal-configuration");
@@ -307,6 +308,7 @@ function changeVol(volume, audio) {
 function closeSettings() {
   let captureModalConfigurations = document.getElementById("modal-configuration");
   captureModalConfigurations.classList.remove("absolute-with-blur");
+  console.log("entrei")
   captureModalConfigurations.style.display = "none";
   let removeBtnBox = document.getElementById("btn-box");
   try {
@@ -623,6 +625,7 @@ function showInstructions() {
   removeBtnBox = document.getElementById("modal-instructions");
   captureModalConfigurations = document.getElementById("modal-configuration");
 }
+
 let slotSequence = [];
 
 function gameStart() {
@@ -746,6 +749,7 @@ function gameStart() {
 
 //Movi a showVirus para o escopo global, para poder ser chamada pelo botão de troca de fases
 //Criei um parâmetro para receber o getCurrentLevel e substitui todas as passagens de parâmetro referentes ao nível por ele, para generalizar a função
+
 function showVirus(level = newGame.getCurrentLevel()) {
   console.log("Nível " + level); //remover
   newGame.setCurrentLevel(level);
@@ -876,6 +880,16 @@ function startNextLevel() {
   for (let i = 1; i <= userLifes; i++) {
     masks.innerHTML += `<img src="img/icon-heart.png" id="mask${i}"/>`
   }*/
+
+
+  //Atualização das vidas na tela quando troca de nível.
+  let upadateLives = document.getElementById(`masks`);
+  let remainLives = '';
+  for (let i = 1; i <= newGame.getLifeStatus(); i++) {
+    remainLives += `<img src="img/icon-heart.png" id="mask${i}" />`
+  }
+  upadateLives.innerHTML = remainLives;
+
   const happyCrocodyle = document.getElementById("happy");
   const normalCrocodyle = document.getElementById("normal");
   const nextLevelModal = document.getElementById("modal-next-level");
