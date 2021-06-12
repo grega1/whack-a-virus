@@ -905,6 +905,7 @@ function startNextLevel() {
 
 }
 function showGameLost() {
+  let removeBtnBox = document.getElementById("game-box");
   removeBtnBox.classList.add(`relative-with-blur`);
   captureContainer.innerHTML += ` <div id="modal-gameover" class="modal">
   <div class="modal-with-border">
@@ -926,7 +927,7 @@ function showGameLost() {
     </p>
   </div>
   <div id="btn-retry-and-return">
-      <button id="btn-retry" class="retry" onclick="">Retry </button>
+      <button id="btn-retry" class="retry" onclick="load_home()">Retry </button>
       <button id="btn-return-start" class="return-start">Return to Start </button>
   </div>
 </div>
