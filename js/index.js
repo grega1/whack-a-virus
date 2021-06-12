@@ -241,7 +241,6 @@ function playAudio(sound) {
 
 //Sequência das Configurações da Tela do Jogo
 let captureContainer = document.getElementById("container");
-let captureSettings = document.getElementById("settings-button");
 
 function makeSettings() {
     captureContainer.innerHTML += `<section id="modal-configuration-sound" class="modal">
@@ -329,7 +328,7 @@ function closeSettings() {
 function closeSettingsSound() {
     let modalSound = document.getElementById("modal-configuration-sound");
     modalSound.style.display = "none";
-    let captureModalConfigurations = document.getElementById("modal-configuration");
+    let captureModalConfigurations = document.getElementById("modal-configuration-sound");
     captureModalConfigurations.style.display = "flex";
 }
 let captureSoundConfigurations = document.getElementById("btn-sound-configuration");
@@ -337,9 +336,10 @@ let captureSoundVol;
 
 //Sequência do Jogo
 let pressStart = document.getElementById("pressStart");
-pressStart.addEventListener("click", () => {
+pressStart.addEventListener("click", () => {;
+    let captureSettings = document.getElementById("sound");
+    captureSettings.parentNode.removeChild(captureSettings);
     let removeBtnBox = document.getElementById("btn-box");
-    let newGame = new Game();
     removeBtnBox.parentNode.removeChild(removeBtnBox);
     captureContainer.innerHTML +=
         `<div id="modal-nickname" class="modal">

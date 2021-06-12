@@ -1,208 +1,208 @@
 class Game {
-  constructor(_name, _lifes = 3, _score = 0, _currentLevel = 1, _playMusic = true, _soundEffects = true, _levelBonus) {
-    this.name = _name;
-    this.lifes = _lifes;
-    this.score = _score;
-    this.currentLevel = _currentLevel;
-    this.playMusic = _playMusic;
-    this.soundEffects = _soundEffects;
-    this.levelBonus = _levelBonus;
-  }
-
-  setName(_name) {
-    this.name = _name;
-  }
-
-  getName() {
-    return this.name;
-  }
-
-  setScore(_score = 0) {
-    this.score = _score;
-  }
-  setCurrentLevel(_currentLevel = 1) {
-    this.currentLevel = _currentLevel;
-  }
-  getCurrentLevel() {
-    return this.currentLevel;
-  }
-  getScore() {
-    return this.score;
-  }
-  getIntervalByLevel() {
-    switch (this.currentLevel) {
-      case 1:
-        return 1500;
-      case 2:
-        return 1200;
-      case 3:
-        return 1000;
-      case 4:
-        return 800;;
-      case 5:
-        return 500;;
+    constructor(_name, _lifes = 3, _score = 0, _currentLevel = 1, _playMusic = true, _soundEffects = true, _levelBonus) {
+        this.name = _name;
+        this.lifes = _lifes;
+        this.score = _score;
+        this.currentLevel = _currentLevel;
+        this.playMusic = _playMusic;
+        this.soundEffects = _soundEffects;
+        this.levelBonus = _levelBonus;
     }
-  }
-  getPointsByLevel() {
-    switch (this.currentLevel) {
-      case 1:
-        return 10;
-      case 2:
-        return 20;
-      case 3:
-        return 30;
-      case 4:
-        return 40;
-      case 5:
-        return 50;
+
+    setName(_name) {
+        this.name = _name;
     }
-  }
 
-  setLifeStatus(_lifes = 3) {
-    this.lifes = _lifes;
-  }
-
-  getLifeStatus() {
-    return this.lifes;
-  }
-
-  //actionPoint = Pontuação recebida por destruir o alvo
-  increaseScore(_actionPoint = 5) {
-    /* let scoreOfPlayer = this.score;
-    let updatedScore = scoreOfPlayer + _actionPoint;
-    return updatedScore; */
-    this.score = this.score + parseInt(_actionPoint);
-  }
-
-  drawSlots(_firstSlot, _lastSlot) {
-    return Math.round(Math.random() * (_lastSlot - _firstSlot)) + _firstSlot;
-
-  }
-  setPlayMusic(_playMusic) {
-    this.playMusic = _playMusic;
-  }
-  setSoundEffects(_soundEffects) {
-    this.soundEffects = _soundEffects;
-  }
-  getPlayMusic() {
-    return this.playMusic;
-  }
-  getSoundEffects() {
-    return this.soundEffects;
-  }
-  //criar função fora para mutar e executar
-
-  // _levelBonus = Bônus recebido ao final da fase, caso o jogador tenha todas as vidas
-  levelAward() {
-    switch (this.currentLevel) {
-      case 1:
-        this.levelBonus = 100;
-        break;
-      case 2:
-        this.levelBonus = 200;
-        break;
-      case 3:
-        this.levelBonus = 300;
-        break;
-      case 4:
-        this.levelBonus = 400;
-        break;
-      case 5:
-        this.levelBonus = 500;
-        break;
-    };
-
-    if (this.lifes < 3) {
-      return this.lifes += 1
-    } else {
-      return this.score += this.levelBonus;
+    getName() {
+        return this.name;
     }
-  }
 
-  rankingData() {
+    setScore(_score = 0) {
+        this.score = _score;
+    }
+    setCurrentLevel(_currentLevel = 1) {
+        this.currentLevel = _currentLevel;
+    }
+    getCurrentLevel() {
+        return this.currentLevel;
+    }
+    getScore() {
+        return this.score;
+    }
+    getIntervalByLevel() {
+        switch (this.currentLevel) {
+            case 1:
+                return 1500;
+            case 2:
+                return 1200;
+            case 3:
+                return 1000;
+            case 4:
+                return 800;;
+            case 5:
+                return 500;;
+        }
+    }
+    getPointsByLevel() {
+        switch (this.currentLevel) {
+            case 1:
+                return 10;
+            case 2:
+                return 20;
+            case 3:
+                return 30;
+            case 4:
+                return 40;
+            case 5:
+                return 50;
+        }
+    }
 
-    return { name: this.name, score: this.score };
+    setLifeStatus(_lifes = 3) {
+        this.lifes = _lifes;
+    }
 
-  }
-  ismuted() {
+    getLifeStatus() {
+        return this.lifes;
+    }
 
-  }
+    //actionPoint = Pontuação recebida por destruir o alvo
+    increaseScore(_actionPoint = 5) {
+        /* let scoreOfPlayer = this.score;
+        let updatedScore = scoreOfPlayer + _actionPoint;
+        return updatedScore; */
+        this.score = this.score + parseInt(_actionPoint);
+    }
+
+    drawSlots(_firstSlot, _lastSlot) {
+        return Math.round(Math.random() * (_lastSlot - _firstSlot)) + _firstSlot;
+
+    }
+    setPlayMusic(_playMusic) {
+        this.playMusic = _playMusic;
+    }
+    setSoundEffects(_soundEffects) {
+        this.soundEffects = _soundEffects;
+    }
+    getPlayMusic() {
+        return this.playMusic;
+    }
+    getSoundEffects() {
+            return this.soundEffects;
+        }
+        //criar função fora para mutar e executar
+
+    // _levelBonus = Bônus recebido ao final da fase, caso o jogador tenha todas as vidas
+    levelAward() {
+        switch (this.currentLevel) {
+            case 1:
+                this.levelBonus = 100;
+                break;
+            case 2:
+                this.levelBonus = 200;
+                break;
+            case 3:
+                this.levelBonus = 300;
+                break;
+            case 4:
+                this.levelBonus = 400;
+                break;
+            case 5:
+                this.levelBonus = 500;
+                break;
+        };
+
+        if (this.lifes < 3) {
+            return this.lifes += 1
+        } else {
+            return this.score += this.levelBonus;
+        }
+    }
+
+    rankingData() {
+
+        return { name: this.name, score: this.score };
+
+    }
+    ismuted() {
+
+    }
 
 };
 
 //Timer
 class Timer {
-  constructor(_time, _currentTime, _timerInterval = 100, _callbackTimeout, _callbackTimeInterval, _internalTimer, _internalTimeout) {
-    this.time = _time;
-    this.currentTime = _currentTime;
-    this.timerInterval = _timerInterval;
-    this.callbackTimeout = _callbackTimeout;
-    this.callbackTimeInterval = _callbackTimeInterval;
-    this.internalTimer = _internalTimer;
-    this.internalTimeout = _internalTimeout;
-  }
+    constructor(_time, _currentTime, _timerInterval = 100, _callbackTimeout, _callbackTimeInterval, _internalTimer, _internalTimeout) {
+        this.time = _time;
+        this.currentTime = _currentTime;
+        this.timerInterval = _timerInterval;
+        this.callbackTimeout = _callbackTimeout;
+        this.callbackTimeInterval = _callbackTimeInterval;
+        this.internalTimer = _internalTimer;
+        this.internalTimeout = _internalTimeout;
+    }
 
-  setTimer(_time) {
-    this.time = _time;
-  }
+    setTimer(_time) {
+        this.time = _time;
+    }
 
-  setTimerInterval(_timerInterval = 100) {
-    this.timerInterval = _timerInterval;
-  }
+    setTimerInterval(_timerInterval = 100) {
+        this.timerInterval = _timerInterval;
+    }
 
-  setCallbackTimeout(_callbackTimeout) {
-    this.callbackTimeout = _callbackTimeout;
-  }
+    setCallbackTimeout(_callbackTimeout) {
+        this.callbackTimeout = _callbackTimeout;
+    }
 
-  setCallbackTimeInterval(_callbackTimeInterval) {
-    this.callbackTimeInterval = _callbackTimeInterval;
-  }
+    setCallbackTimeInterval(_callbackTimeInterval) {
+        this.callbackTimeInterval = _callbackTimeInterval;
+    }
 
-  getCurrentTime() {
-    return this.currentTime;
+    getCurrentTime() {
+        return this.currentTime;
 
-  }
+    }
 
-  startTimer() {
-    this.currentTime = this.time;
-    this.internalTimeout = setTimeout(this.callbackTimeout, this.currentTime);
-    this.internalTimer = setInterval(() => {
-      this.currentTime -= this.timerInterval;
-      this.callbackTimeInterval();
-      if (this.currentTime <= 0) {
-        clearInterval(this.internalTimer)
-      }
-    }, this.timerInterval);
-    this.currentTimeString;
-  }
+    startTimer() {
+        this.currentTime = this.time;
+        this.internalTimeout = setTimeout(this.callbackTimeout, this.currentTime);
+        this.internalTimer = setInterval(() => {
+            this.currentTime -= this.timerInterval;
+            this.callbackTimeInterval();
+            if (this.currentTime <= 0) {
+                clearInterval(this.internalTimer)
+            }
+        }, this.timerInterval);
+        this.currentTimeString;
+    }
 
-  stopTimer() {
-    clearInterval(this.internalTimer);
-    clearTimeout(this.internalTimeout);
+    stopTimer() {
+        clearInterval(this.internalTimer);
+        clearTimeout(this.internalTimeout);
 
-  }
+    }
 
-  get resetTimer() {
-    clearInterval(this.internalTimer);
-    clearTimeout(this.internalTimeout);
-    this.time = 0;
-    this.timerInterval = 100;
-    this.currentTime = 0;
-  }
+    get resetTimer() {
+        clearInterval(this.internalTimer);
+        clearTimeout(this.internalTimeout);
+        this.time = 0;
+        this.timerInterval = 100;
+        this.currentTime = 0;
+    }
 
-  get currentTimeString() {
-    let milliseconds = Math.floor((this.currentTime % 1000) / 10);
-    let seconds = Math.floor((this.currentTime / 1000) % 60);
-    let minutes = Math.floor((this.currentTime / (1000 * 60)) % 60);
-    let hours = Math.floor((this.currentTime / (1000 * 60 * 60)));
+    get currentTimeString() {
+        let milliseconds = Math.floor((this.currentTime % 1000) / 10);
+        let seconds = Math.floor((this.currentTime / 1000) % 60);
+        let minutes = Math.floor((this.currentTime / (1000 * 60)) % 60);
+        let hours = Math.floor((this.currentTime / (1000 * 60 * 60)));
 
-    hours = (hours < 10) ? "0" + hours : hours;
-    minutes = (minutes < 10) ? "0" + minutes : minutes;
-    seconds = (seconds < 10) ? "0" + seconds : seconds;
-    milliseconds = (milliseconds < 10) ? "0" + milliseconds : milliseconds;
+        hours = (hours < 10) ? "0" + hours : hours;
+        minutes = (minutes < 10) ? "0" + minutes : minutes;
+        seconds = (seconds < 10) ? "0" + seconds : seconds;
+        milliseconds = (milliseconds < 10) ? "0" + milliseconds : milliseconds;
 
-    return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
-  }
+        return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
+    }
 }
 
 // Instances
@@ -210,7 +210,7 @@ const newGame = new Game();
 const levelTimer = new Timer();
 
 //Audios//
-let btnSelectSound = "../audio/btn-select.mp3"; 
+let btnSelectSound = "../audio/btn-select.mp3";
 let maskUpSound = "../audio/mask-up.mp3";
 let levelUpSound = "../audio/level-up.mp3";
 let gameStartSound = "../audio/game-start.ogg";
@@ -223,33 +223,34 @@ let increaseSound = "../audio/increase-sound.mp3";
 let mainMusic = new Audio(backgroundSound);
 mainMusic.play();
 mainMusic.loop = true;
+
 function playAudio(sound) {
-  const audioToPlay = new Audio(sound);
-  audioToPlay.play();
-  /*if (newGame.getSoundEffects()) {
+    const audioToPlay = new Audio(sound);
     audioToPlay.play();
-    audioToPlay.volume = parseInt(localStorage.getItem('mainVolume'));
-    
-  }*/
+    /*if (newGame.getSoundEffects()) {
+      audioToPlay.play();
+      audioToPlay.volume = parseInt(localStorage.getItem('mainVolume'));
+      
+    }*/
 }
 //ShortKeyUps
 let arrKeys = ['Q', 'W', 'E', 'R', 'T', 'A', 'S', 'D', 'F'];
 document.addEventListener('keydown', (event) => {
-  const keyName = event.key;
-  if (arrKeys.indexOf(keyName) != -1) {
-    console.log('keydown event\n\n' + 'key: ' + keyName);
-    //count++;
-  }
-  console.log(arrKeys)
+    const keyName = event.key;
+    if (arrKeys.indexOf(keyName) != -1) {
+        console.log('keydown event\n\n' + 'key: ' + keyName);
+        //count++;
+    }
+    console.log(arrKeys)
 });
 
 //Manipulação das Telas do Jogo
 //Sequência das Configurações da Tela do Jogo
 let captureContainer = document.getElementById("container");
-let captureSettings = document.getElementById("settings-button");
+let captureSettings = document.getElementById("sound");
 //captureSettings.addEventListener("click'"','()=>
 function makeSettings() {
-  captureContainer.innerHTML += ` 
+    captureContainer.innerHTML += ` 
             <section id="modal-configuration" class="modal">
             
             <section class="modal-with-border">
@@ -287,48 +288,49 @@ let captureModalConfigurations = document.getElementById("modal-configuration");
 captureModalConfigurations.style.display = "none";
 
 function openSettings() {
-  captureModalConfigurations.classList.add("absolute-with-blur");
-  captureModalConfigurations.style.display = "flex";
-  removeBtnBox.classList.add("relative-with-blur");
+    captureModalConfigurations.classList.add("absolute-with-blur");
+    captureModalConfigurations.style.display = "flex";
+    removeBtnBox.classList.add("relative-with-blur");
 
 }
 
 function closeSettings() {
-  let captureModalConfigurations = document.getElementById("modal-configuration");
-  captureModalConfigurations.classList.remove("absolute-with-blur");
-  captureModalConfigurations.style.display = "none";
-  let removeBtnBox = document.getElementById("btn-box");
-  try {
-    removeBtnBox.classList.remove("relative-with-blur");
-  } catch (error) {
-    let removeBtnBox = document.getElementById("modal-language");
-    removeBtnBox.classList.remove("relative-with-blur");
-  }
-  try {
-    
-    removeBtnBox.classList.remove("relative-with-blur");
-  } catch (error) {
-    let removeBtnBox = document.getElementById("modal-nickname");
-     removeBtnBox.classList.remove("relative-with-blur");
-  }
-  try {
-    removeBtnBox.classList.remove("relative-with-blur");
-  } catch (error) {
-    let removeBtnBox = document.getElementById("modal-instructions");
-    removeBtnBox.classList.remove("relative-with-blur");
-  }try{
-    removeBtnBox.classList.remove("relative-with-blur");
-  }catch (error) {
-    let removeBtnBox = document.getElementById("game-box");
-    removeBtnBox.classList.remove("relative-with-blur");
-  }
+    let captureModalConfigurations = document.getElementById("modal-configuration");
+    captureModalConfigurations.classList.remove("absolute-with-blur");
+    captureModalConfigurations.style.display = "none";
+    let removeBtnBox = document.getElementById("btn-box");
+    try {
+        removeBtnBox.classList.remove("relative-with-blur");
+    } catch (error) {
+        let removeBtnBox = document.getElementById("modal-language");
+        removeBtnBox.classList.remove("relative-with-blur");
+    }
+    try {
+
+        removeBtnBox.classList.remove("relative-with-blur");
+    } catch (error) {
+        let removeBtnBox = document.getElementById("modal-nickname");
+        removeBtnBox.classList.remove("relative-with-blur");
+    }
+    try {
+        removeBtnBox.classList.remove("relative-with-blur");
+    } catch (error) {
+        let removeBtnBox = document.getElementById("modal-instructions");
+        removeBtnBox.classList.remove("relative-with-blur");
+    }
+    try {
+        removeBtnBox.classList.remove("relative-with-blur");
+    } catch (error) {
+        let removeBtnBox = document.getElementById("game-box");
+        removeBtnBox.classList.remove("relative-with-blur");
+    }
 }
 
 function closeSettingsSound() {
-  let modalSound = document.getElementById("modal-configuration-sound");
-  modalSound.style.display = "none";
-  let captureModalConfigurations = document.getElementById("modal-configuration");
-  captureModalConfigurations.style.display = "flex";
+    let modalSound = document.getElementById("modal-configuration-sound");
+    modalSound.style.display = "none";
+    let captureModalConfigurations = document.getElementById("modal-configuration");
+    captureModalConfigurations.style.display = "flex";
 }
 
 let captureSoundConfigurations = document.getElementById("btn-sound-configuration");
@@ -337,9 +339,9 @@ let captureHelps = document.getElementById("btn-help");
 let captureSoundVol;
 
 function openConfigSound() {
-  let captureModalConfigurations = document.getElementById("modal-configuration");
-  captureModalConfigurations.style.display = "none";
-  captureContainer.innerHTML += `<section id="modal-configuration-sound" class="modal">
+    let captureModalConfigurations = document.getElementById("modal-configuration");
+    captureModalConfigurations.style.display = "none";
+    captureContainer.innerHTML += `<section id="modal-configuration-sound" class="modal">
             
     <section class="modal-with-border">
         <div id="circle1" class="circles">
@@ -377,20 +379,20 @@ function openConfigSound() {
     </section>
     
 </section>`
-  let captureSoundMainVol = document.getElementById("main-volume"); //Verificar
-  captureSoundVol = document.getElementById("sound-volume");
-  let captureSoundEffectsVol = document.getElementById("sound-effects"); //Verificar
-  captureSoundVol.addEventListener("change", function (e) {
-    let eventVol = e.currentTarget.value / 100;
-    mainMusic.volume = eventVol;
-    //localStorage.setItem('mainVolume',e.currentTarget.value / 100);  
-  });
+    let captureSoundMainVol = document.getElementById("main-volume"); //Verificar
+    captureSoundVol = document.getElementById("sound-volume");
+    let captureSoundEffectsVol = document.getElementById("sound-effects"); //Verificar
+    captureSoundVol.addEventListener("change", function(e) {
+        let eventVol = e.currentTarget.value / 100;
+        mainMusic.volume = eventVol;
+        //localStorage.setItem('mainVolume',e.currentTarget.value / 100);  
+    });
 };
 
 function openShortcutKeys() {
-  let captureModalConfigurations = document.getElementById("modal-configuration");
-  captureModalConfigurations.style.display = "none";
-  captureContainer.innerHTML += `<section id="modal-configuration-shortcut" class="modal">
+    let captureModalConfigurations = document.getElementById("modal-configuration");
+    captureModalConfigurations.style.display = "none";
+    captureContainer.innerHTML += `<section id="modal-configuration-shortcut" class="modal">
             
             <section class="modal-with-border">
                 <div id="circle1" class="circles">
@@ -466,25 +468,25 @@ function openShortcutKeys() {
             </section>
             
         </section>`
-  captureModalConfigurations = document.getElementById("modal-configuration-shortcut");
-  //função que vai guardar e substituir as KeyUps
-  let saveShortKeys = document.getElementById("btn-save");
-  saveShortKeys.addEventListener('click', () => {
-    let slots = document.querySelectorAll('.slot');
-    let newSlots = slots.filter((slot) => slot.value != ""); //só retorna os campos preenchidos
-    console.log(slots);
-    console.log(newSlots);
-    for (let i = 0; i < newSlots.length; i++) {
-      let captureData = newSlots[i].dataset.index;
-      arrKeys[captureData] = newSlots[i].value;
-    }
-  })
+    captureModalConfigurations = document.getElementById("modal-configuration-shortcut");
+    //função que vai guardar e substituir as KeyUps
+    let saveShortKeys = document.getElementById("btn-save");
+    saveShortKeys.addEventListener('click', () => {
+        let slots = document.querySelectorAll('.slot');
+        let newSlots = slots.filter((slot) => slot.value != ""); //só retorna os campos preenchidos
+        console.log(slots);
+        console.log(newSlots);
+        for (let i = 0; i < newSlots.length; i++) {
+            let captureData = newSlots[i].dataset.index;
+            arrKeys[captureData] = newSlots[i].value;
+        }
+    })
 }
 
 function openHelp() {
-  let captureModalConfigurations = document.getElementById("modal-configuration");
-  captureModalConfigurations.style.display = "none";
-  captureContainer.innerHTML += `  <div id="modal-instructions-menu" class="modal">
+    let captureModalConfigurations = document.getElementById("modal-configuration");
+    captureModalConfigurations.style.display = "none";
+    captureContainer.innerHTML += `  <div id="modal-instructions-menu" class="modal">
       <div class="modal-with-border">
         <div id="circle1" class="circles">        
         </div>
@@ -508,16 +510,16 @@ function openHelp() {
       </div>
     </div>
     </div>`
-  captureModalConfigurations = document.getElementById("modal-instructions-menu");
+    captureModalConfigurations = document.getElementById("modal-instructions-menu");
 }
 
 //Sequência do Jogo
 let pressStart = document.getElementById("pressStart");
 pressStart.addEventListener("click", () => {
-  let removeBtnBox = document.getElementById("btn-box");
-  let newGame = new Game();
-  removeBtnBox.parentNode.removeChild(removeBtnBox);
-  captureContainer.innerHTML += `<div id="modal-language" class="modal">
+    let removeBtnBox = document.getElementById("btn-box");
+    let newGame = new Game();
+    removeBtnBox.parentNode.removeChild(removeBtnBox);
+    captureContainer.innerHTML += `<div id="modal-language" class="modal">
        <div class="modal-with-border">
          <div id="circle1" class="circles">        
          </div>
@@ -540,16 +542,16 @@ pressStart.addEventListener("click", () => {
        </div>
      </div>
      </div>`
-  removeBtnBox = document.getElementById("modal-language");
-  captureModalConfigurations = document.getElementById("modal-configuration");
+    removeBtnBox = document.getElementById("modal-language");
+    captureModalConfigurations = document.getElementById("modal-configuration");
 });
 
 let langPTBR = document.getElementById("select-language");
 
 function portugueseRoute() {
-  let modalLanguage = document.getElementById("modal-language");
-  modalLanguage.parentNode.removeChild(modalLanguage);
-  captureContainer.innerHTML += `<div id="modal-nickname" class="modal">
+    let modalLanguage = document.getElementById("modal-language");
+    modalLanguage.parentNode.removeChild(modalLanguage);
+    captureContainer.innerHTML += `<div id="modal-nickname" class="modal">
       <div class="modal-with-border">
         <div id="circle1" class="circles">        
         </div>
@@ -569,17 +571,17 @@ function portugueseRoute() {
       </div>
     </div>
     </div>`
-  removeBtnBox = document.getElementById("modal-nickname");
-  captureModalConfigurations = document.getElementById("modal-configuration");
+    removeBtnBox = document.getElementById("modal-nickname");
+    captureModalConfigurations = document.getElementById("modal-configuration");
 };
 
 function showInstructions() {
-  let removeBtnBox = document.getElementById("modal-instructions");
-  let captureName = document.getElementById("user-input").value;
-  newGame.setName(captureName);
-  let modalNickName = document.getElementById("modal-nickname");
-  modalNickName.parentNode.removeChild(modalNickName);
-  captureContainer.innerHTML += ` <div id="modal-instructions" class="modal">
+    let removeBtnBox = document.getElementById("modal-instructions");
+    let captureName = document.getElementById("user-input").value;
+    newGame.setName(captureName);
+    let modalNickName = document.getElementById("modal-nickname");
+    modalNickName.parentNode.removeChild(modalNickName);
+    captureContainer.innerHTML += ` <div id="modal-instructions" class="modal">
       <div class="modal-with-border">
         <div id="circle1" class="circles">        
         </div>
@@ -603,20 +605,20 @@ function showInstructions() {
       </div>
     </div>
     </div>`
-  removeBtnBox = document.getElementById("modal-instructions");
-  captureModalConfigurations = document.getElementById("modal-configuration");
+    removeBtnBox = document.getElementById("modal-instructions");
+    captureModalConfigurations = document.getElementById("modal-configuration");
 }
 
 let slotSequence = [];
 
 function gameStart() {
-  let userName = newGame.getName();
-  newGame.setScore();
-  newGame.setLifeStatus();
-  let userLifes = newGame.getLifeStatus();
-  let modalInstructions = document.getElementById("modal-instructions");
-  modalInstructions.parentNode.removeChild(modalInstructions);
-  captureContainer.innerHTML += `<header>      
+    let userName = newGame.getName();
+    newGame.setScore();
+    newGame.setLifeStatus();
+    let userLifes = newGame.getLifeStatus();
+    let modalInstructions = document.getElementById("modal-instructions");
+    modalInstructions.parentNode.removeChild(modalInstructions);
+    captureContainer.innerHTML += `<header>      
       <button id="help-button">
         <img src="img/help-icon.png" />
       </button>
@@ -718,20 +720,20 @@ function gameStart() {
           </section>
         </section>
       </div>`
-  removeBtnBox = document.getElementById("game-ingame");
-  captureModalConfigurations = document.getElementById("modal-configuration");
-  let masks = document.getElementById("masks");
-  for (let i = 1; i <= userLifes; i++) {
-    masks.innerHTML += `<img src="img/icon-heart.png" id="mask${i}"/>`
-  }
-  //Substitui pela chamada da função  
-  startLevel();
+    removeBtnBox = document.getElementById("game-ingame");
+    captureModalConfigurations = document.getElementById("modal-configuration");
+    let masks = document.getElementById("masks");
+    for (let i = 1; i <= userLifes; i++) {
+        masks.innerHTML += `<img src="img/icon-heart.png" id="mask${i}"/>`
+    }
+    //Substitui pela chamada da função  
+    startLevel();
 };
 
 
 //Funções adaptadas para a Class Timer
 
-function showVirus(){
+function showVirus() {
     let drawRange = newGame.drawSlots(1, 9);
     let captureVirus = document.getElementById(`virus${drawRange}`);
     let captureHole = document.getElementById(`hole${drawRange}`);
@@ -744,26 +746,26 @@ function showVirus(){
 
 
     setTimeout(() => {
-      let decreaseLife = document.getElementById(`masks`);
-      let remainLives = '';
+        let decreaseLife = document.getElementById(`masks`);
+        let remainLives = '';
 
-      if (captureVirus.classList.contains("visible") && decreaseLife.hasChildNodes()) {
-        newGame.setLifeStatus((newGame.getLifeStatus() - 1));
-        for (let i = 1; i <= newGame.getLifeStatus(); i++) {
-          remainLives += `<img src="img/icon-heart.png" id="mask${i}" />`
+        if (captureVirus.classList.contains("visible") && decreaseLife.hasChildNodes()) {
+            newGame.setLifeStatus((newGame.getLifeStatus() - 1));
+            for (let i = 1; i <= newGame.getLifeStatus(); i++) {
+                remainLives += `<img src="img/icon-heart.png" id="mask${i}" />`
+            }
+            decreaseLife.innerHTML = remainLives;
         }
-        decreaseLife.innerHTML = remainLives;
-      }
 
-      captureVirus.classList.add("invisible");
-      captureVirus.classList.remove("visible");
-      captureHole.classList.add("visible");
-      captureHole.classList.remove("invisible");
-     
-      if (newGame.getLifeStatus() <= 0) {
-        levelTimer.stopTimer();
-        showGameLost();
-      }
+        captureVirus.classList.add("invisible");
+        captureVirus.classList.remove("visible");
+        captureHole.classList.add("visible");
+        captureHole.classList.remove("invisible");
+
+        if (newGame.getLifeStatus() <= 0) {
+            levelTimer.stopTimer();
+            showGameLost();
+        }
 
 
 
@@ -772,97 +774,97 @@ function showVirus(){
 }
 
 
-function startLevel(level = newGame.getCurrentLevel()){
-  console.table(newGame);
-  newGame.setCurrentLevel(level);
-  levelTimer.setTimer(10000);
-  levelTimer.setTimerInterval(newGame.getIntervalByLevel());
-  levelTimer.setCallbackTimeout(finishLevel);
-  levelTimer.setCallbackTimeInterval(showVirus);
-  levelTimer.startTimer();
+function startLevel(level = newGame.getCurrentLevel()) {
+    console.table(newGame);
+    newGame.setCurrentLevel(level);
+    levelTimer.setTimer(10000);
+    levelTimer.setTimerInterval(newGame.getIntervalByLevel());
+    levelTimer.setCallbackTimeout(finishLevel);
+    levelTimer.setCallbackTimeInterval(showVirus);
+    levelTimer.startTimer();
 
 }
 
-function finishLevel(){
-  levelTimer.stopTimer();
-  for (let i = 1; i <= 9; i++) {
-    let clearVirus = document.getElementById(`virus${[i]}`);
-    let clearHole = document.getElementById(`hole${[i]}`);
-    clearVirus.classList.add("invisible");
-    clearVirus.classList.remove("visible");
-    clearHole.classList.add("visible");
-    clearHole.classList.remove("invisible");     
-  }
-  nextLevel();
+function finishLevel() {
+    levelTimer.stopTimer();
+    for (let i = 1; i <= 9; i++) {
+        let clearVirus = document.getElementById(`virus${[i]}`);
+        let clearHole = document.getElementById(`hole${[i]}`);
+        clearVirus.classList.add("invisible");
+        clearVirus.classList.remove("visible");
+        clearHole.classList.add("visible");
+        clearHole.classList.remove("invisible");
+    }
+    nextLevel();
 }
 
 //Fim das funções adaptadas para a Class Timer
 
 
 function hitVirus(id, level = newGame.getCurrentLevel()) {
-  newGame.getScore();
-  let captureScore = document.getElementById("score")
-  let virusValue = newGame.getPointsByLevel(level);
-  let captureVirus = document.getElementById(`virus${id}`);
-  let captureHole = document.getElementById(`hole${id}`);
-  newGame.increaseScore(virusValue);
- 
-  captureVirus.classList.remove("visible")
-  captureVirus.classList.add("invisible");
-  captureHole.classList.add("visible");
-  captureHole.classList.remove("invisible");
-  playAudio(sprayClicksSound);
-  setTimeout(() => {
-    playAudio(increaseSound);
-    captureScore.innerHTML = `Score: ${newGame.getScore()}`;
-  }, 300);
+    newGame.getScore();
+    let captureScore = document.getElementById("score")
+    let virusValue = newGame.getPointsByLevel(level);
+    let captureVirus = document.getElementById(`virus${id}`);
+    let captureHole = document.getElementById(`hole${id}`);
+    newGame.increaseScore(virusValue);
+
+    captureVirus.classList.remove("visible")
+    captureVirus.classList.add("invisible");
+    captureHole.classList.add("visible");
+    captureHole.classList.remove("invisible");
+    playAudio(sprayClicksSound);
+    setTimeout(() => {
+        playAudio(increaseSound);
+        captureScore.innerHTML = `Score: ${newGame.getScore()}`;
+    }, 300);
 
 }
 
 function nextLevel() {
-  newGame.levelAward(newGame.getCurrentLevel());
-  const happyCrocodyle = document.getElementById("happy");
-  const normalCrocodyle = document.getElementById("normal");
-  const nextLevelModal = document.getElementById("modal-next-level");
-  const nextLevelBtn = document.getElementById("btn-next-level");
-  happyCrocodyle.style.display = "block";
-  normalCrocodyle.style.display = "none";
-  nextLevelModal.style.display = "flex";
-  nextLevelBtn.style.display = "block";
-  playAudio(gameWinSound);
+    newGame.levelAward(newGame.getCurrentLevel());
+    const happyCrocodyle = document.getElementById("happy");
+    const normalCrocodyle = document.getElementById("normal");
+    const nextLevelModal = document.getElementById("modal-next-level");
+    const nextLevelBtn = document.getElementById("btn-next-level");
+    happyCrocodyle.style.display = "block";
+    normalCrocodyle.style.display = "none";
+    nextLevelModal.style.display = "flex";
+    nextLevelBtn.style.display = "block";
+    playAudio(gameWinSound);
 
 }
 
 //Restaura a tela de jogo e reinicia a partida de acordo com o novo nível
 function startNextLevel() {
 
-  //Atualização das vidas na tela quando troca de nível.
-  let upadateLives = document.getElementById(`masks`);
-  let remainLives = '';
-  for (let i = 1; i <= newGame.getLifeStatus(); i++) {
-    remainLives += `<img src="img/icon-heart.png" id="mask${i}" />`
-  }
-  upadateLives.innerHTML = remainLives;
+    //Atualização das vidas na tela quando troca de nível.
+    let upadateLives = document.getElementById(`masks`);
+    let remainLives = '';
+    for (let i = 1; i <= newGame.getLifeStatus(); i++) {
+        remainLives += `<img src="img/icon-heart.png" id="mask${i}" />`
+    }
+    upadateLives.innerHTML = remainLives;
 
-  const happyCrocodyle = document.getElementById("happy");
-  const normalCrocodyle = document.getElementById("normal");
-  const nextLevelModal = document.getElementById("modal-next-level");
-  const nextLevelBtn = document.getElementById("btn-next-level");
-  happyCrocodyle.style.display = "none";
-  normalCrocodyle.style.display = "block";
-  nextLevelModal.style.display = "none";
-  nextLevelBtn.style.display = "none";
+    const happyCrocodyle = document.getElementById("happy");
+    const normalCrocodyle = document.getElementById("normal");
+    const nextLevelModal = document.getElementById("modal-next-level");
+    const nextLevelBtn = document.getElementById("btn-next-level");
+    happyCrocodyle.style.display = "none";
+    normalCrocodyle.style.display = "block";
+    nextLevelModal.style.display = "none";
+    nextLevelBtn.style.display = "none";
 
-  newGame.setCurrentLevel(newGame.getCurrentLevel() + 1);
-  let incrementedLevel = newGame.getCurrentLevel();
-  startLevel(incrementedLevel);
+    newGame.setCurrentLevel(newGame.getCurrentLevel() + 1);
+    let incrementedLevel = newGame.getCurrentLevel();
+    startLevel(incrementedLevel);
 
 }
 
 function showGameLost() {
-  let removeBtnBox = document.getElementById("game-box");
-  removeBtnBox.classList.add(`relative-with-blur`);
-  captureContainer.innerHTML += ` <div id="modal-gameover" class="modal">
+    let removeBtnBox = document.getElementById("game-box");
+    removeBtnBox.classList.add(`relative-with-blur`);
+    captureContainer.innerHTML += ` <div id="modal-gameover" class="modal">
   <div class="modal-with-border">
     <div id="circle1" class="circles">        
     </div>
