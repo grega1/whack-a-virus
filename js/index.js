@@ -200,7 +200,7 @@ class Timer {
         this.currentTime = 0;
     }
 
-    get currentTimeString() {
+    currentTimeString() {
         let milliseconds = Math.floor((this.currentTime % 1000) / 10);
         let seconds = Math.floor((this.currentTime / 1000) % 60);
         let minutes = Math.floor((this.currentTime / (1000 * 60)) % 60);
@@ -259,16 +259,12 @@ function makeSettings() {
 
       <h3 class="modal-titles">SOM</h3>
 
-      <section id="sound-configuration" class="sound-menu">
-
-          
+      <section id="sound-configuration" class="sound-menu">         
 
             <div id="slider-sound-volume">
               <label for="sound-volume">Volume do Som:</label>
               <input type="range" min="0" max="100" value="10" class="slider" id="sound-volume">
-            </div>
-
-            
+            </div>           
 
       </section>
 
@@ -430,7 +426,7 @@ function gameStart() {
             <div id="scoreboard-footer">
                 <section id="modal-next-level" class="invisible">
                     <div class="orange-stroke invisible">
-                    <p>Next level unlocked!</p>
+                    <p>Próximo nível desbloqueado!</p>
                     </div>
                   </section>
                 <img class="happy-crocodile invisible" src="img/happy-jacarezin.svg" id="happy" />
@@ -482,8 +478,8 @@ function gameStart() {
         <section id="modal-level" class="modal">
          
           <section class="modal-with-border">            
-            <div id="currentLevel">
-              <h4>Nível:1
+            <div>
+              <h4 id="currentLevel">Nível:1
               </h4>             
             </div>
                        
@@ -497,10 +493,10 @@ function gameStart() {
               </div>
             </div>
             <div id="time-remain">
-              <h4>Tempo restante:
+              <h4 id="time-current">Tempo restante:
               <br>
               </h4>
-              <p> </p>
+              <input type="time" step="0.001" id="time-input" value="00:00:00.000">              
             
             </div>
             <div id="next">
@@ -518,6 +514,7 @@ function gameStart() {
         masks.innerHTML += `<img src="img/icon-heart.png" id="mask${i}"/>`
     }
     startLevel();
+
 };
 
 function showVirus() {
@@ -530,6 +527,8 @@ function showVirus() {
     captureVirus.classList.remove("invisible");
     captureHole.classList.add("invisible");
     captureHole.classList.remove("visible");
+    let time = document.getElementById("time-input");
+    time.value = levelTimer.currentTimeString();
 
 
     setTimeout(() => {
@@ -569,11 +568,12 @@ function startLevel(level = newGame.getCurrentLevel()) {
     levelTimer.setCallbackTimeout(finishLevel);
     levelTimer.setCallbackTimeInterval(showVirus);
     levelTimer.startTimer();
-
 }
 
 function finishLevel() {
     levelTimer.stopTimer();
+    let time = document.getElementById("time-input");
+    time.value = '00:00:00.000'
     for (let i = 1; i <= 9; i++) {
         let clearVirus = document.getElementById(`virus${[i]}`);
         let clearHole = document.getElementById(`hole${[i]}`);
@@ -588,7 +588,6 @@ function finishLevel() {
 function hitVirus(id, level = newGame.getCurrentLevel()) {
     newGame.getScore();
     let captureScore = document.getElementById("score");
-    let captureLevel = document.getElementById("currentlevel");
     let virusValue = newGame.getPointsByLevel(level);
     let captureVirus = document.getElementById(`virus${id}`);
     let captureHole = document.getElementById(`hole${id}`);
@@ -602,12 +601,14 @@ function hitVirus(id, level = newGame.getCurrentLevel()) {
     playAudio(sprayClicksSound);
     setTimeout(() => {
         playAudio(increaseSound);
-        captureScore.innerHTML = `Score: ${newGame.getScore()}`;
+        captureScore.innerHTML = `Pontos: ${newGame.getScore()}`;
     }, 300);
 }
 
 function nextLevel() {
-    if (newGame.getCurrentLevel() < 4) {
+    let level = newGame.getCurrentLevel();
+    console.log(level);
+    if (level < 4) {
         const happyCrocodyle = document.getElementById("happy");
         const normalCrocodyle = document.getElementById("normal");
         const nextLevelModal = document.getElementById("modal-next-level");
@@ -617,11 +618,14 @@ function nextLevel() {
         nextLevelModal.style.display = "flex";
         nextLevelBtn.style.display = "block";
         playAudio(gameWinSound);
-        newGame.levelAward(newGame.getCurrentLevel());
+        newGame.levelAward(level);
+
+
     } else {
-        newGame.levelAward(newGame.getCurrentLevel());
+        newGame.levelAward(level);
         showGameWin();
     }
+
 }
 
 function startNextLevel() {
@@ -633,6 +637,7 @@ function startNextLevel() {
     }
     upadateLives.innerHTML = remainLives;
 
+    let captureLevel = document.getElementById("currentLevel");
     const happyCrocodyle = document.getElementById("happy");
     const normalCrocodyle = document.getElementById("normal");
     const nextLevelModal = document.getElementById("modal-next-level");
@@ -645,6 +650,8 @@ function startNextLevel() {
     newGame.setCurrentLevel(newGame.getCurrentLevel() + 1);
     let incrementedLevel = newGame.getCurrentLevel();
     startLevel(incrementedLevel);
+    captureLevel.innerHTML = `Nível:${newGame.getCurrentLevel()}`
+
 }
 
 function showGameLost() {
