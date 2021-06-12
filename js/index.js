@@ -20,10 +20,10 @@ class Game {
   setScore(_score = 0) {
     this.score = _score;
   }
-  setCurrentLevel(_currentLevel = 1){
+  setCurrentLevel(_currentLevel = 1) {
     this.currentLevel = _currentLevel;
   }
-  getCurrentLevel(){
+  getCurrentLevel() {
     return this.currentLevel;
   }
   getScore() {
@@ -33,38 +33,28 @@ class Game {
     switch (this.currentLevel) {
       case 1:
         return 1500;
-        break;
       case 2:
         return 1200;
-        break;
       case 3:
         return 1000;
-        break;
       case 4:
         return 800;
-        break;
       case 5:
         return 500;
-        break;
     }
   }
   getPointsByLevel() {
     switch (this.currentLevel) {
       case 1:
         return 10;
-        break;
       case 2:
         return 20;
-        break;
       case 3:
         return 30;
-        break;
       case 4:
         return 40;
-        break;
       case 5:
         return 50;
-        break;
     }
   }
 
@@ -77,10 +67,11 @@ class Game {
   }
 
   //actionPoint = Pontuação recebida por destruir o alvo
-  increaseScore(_actionPoint) {
-    let scoreOfPlayer = this.score;
+  increaseScore(_actionPoint = 5) {
+    /* let scoreOfPlayer = this.score;
     let updatedScore = scoreOfPlayer + _actionPoint;
-    return updatedScore;
+    return updatedScore; */
+    this.score = this.score + parseInt(_actionPoint);
   }
 
   drawSlots(_firstSlot, _lastSlot) {
@@ -101,30 +92,27 @@ class Game {
   }
   //criar função fora para mutar e executar
 
-
-
   // _levelBonus = Bônus recebido ao final da fase, caso o jogador tenha todas as vidas
   levelAward() {
-    switch (this.levelBonus) {
+    switch (this.currentLevel) {
       case 1:
-        return 100;
+        this.levelBonus = 100;
         break;
       case 2:
-        return 200;
+        this.levelBonus = 200;
         break;
       case 3:
-        return 300;
+        this.levelBonus = 300;
         break;
       case 4:
-        return 400;
+        this.levelBonus = 400;
         break;
       case 5:
-        return 500;
+        this.levelBonus = 500;
         break;
     };
 
-    let lifesPlayer = this.lifes;
-    if (lifesPlayer < 3) {
+    if (this.lifes < 3) {
       return this.lifes += 1
     } else {
       return this.score += this.levelBonus;
@@ -153,27 +141,33 @@ class Timer {
     this.internalTimeout = _internalTimeout;
   }
 
+  //Colocar o tempo do level
   setTimer(_time) {
     this.time = _time;
   }
 
+  //Tempo para aparecer o coroninha
   setTimerInterval(_timerInterval = 100) {
     this.timerInterval = _timerInterval;
   }
 
+  //Finaliza o level
   setCallbackTimeout(_callbackTimeout) {
     this.callbackTimeout = _callbackTimeout;
   }
 
+  //Função para aparecer o coroninha
   setCallbackTimeInterval(_callbackTimeInterval) {
     this.callbackTimeInterval = _callbackTimeInterval;
   }
 
+  //Mostrar o tempo
   getCurrentTime() {
     return this.currentTime;
 
   }
 
+  //Método principal
   startTimer() {
     this.currentTime = this.time;
     this.internalTimeout = setTimeout(this.callbackTimeout, this.currentTime);
@@ -187,20 +181,21 @@ class Timer {
     this.currentTimeString;
   }
 
+  //Chamar quando acabar as vidas ou o tempo
   get stopTimer() {
     clearInterval(this.internalTimer);
     clearTimeout(this.internalTimeout);
-
   }
 
-  get resetTimer() {
+  /*get resetTimer() {
     clearInterval(this.internalTimer);
     clearTimeout(this.internalTimeout);
     this.time = 0;
     this.timerInterval = 100;
     this.currentTime = 0;
-  }
+  }*/
 
+  //Mostrar o tempo na tela
   get currentTimeString() {
     let milliseconds = Math.floor((this.currentTime % 1000) / 10);
     let seconds = Math.floor((this.currentTime / 1000) % 60);
@@ -215,33 +210,52 @@ class Timer {
     return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
   }
 }
+
 // Instances
-let newGame = new Game();
-let virusTimer = new Timer();
-let gameTimer = new Timer();
+const newGame = new Game();
+const virusTimer = new Timer();
+const gameTimer = new Timer();
+const levelTimer = new Timer();
 
 //Audios//
-let btnSelectSound = "../audio/btn-select.wav"; // guardar o caminho como strig
-let maskUpSound = "../audio/mask-up.wav";
-let levelUpSound = "../audio/level-up.wav";
+let btnSelectSound = "../audio/btn-select.mp3"; // guardar o caminho como strig
+let maskUpSound = "../audio/mask-up.mp3";
+let levelUpSound = "../audio/level-up.mp3";
 let gameStartSound = "../audio/game-start.ogg";
-let virusExplosionSound = "../audio/virus-explosion.wav";
-let sprayClicksSound = "../audio/spray-click.wav";
-let gameWinSound = "../audio/game-win.wav";
-let vaxxBreakingSound = "../audio/vaxx-breaking.wav";
-
+let virusExplosionSound = "../audio/virus-explosion.mp3";
+let sprayClicksSound = "../audio/spray-click.mp3";
+let gameWinSound = "../audio/game-win.mp3";
+let vaxxBreakingSound = "../audio/vaxx-breaking.mp3";
+let backgroundSound = "../audio/background-sound.mp3";
+let increaseSound = "../audio/increase-sound.mp3";
+let mainMusic = new Audio(backgroundSound);
+mainMusic.play();
+mainMusic.loop = true;
 function playAudio(sound) {
   const audioToPlay = new Audio(sound);
-  if (newGame.getSoundEffects()) {
+  audioToPlay.play();
+  /*if (newGame.getSoundEffects()) {
     audioToPlay.play();
-  }
+    audioToPlay.volume = parseInt(localStorage.getItem('mainVolume'));
+    
+  }*/
 }
+//ShortKeyUps
+let arrKeys = ['Q', 'W', 'E', 'R', 'T', 'A', 'S', 'D', 'F'];
+document.addEventListener('keydown', (event) => {
+  const keyName = event.key;
+  if (arrKeys.indexOf(keyName) != -1) {
+    console.log('keydown event\n\n' + 'key: ' + keyName);
+    //count++;
+  }
+  console.log(arrKeys)
+});
 
 //Manipulação das Telas do Jogo
 //Sequência das Configurações da Tela do Jogo
 let captureContainer = document.getElementById("container");
 let captureSettings = document.getElementById("settings-button");
-//captureSettings.addEventListener("click",()=>
+//captureSettings.addEventListener("click'"','()=>
 function makeSettings() {
   captureContainer.innerHTML += ` 
             <section id="modal-configuration" class="modal">
@@ -266,7 +280,7 @@ function makeSettings() {
 
                 </section>
 
-                <button id="btn-return-game" class="return-game" onclick="" >Voltar para o Jogo</button>
+                <button id="btn-return-game" class="return-game" onclick="closeSettings()">Voltar para o Jogo</button>
                 
             </section>
             
@@ -274,19 +288,34 @@ function makeSettings() {
 
 };
 makeSettings();
+
+let btnReturnGame = document.getElementById("btn-return-game");
 let removeBtnBox = document.getElementById("btn-box");
 let captureModalConfigurations = document.getElementById("modal-configuration");
 captureModalConfigurations.style.display = "none";
-function openSetting() {
+function openSettings() {
+  captureModalConfigurations.classList.add("absolute-with-blur");
+  captureModalConfigurations.style.display = "flex";
   removeBtnBox.classList.add("relative-with-blur");
-  captureModalConfigurations.style.display = "flex"
-  makeSettings();
+
+}
+function changeVol(volume, audio) {
+
+}
+function closeSettings() {
+  console.log("entrei")
+  captureModalConfigurations.style.display = "none";
+  removeBtnBox.classList.remove("relative-with-blur");
+  removeBtnBox.style.display = "flex";
 
 }
 
 let captureSoundConfigurations = document.getElementById("btn-sound-configuration");
 let captureShorcutKeys = document.getElementById("btn-shortcut-key");
 let captureHelps = document.getElementById("btn-help");
+let captureSoundVol;
+
+
 
 function openConfigSound() {
   let captureModalConfigurations = document.getElementById("modal-configuration");
@@ -324,14 +353,23 @@ function openConfigSound() {
 
         </section>
 
-        <button id="btn-return-game" class="return-game" onclick="makeSettings()">Return to Main Menu</button>
+        <button id="btn-return-game" class="return-game" onclick="closeSettings()">Return to Main Menu</button>
         
     </section>
     
 </section>`
-
+  let captureSoundMainVol = document.getElementById("main-volume");
+  captureSoundVol = document.getElementById("sound-volume");
+  let captureSoundEffectsVol = document.getElementById("sound-effects");
+  captureSoundVol.addEventListener("change", function (e) {
+    let eventVol = e.currentTarget.value / 100;
+    mainMusic.volume = eventVol;
+    //localStorage.setItem('mainVolume',e.currentTarget.value / 100);  
+  });
 };
-function openShortcutKeys(){
+
+
+function openShortcutKeys() {
   let captureModalConfigurations = document.getElementById("modal-configuration");
   captureModalConfigurations.style.display = "none";
   captureContainer.innerHTML += `<section id="modal-configuration" class="modal">
@@ -353,49 +391,49 @@ function openShortcutKeys(){
                     <div class="row">
 
                         <div class="slot-with-label">
-                        <input type="text" id="splt1" class="slot">
-                        <label for="splt1">Slot 1</label>
+                        <input data-index="0" type="text" id="slot1" class="slot">
+                        <label for="slot1">Slot 1</label>
                         </div>
 
                         <div class="slot-with-label">
-                        <input type="text" id="splt2" class="slot">
+                        <input data-index="1" type="text" id="slot2" class="slot">
                         <label for="slot2">Slot 2</label>
                         </div>
 
                         <div class="slot-with-label">
-                        <input type="text" id="slot3" class="slot">
-                        <label for="slo3t">Slot 3</label>
+                        <input data-index="2" type="text" id="slot3" class="slot">
+                        <label for="slot3">Slot 3</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="slot-with-label">
-                        <input type="text" id="slot4" class="slot">
+                        <input data-index="3" type="text" id="slot4" class="slot">
                         <label for="slot4">Slot 4</label>
                         </div>
                         
                         <div class="slot-with-label">
-                        <input type="text" id="slot5" class="slot">
+                        <input data-index="4" type="text" id="slot5" class="slot">
                         <label for="slot5">Slot 5</label>
                         </div>
 
                         <div class="slot-with-label">
-                        <input type="text" id="slot6" class="slot">
+                        <input data-index="5" type="text" id="slot6" class="slot">
                         <label for="slot6">Slot 6</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="slot-with-label">
-                        <input type="text" id="slot7" class="slot">
+                        <input data-index="6" type="text" id="slot7" class="slot">
                         <label for="slot7">Slot 7</label>
                         </div>
 
                         <div class="slot-with-label">
-                        <input type="text" id="slot8" class="slot">
+                        <input data-index="7"type="text" id="slot8" class="slot">
                         <label for="slot8">Slot 8</label>
                         </div>
                         
                         <div class="slot-with-label">
-                        <input type="text" id="slot9" class="slot">
+                        <input data-index="8" type="text" id="slot9" class="slot">
                         <label for="slot9">Slot 9</label>
                         </div>
 
@@ -410,11 +448,23 @@ function openShortcutKeys(){
             </section>
             
         </section>`
+  //função que vai guardar e substituir as KeyUps
+  let saveShortKeys = document.getElementById("btn-save");
+  saveShortKeys.addEventListener('click', () => {
+    let slots = document.querySelectorAll('.slot');
+    let newSlots = slots.filter((slot) => slot.value != ""); //só retorna os campos preenchidos
+    console.log(slots);
+    console.log(newSlots);
+    for (let i = 0; i < newSlots.length; i++) {
+      let captureData = newSlots[i].dataset.index;
+      arrKeys[captureData] = newSlots[i].value;
+    }
+  })
 }
-function openHelp(){
+function openHelp() {
   let captureModalConfigurations = document.getElementById("modal-configuration");
   captureModalConfigurations.style.display = "none";
-  captureContainer.innerHTML +=`  <div id="modal-instructions-menu" class="modal">
+  captureContainer.innerHTML += `  <div id="modal-instructions-menu" class="modal">
       <div class="modal-with-border">
         <div id="circle1" class="circles">        
         </div>
@@ -444,7 +494,6 @@ function openHelp(){
 //Sequência do Jogo
 let pressStart = document.getElementById("pressStart");
 pressStart.addEventListener("click", () => {
-  let newGame = new Game();
   removeBtnBox.parentNode.removeChild(removeBtnBox);
   captureContainer.innerHTML += `<div id="modal-language" class="modal">
        <div class="modal-with-border">
@@ -469,7 +518,8 @@ pressStart.addEventListener("click", () => {
        </div>
      </div>
      </div>`
-  removeBtnBox = document.getElementById("modal-language")
+  removeBtnBox = document.getElementById("modal-language");
+  captureModalConfigurations = document.getElementById("modal-configuration");
 });
 
 let langPTBR = document.getElementById("select-language");
@@ -490,21 +540,22 @@ function portugueseRoute() {
       <h2 class="modal-titles"> Insert your nickname
       </h2>
       <div id="input-nickname" >
-        <input type="text" name="nickname" id="user-input">           
+        <input type="text" name="nickname" id="user-input" value="Player1">           
       </div>
       <div>
           <button id="play-game" class="btn-sec" onclick="showInstructions()"> Play </button>
       </div>
     </div>
     </div>`
-  removeBtnBox = document.getElementById("modal-nickname")
+  removeBtnBox = document.getElementById("modal-nickname");
+  captureModalConfigurations = document.getElementById("modal-configuration");
 };
 
 
 function showInstructions() {
   let captureName = document.getElementById("user-input").value;
   newGame.setName(captureName);
-  console.log(newGame.getName());
+  //console.log(newGame.getName());
   let modalNickName = document.getElementById("modal-nickname");
   modalNickName.parentNode.removeChild(modalNickName);
   captureContainer.innerHTML += ` <div id="modal-instructions" class="modal">
@@ -531,15 +582,16 @@ function showInstructions() {
       </div>
     </div>
     </div>`
-  removeBtnBox = document.getElementById("modal-instructions")
+  removeBtnBox = document.getElementById("modal-instructions");
+  captureModalConfigurations = document.getElementById("modal-configuration");
 }
+
 let slotSequence = [];
 
 function gameStart() {
   let userName = newGame.getName();
   newGame.setScore();
-  let userScore = newGame.getScore();
-  newGame.setLifeStatus(3);
+  newGame.setLifeStatus();
   let userLifes = newGame.getLifeStatus();
   let modalInstructions = document.getElementById("modal-instructions");
   modalInstructions.parentNode.removeChild(modalInstructions);
@@ -553,8 +605,8 @@ function gameStart() {
       <section class="modal-with-border">
           <section class="background-with-crocodile">
             <div id="player-scoreboard">
-              <h4> Name:${userName}</h4>
-              <h4 id="score">Score:0 </h4>
+              <h4> Name: ${userName}</h4>
+              <h4 id="score">Score: 0 </h4>
             </div>
             <div id="scoreboard-footer">
                 <section id="modal-next-level" class="invisible">
@@ -569,39 +621,39 @@ function gameStart() {
           <section id="game-section">
             <div id="slot1" class="spots">
               <img src="img/spots.svg" id="hole1"/>
-              <img src="img/coroninha-no-buraco.svg" id="virus1"  class="virus invisible" />
+              <img src="img/coroninha-no-buraco.svg" id="virus1"  class="virus invisible" onclick="hitVirus(1)" />
             </div>
             <div id="slot2" class="spots">
               <img src="img/spots.svg" id="hole2"/>
-              <img src="img/coroninha-no-buraco.svg" id="virus2"  class="virus invisible" />
+              <img src="img/coroninha-no-buraco.svg" id="virus2"  class="virus invisible" onclick="hitVirus(2)" />
             </div>
             <div id="slot3" class="spots">
               <img src="img/spots.svg" id="hole3" />
-              <img src="img/coroninha-no-buraco.svg" id="virus3"  class="virus invisible" />
+              <img src="img/coroninha-no-buraco.svg" id="virus3"  class="virus invisible" onclick="hitVirus(3)" />
             </div>
             <div id="slot4" class="spots">
               <img src="img/spots.svg" id="hole4"/>
-              <img src="img/coroninha-no-buraco.svg" id="virus4"  class="virus invisible" />
+              <img src="img/coroninha-no-buraco.svg" id="virus4"  class="virus invisible" onclick="hitVirus(4)" />
             </div>
             <div id="slot5" class="spots">
               <img src="img/spots.svg" id="hole5" />
-              <img src="img/coroninha-no-buraco.svg" id="virus5"  class="virus invisible" />
+              <img src="img/coroninha-no-buraco.svg" id="virus5"  class="virus invisible" onclick="hitVirus(5)" />
             </div>
             <div id="slot6" class="spots">
               <img src="img/spots.svg" id="hole6" />
-              <img src="img/coroninha-no-buraco.svg" id="virus6"  class="virus invisible" />
+              <img src="img/coroninha-no-buraco.svg" id="virus6"  class="virus invisible" onclick="hitVirus(6)" />
             </div>
             <div id="slot7" class="spots">
               <img src="img/spots.svg" id="hole7"/>
-              <img src="img/coroninha-no-buraco.svg" id="virus7"  class="virus invisible" />
+              <img src="img/coroninha-no-buraco.svg" id="virus7"  class="virus invisible" onclick="hitVirus(7)" />
             </div>
             <div id="slot8" class="spots">
               <img src="img/spots.svg" id="hole8"/>
-              <img src="img/coroninha-no-buraco.svg" id="virus8"  class="virus invisible" />
+              <img src="img/coroninha-no-buraco.svg" id="virus8"  class="virus invisible" onclick="hitVirus(8)" />
             </div>
             <div id="slot9" class="spots">
               <img src="img/spots.svg" id="hole9" />
-              <img src="img/coroninha-no-buraco.svg" id="virus9"  class="virus invisible" />
+              <img src="img/coroninha-no-buraco.svg" id="virus9"  class="virus invisible" onclick="hitVirus(9)" />
             </div>
           </section>
         </section>
@@ -638,74 +690,214 @@ function gameStart() {
             
             </div>
             <div id="next">
-              <button id="btn-next-level" onclick="">
+              <button id="btn-next-level" onclick="startNextLevel()">
                 <img src="img/next-btn.png">
               </button>
             </div>
           </section>
         </section>
       </div>`
-  removeBtnBox = document.getElementById("modal-ingame")
+  removeBtnBox = document.getElementById("modal-ingame");
+  captureModalConfigurations = document.getElementById("modal-configuration");
   let masks = document.getElementById("masks");
   for (let i = 1; i <= userLifes; i++) {
-    masks.innerHTML += `<img src="img/icon-heart.png"/>`
-
+    masks.innerHTML += `<img src="img/icon-heart.png" id="mask${i}"/>`
   }
-
-  function showVirus() {
-    newGame.setCurrentLevel(1);
-    const virusValue = newGame.getPointsByLevel(1);
-    const intervalByLevel = newGame.getIntervalByLevel(1);
-    let interval1 = setInterval(() => {
-      let drawRange = newGame.drawSlots(1, 3);     
-      let captureVirus = document.getElementById(`virus${drawRange}`);
-      let captureHole = document.getElementById(`hole${drawRange}`);
-      let captureScore = document.getElementById("score")
-      captureVirus.classList.add("visible");
-      captureVirus.classList.remove("invisible");
-      captureHole.classList.add("invisible");
-      captureHole.classList.remove("visible");
-      captureVirus.addEventListener("click", () => {
-        let storageScore = newGame.increaseScore(virusValue);
-        console.log(storageScore);
-        newGame.setScore(storageScore);        
-        captureScore.innerHTML = `Score:${newGame.getScore()}`
-        console.log(newGame.getScore());
-        captureVirus.classList.remove("visible")
-        captureVirus.classList.add("invisible");
-        captureHole.classList.add("visible");
-        captureHole.classList.remove("invisible");
-      })
-        setTimeout(() => {
-          captureVirus.classList.add("invisible");
-          captureVirus.classList.remove("visible");
-          captureHole.classList.add("visible");
-          captureHole.classList.remove("invisible");
-        }, 200)
-     
-
-
-    }, 3000);
-    setTimeout(() => {
-      clearInterval(interval1);
-      nextLevel();
-    }, 10000)
-
-  };
+  //Substitui pela chamada da função  
   showVirus();
 };
-//Function a ser chamada quando a pessoa ganhar(Fazer condição de acordo com o score minimo)
-function nextLevel(){
+
+
+
+
+
+
+
+
+
+//Zona de testes
+
+
+levelTimer.setTimer(newGame.getIntervalByLevel());
+levelTimer.setTimerInterval((newGame.getIntervalByLevel() / 1.5));
+levelTimer.setCallbackTimeout(nextLevel);
+levelTimer.setCallbackTimeInterval(hideVirus);
+
+function hideVirus() {
+  let decreaseLife = document.getElementById(`masks`);
+  let remainLives = '';
+
+  if (captureVirus.classList.contains("visible") && decreaseLife.hasChildNodes()) {
+    newGame.setLifeStatus((newGame.getLifeStatus() - 1));
+    for (let i = 1; i <= newGame.getLifeStatus(); i++) {
+      remainLives += `<img src="img/icon-heart.png" id="mask${i}" />`
+    }
+    decreaseLife.innerHTML = remainLives;
+    console.log("Total de vidas: " + newGame.getLifeStatus());
+  }
+
+  captureVirus.classList.add("invisible");
+  captureVirus.classList.remove("visible");
+  captureHole.classList.add("visible");
+  captureHole.classList.remove("invisible");
+  //Precisamos colocar essa condição no lugar correto, pq ela está executando, mesmo quando o coroninha recebe click
+  if (newGame.getLifeStatus() <= 0) {
+    clearInterval(interval1);
+    clearTimeout(gameTimeout);
+    //console.log("Perdeu playboy!");
+    showGameLost(); // Inserir a chamada da tela de Game Over
+  }
+
+}
+
+
+function showVirusClone() {
+
+  newGame.setCallbackTimeInterval(gameRound);
+
+  function gameRound() {
+    let drawRange = newGame.drawSlots(1, 9);
+    let captureVirus = document.getElementById(`virus${drawRange}`);
+    let captureHole = document.getElementById(`hole${drawRange}`);
+
+
+    captureVirus.classList.add("visible");
+    captureVirus.classList.remove("invisible");
+    captureHole.classList.add("invisible");
+    captureHole.classList.remove("visible");
+    
+  }
+}
+
+
+
+
+
+
+
+
+function showVirus(level = newGame.getCurrentLevel()) {
+  console.log("Nível " + level); //remover
+  newGame.setCurrentLevel(level);
+  const intervalByLevel = newGame.getIntervalByLevel(level);
+  console.log("Intervalo de tempo " + intervalByLevel / 1.5); //remover
+  //let life = newGame.getLifeStatus();
+
+
+  /*  let decreaseLife1 = document.getElementById(`mask1`);
+   let decreaseLife2 = document.getElementById(`mask2`);
+   let decreaseLife3 = document.getElementById(`mask3`)
+  */
+
+  let interval1 = setInterval(() => {
+
+
+  }, intervalByLevel);
+  //jogar dentro de uma variável e limpar no gameLost
+  let gameTimeout = setTimeout(() => {
+    clearInterval(interval1);
+    for (let i = 1; i <= 9; i++) {
+      let clearVirus = document.getElementById(`virus${[i]}`);
+      let clearHole = document.getElementById(`hole${[i]}`);
+      clearVirus.classList.add("invisible");
+      clearVirus.classList.remove("visible");
+      clearHole.classList.add("visible");
+      clearHole.classList.remove("invisible");
+      //console.log(i);      
+    }
+    nextLevel();
+  }, 10000)
+};
+
+function hitVirus(id, level = newGame.getCurrentLevel()) {
+  newGame.getScore();
+  let captureScore = document.getElementById("score")
+  let virusValue = newGame.getPointsByLevel(level);
+  let captureVirus = document.getElementById(`virus${id}`);
+  let captureHole = document.getElementById(`hole${id}`);
+  //let storageScore = newGame.increaseScore(virusValue);
+  newGame.increaseScore(virusValue);
+  //  console.log(storageScore);
+  //  console.log('foi clicado');
+  //  newGame.setScore(storageScore);
+
+  //console.log(newGame.getScore());
+  captureVirus.classList.remove("visible")
+  captureVirus.classList.add("invisible");
+  captureHole.classList.add("visible");
+  captureHole.classList.remove("invisible");
+  //playAudio(sprayClicksSound); //AtivarSom
+  setTimeout(() => {
+    //playAudio(increaseSound);  //AtivarSom
+    captureScore.innerHTML = `Score: ${newGame.getScore()}`;
+  }, 300);
+
+}
+
+function nextLevel() {
   const happyCrocodyle = document.getElementById("happy");
   const normalCrocodyle = document.getElementById("normal");
   const nextLevelModal = document.getElementById("modal-next-level");
   const nextLevelBtn = document.getElementById("btn-next-level");
-    happyCrocodyle.style.display = "block";
-    normalCrocodyle.style.display = "none";
-    nextLevelModal.style.display = "flex";
-    nextLevelBtn.style.display = "block";
-    playAudio(gameWinSound);
-    newGame.levelAward();
-    newGame.setCurrentLevel(newGame.getCurrentLevel() +1)
+  happyCrocodyle.style.display = "block";
+  normalCrocodyle.style.display = "none";
+  nextLevelModal.style.display = "flex";
+  nextLevelBtn.style.display = "block";
+  //playAudio(gameWinSound); //AtivarSom
+  newGame.levelAward(newGame.getCurrentLevel());
 
+}
+
+function startNextLevel() {
+
+  //Atualização das vidas na tela quando troca de nível.
+  let upadateLives = document.getElementById(`masks`);
+  let remainLives = '';
+  for (let i = 1; i <= newGame.getLifeStatus(); i++) {
+    remainLives += `<img src="img/icon-heart.png" id="mask${i}" />`
+  }
+  upadateLives.innerHTML = remainLives;
+
+  const happyCrocodyle = document.getElementById("happy");
+  const normalCrocodyle = document.getElementById("normal");
+  const nextLevelModal = document.getElementById("modal-next-level");
+  const nextLevelBtn = document.getElementById("btn-next-level");
+  happyCrocodyle.style.display = "none";
+  normalCrocodyle.style.display = "block";
+  nextLevelModal.style.display = "none";
+  nextLevelBtn.style.display = "none";
+
+  newGame.setCurrentLevel(newGame.getCurrentLevel() + 1);
+  let incrementedLevel = newGame.getCurrentLevel();
+  showVirus(incrementedLevel);
+
+}
+
+function showGameLost() {
+  removeBtnBox.classList.add(`relative-with-blur`);
+  captureContainer.innerHTML += ` <div id="modal-gameover" class="modal">
+  <div class="modal-with-border">
+    <div id="circle1" class="circles">        
+    </div>
+    <div id="circle2" class="circles">        
+    </div>
+    <div id="circle3" class="circles">        
+    </div>
+    <div id="circle4" class="circles">        
+    </div>
+  <h2 class="modal-titles"> Game Over
+  </h2>
+  <div id="icon" class="sad-alligator">
+    <img src="/img/sad-jacarezin.svg" alt="sad crocodile">
+
+    <p>Your Score: <br />
+        0000
+    </p>
+  </div>
+  <div id="btn-retry-and-return">
+      <button id="btn-retry" class="retry" onclick="">Retry </button>
+      <button id="btn-return-start" class="return-start">Return to Start </button>
+  </div>
+</div>
+</div>`
 }
