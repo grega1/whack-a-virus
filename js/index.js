@@ -33,38 +33,28 @@ class Game {
         switch (this.currentLevel) {
             case 1:
                 return 1500;
-                break;
             case 2:
                 return 1200;
-                break;
             case 3:
                 return 1000;
-                break;
             case 4:
-                return 800;
-                break;
+                return 800;;
             case 5:
-                return 500;
-                break;
+                return 500;;
         }
     }
     getPointsByLevel() {
         switch (this.currentLevel) {
             case 1:
                 return 10;
-                break;
             case 2:
                 return 20;
-                break;
             case 3:
                 return 30;
-                break;
             case 4:
                 return 40;
-                break;
             case 5:
                 return 50;
-                break;
         }
     }
 
@@ -78,9 +68,6 @@ class Game {
 
     //actionPoint = Pontuação recebida por destruir o alvo
     increaseScore(_actionPoint = 5) {
-        /* let scoreOfPlayer = this.score;
-        let updatedScore = scoreOfPlayer + _actionPoint;
-        return updatedScore; */
         this.score = this.score + parseInt(_actionPoint);
     }
 
@@ -134,10 +121,6 @@ class Game {
         return { name: this.name, score: this.score };
 
     }
-    ismuted() {
-
-    }
-
 };
 
 //Timer
@@ -220,7 +203,7 @@ const newGame = new Game();
 const levelTimer = new Timer();
 
 //Audios//
-const btnSelectSound = "../audio/btn-select.mp3"; // guardar o caminho como strig
+const btnSelectSound = "../audio/btn-select.mp3";
 const maskUpSound = "../audio/mask-up.mp3";
 const levelUpSound = "../audio/level-up.mp3";
 const gameStartSound = "../audio/game-start.ogg";
@@ -241,8 +224,9 @@ function playAudio(sound) {
     audioToPlay.play();
 }
 
-//Sequência das Configurações da Tela do Jogo
+//Sequência das Configurações da Tela do Jogo e variáveis globais
 let captureContainer = document.getElementById("container");
+let slotSequence = [];
 
 function makeSettings() {
     captureContainer.innerHTML += `<section id="modal-configuration-sound" class="modal">
@@ -300,37 +284,8 @@ function closeSettings() {
     captureModalConfigurations.classList.remove("absolute-with-blur");
     captureModalConfigurations.style.display = "none";
     let removeBtnBox = document.getElementById("btn-box");
-
-    //Tratamento de erros
-    try {
-        removeBtnBox.classList.remove("relative-with-blur");
-    } catch (error) {
-        let removeBtnBox = document.getElementById("modal-nickname");
-        removeBtnBox.classList.remove("relative-with-blur");
-    }
-    try {
-        removeBtnBox.classList.remove("relative-with-blur");
-    } catch (error) {
-        let removeBtnBox = document.getElementById("modal-instructions");
-        removeBtnBox.classList.remove("relative-with-blur");
-    }
-    try {
-        removeBtnBox.classList.remove("relative-with-blur");
-    } catch (error) {
-        let removeBtnBox = document.getElementById("game-box");
-        removeBtnBox.classList.remove("relative-with-blur");
-    }
+    removeBtnBox.classList.remove("relative-with-blur");
 }
-
-
-function closeSettingsSound() {
-    let modalSound = document.getElementById("modal-configuration-sound");
-    modalSound.style.display = "none";
-    let captureModalConfigurations = document.getElementById("modal-configuration-sound");
-    captureModalConfigurations.style.display = "flex";
-}
-let captureSoundConfigurations = document.getElementById("btn-sound-configuration");
-let captureSoundVol;
 
 //Sequência do Jogo
 let pressStart = document.getElementById("pressStart");
@@ -404,8 +359,6 @@ function showInstructions() {
     removeBtnBox = document.getElementById("modal-instructions");
     captureModalConfigurations = document.getElementById("modal-configuration-sound");
 }
-
-let slotSequence = [];
 
 function gameStart() {
     let userName = newGame.getName();
@@ -552,18 +505,14 @@ function showVirus() {
             levelTimer.stopTimer();
             showGameLost();
         }
-
-
-
     }, (newGame.getIntervalByLevel() / 1.5))
 
 }
 
-
 function startLevel(level = newGame.getCurrentLevel()) {
     console.table(newGame);
     newGame.setCurrentLevel(level);
-    levelTimer.setTimer(10000);
+    levelTimer.setTimer(60000);
     levelTimer.setTimerInterval(newGame.getIntervalByLevel());
     levelTimer.setCallbackTimeout(finishLevel);
     levelTimer.setCallbackTimeInterval(showVirus);
@@ -619,7 +568,6 @@ function nextLevel() {
         nextLevelBtn.style.display = "block";
         playAudio(gameWinSound);
         newGame.levelAward(level);
-
 
     } else {
         newGame.levelAward(level);
