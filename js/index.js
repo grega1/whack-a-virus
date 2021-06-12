@@ -231,11 +231,13 @@ const vaxxBreakingSound = "../audio/vaxx-breaking.mp3";
 const backgroundSound = "../audio/background-sound.mp3";
 const increaseSound = "../audio/increase-sound.mp3";
 const mainMusic = new Audio(backgroundSound);
+mainMusic.volume = 0.1;
 mainMusic.play();
 mainMusic.loop = true;
 
 function playAudio(sound) {
     const audioToPlay = new Audio(sound);
+    audioToPlay.volume = 0.1;
     audioToPlay.play();
 }
 
