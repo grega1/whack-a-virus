@@ -260,41 +260,52 @@ let captureContainer = document.getElementById("container");
 let captureSettings = document.getElementById("settings-button");
 //captureSettings.addEventListener("click'"','()=>
 function makeSettings() {
-  captureContainer.innerHTML += ` 
-            <section id="modal-configuration" class="modal">
+  captureContainer.innerHTML += `<section id="modal-configuration-sound" class="modal">
             
-            <section class="modal-with-border">
-                <div id="circle1" class="circles">
-                </div>
-                <div id="circle2" class="circles">
-                </div>
-                <div id="circle3" class="circles">
-                </div>
-                <div id="circle4" class="circles">
-                </div>
+  <section class="modal-with-border">
+      <div id="circle1" class="circles">
+      </div>
+      <div id="circle2" class="circles">
+      </div>
+      <div id="circle3" class="circles">
+      </div>
+      <div id="circle4" class="circles">
+      </div>
 
-                <h3>Ajustes</h3>
+      <h3 class="modal-titles">SOM</h3>
 
-                <section id="main-menu" class="main-menu">
+      <section id="sound-configuration" class="sound-menu">
 
-                <button id="btn-sound-configuration" class="sound" onclick="openConfigSound()"> Sons </button>
-                <button id="btn-shortcut-key" class="shortcut-key" onclick="openShortcutKeys()"> Teclas de Atalho</button>
-                <button id="btn-help" class="menu-help" onclick="openHelp()">Ajuda</button>
+          
 
-                </section>
+            <div id="slider-sound-volume">
+              <label for="sound-volume">Volume do Som:</label>
+              <input type="range" min="0" max="100" value="10" class="slider" id="sound-volume">
+            </div>
 
-                <button id="btn-return-game" class="return-game" onclick="closeSettings()">Voltar para o Jogo</button>
-                
-            </section>
             
-        </section>`
+
+      </section>
+
+      <button id="btn-return-game" class="return-game" onclick="closeSettings()">Voltar</button>
+      
+  </section>
+  
+</section>`
+  let captureSoundVol = document.getElementById("sound-volume");
+
+  captureSoundVol.addEventListener("change", function (e) {
+    let eventVol = e.currentTarget.value / 100;
+    mainMusic.volume = eventVol;
+    //localStorage.setItem('mainVolume',e.currentTarget.value / 100);  
+  });
 
 };
 makeSettings();
 
 let btnReturnGame = document.getElementById("btn-return-game");
 let removeBtnBox = document.getElementById("btn-box");
-let captureModalConfigurations = document.getElementById("modal-configuration");
+let captureModalConfigurations = document.getElementById("modal-configuration-sound");
 captureModalConfigurations.style.display = "none";
 function openSettings() {
   captureModalConfigurations.classList.add("absolute-with-blur");
@@ -302,13 +313,10 @@ function openSettings() {
   removeBtnBox.classList.add("relative-with-blur");
 
 }
-function changeVol(volume, audio) {
 
-}
 function closeSettings() {
-  let captureModalConfigurations = document.getElementById("modal-configuration");
+  let captureModalConfigurations = document.getElementById("modal-configuration-sound");
   captureModalConfigurations.classList.remove("absolute-with-blur");
-  console.log("entrei")
   captureModalConfigurations.style.display = "none";
   let removeBtnBox = document.getElementById("btn-box");
   try {
@@ -318,20 +326,20 @@ function closeSettings() {
     removeBtnBox.classList.remove("relative-with-blur");
   }
   try {
-    
+
     removeBtnBox.classList.remove("relative-with-blur");
   } catch (error) {
     let removeBtnBox = document.getElementById("modal-nickname");
-     removeBtnBox.classList.remove("relative-with-blur");
+    removeBtnBox.classList.remove("relative-with-blur");
   }
   try {
     removeBtnBox.classList.remove("relative-with-blur");
   } catch (error) {
     let removeBtnBox = document.getElementById("modal-instructions");
     removeBtnBox.classList.remove("relative-with-blur");
-  }try{
+  } try {
     removeBtnBox.classList.remove("relative-with-blur");
-  }catch (error) {
+  } catch (error) {
     let removeBtnBox = document.getElementById("game-box");
     removeBtnBox.classList.remove("relative-with-blur");
   }
@@ -344,189 +352,8 @@ function closeSettingsSound() {
   let captureModalConfigurations = document.getElementById("modal-configuration");
   captureModalConfigurations.style.display = "flex";
 }
-
-
 let captureSoundConfigurations = document.getElementById("btn-sound-configuration");
-let captureShorcutKeys = document.getElementById("btn-shortcut-key");
-let captureHelps = document.getElementById("btn-help");
 let captureSoundVol;
-
-
-
-function openConfigSound() {
-  let captureModalConfigurations = document.getElementById("modal-configuration");
-  captureModalConfigurations.style.display = "none";
-  captureContainer.innerHTML += `<section id="modal-configuration-sound" class="modal">
-            
-    <section class="modal-with-border">
-        <div id="circle1" class="circles">
-        </div>
-        <div id="circle2" class="circles">
-        </div>
-        <div id="circle3" class="circles">
-        </div>
-        <div id="circle4" class="circles">
-        </div>
-
-        <h3>Sound</h3>
-
-        <section id="sound-configuration" class="sound-menu">
-
-            <div id="slider-main-volume">
-                <label for="main-volume">Volume Principal:</label>
-                <input type="range" min="1" max="100" value="50" class="slider" id="main-volume">
-              </div>
-
-              <div id="slider-sound-volume">
-                <label for="sound-volume">Sound Volume:</label>
-                <input type="range" min="1" max="100" value="50" class="slider" id="sound-volume">
-              </div>
-
-              <div id="slider-sound-effects">
-                <label for="sound-effects">Sound Effects:</label>
-                <input type="range" min="1" max="100" value="50" class="slider" id="sound-effects">
-            </div>
-
-        </section>
-
-        <button id="btn-return-game" class="return-game" onclick="closeSettingsSound()">Return to Main Menu</button>
-        
-    </section>
-    
-</section>`
-  let captureSoundMainVol = document.getElementById("main-volume");
-  captureSoundVol = document.getElementById("sound-volume");
-  let captureSoundEffectsVol = document.getElementById("sound-effects");
-  captureSoundVol.addEventListener("change", function (e) {
-    let eventVol = e.currentTarget.value / 100;
-    mainMusic.volume = eventVol;
-    //localStorage.setItem('mainVolume',e.currentTarget.value / 100);  
-  });
-};
-//
-
-function openShortcutKeys() {
-  let captureModalConfigurations = document.getElementById("modal-configuration");
-  captureModalConfigurations.style.display = "none";
-  captureContainer.innerHTML += `<section id="modal-configuration-shortcut" class="modal">
-            
-            <section class="modal-with-border">
-                <div id="circle1" class="circles">
-                </div>
-                <div id="circle2" class="circles">
-                </div>
-                <div id="circle3" class="circles">
-                </div>
-                <div id="circle4" class="circles">
-                </div>
-
-                <h3>Shortcut Keys</h3>
-                <p>Select a slot and press <br />the shortcut key to configure</p>
-
-                <section id="input-slot">
-                    <div class="row">
-
-                        <div class="slot-with-label">
-                        <input data-index="0" type="text" id="slot1" class="slot">
-                        <label for="slot1">Slot 1</label>
-                        </div>
-
-                        <div class="slot-with-label">
-                        <input data-index="1" type="text" id="slot2" class="slot">
-                        <label for="slot2">Slot 2</label>
-                        </div>
-
-                        <div class="slot-with-label">
-                        <input data-index="2" type="text" id="slot3" class="slot">
-                        <label for="slot3">Slot 3</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="slot-with-label">
-                        <input data-index="3" type="text" id="slot4" class="slot">
-                        <label for="slot4">Slot 4</label>
-                        </div>
-                        
-                        <div class="slot-with-label">
-                        <input data-index="4" type="text" id="slot5" class="slot">
-                        <label for="slot5">Slot 5</label>
-                        </div>
-
-                        <div class="slot-with-label">
-                        <input data-index="5" type="text" id="slot6" class="slot">
-                        <label for="slot6">Slot 6</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="slot-with-label">
-                        <input data-index="6" type="text" id="slot7" class="slot">
-                        <label for="slot7">Slot 7</label>
-                        </div>
-
-                        <div class="slot-with-label">
-                        <input data-index="7"type="text" id="slot8" class="slot">
-                        <label for="slot8">Slot 8</label>
-                        </div>
-                        
-                        <div class="slot-with-label">
-                        <input data-index="8" type="text" id="slot9" class="slot">
-                        <label for="slot9">Slot 9</label>
-                        </div>
-
-                    </div>
-                    
-                </section>
-                <div class="btns">
-                <button id="btn-save" class="save"> Save configuration </button>
-
-                <button id="btn-return-game" class="return-game" onclick="makeSettings()">Return to Main Menu</button>
-                </div>
-            </section>
-            
-        </section>`
-  captureModalConfigurations = document.getElementById("modal-configuration-shortcut");
-  //função que vai guardar e substituir as KeyUps
-  let saveShortKeys = document.getElementById("btn-save");
-  saveShortKeys.addEventListener('click', () => {
-    let slots = document.querySelectorAll('.slot');
-    let newSlots = slots.filter((slot) => slot.value != ""); //só retorna os campos preenchidos
-    console.log(slots);
-    console.log(newSlots);
-    for (let i = 0; i < newSlots.length; i++) {
-      let captureData = newSlots[i].dataset.index;
-      arrKeys[captureData] = newSlots[i].value;
-    }
-  })
-}
-function openHelp() {
-  let captureModalConfigurations = document.getElementById("modal-configuration");
-  captureModalConfigurations.style.display = "none";
-  captureContainer.innerHTML += `  <div id="modal-instructions-menu" class="modal">
-      <div class="modal-with-border">
-        <div id="circle1" class="circles">        
-        </div>
-        <div id="circle2" class="circles">        
-        </div>
-        <div id="circle3" class="circles">        
-        </div>
-        <div id="circle4" class="circles">        
-        </div>
-        <h2 class="modal-titles"> HELP
-        </h2>
-        <div id="text-instructions">
-         
-          <p>Hit corona vírus with alcohol spray to score</p>
-          <p>If you break the vacine you will lose and can continue using your mask, but think fast! You will have a short to use it!</p>
-          <p>Each level of dificulty clear you will win a mask</p>
-                  
-        </div>
-      <div>
-          <button id="back-to-menu" class="btn-sec" onclick="makeSettings()"> Return to main menu </button>
-      </div>
-    </div>
-    </div>`
-  captureModalConfigurations = document.getElementById("modal-instructions-menu");
-}
 
 //Sequência do Jogo
 let pressStart = document.getElementById("pressStart");
@@ -534,39 +361,8 @@ pressStart.addEventListener("click", () => {
   let removeBtnBox = document.getElementById("btn-box");
   let newGame = new Game();
   removeBtnBox.parentNode.removeChild(removeBtnBox);
-  captureContainer.innerHTML += `<div id="modal-language" class="modal">
-       <div class="modal-with-border">
-         <div id="circle1" class="circles">        
-         </div>
-         <div id="circle2" class="circles">        
-         </div>
-         <div id="circle3" class="circles">        
-         </div>
-         <div id="circle4" class="circles">        
-         </div>
-       <h2 class="modal-titles"> Selecione seu idioma
-       </h2>
-       <div id="language" class="language-box">
-         <input type="radio" name="language" id="lang-EN" value="lang-EN"> 
-         <label for="lang-EN"><img src="./img/english.png" id="flag-EN" alt="">English</label>
-         <input type="radio" name="language" id="lang-ptBR" value="lang-ptBR"> 
-         <label for="lang-ptBR"><img src="./img/br.png" id="flag-ptBR"alt="" onclick="portugueseRoute()">Português</label>
-       </div>
-       <div>
-           <button id="select-language" class="btn-sec" onclick="avancaLinguagem()">Continue </button>
-       </div>
-     </div>
-     </div>`
-  removeBtnBox = document.getElementById("modal-language");
-  captureModalConfigurations = document.getElementById("modal-configuration");
-});
-
-let langPTBR = document.getElementById("select-language");
-
-function portugueseRoute() {
-  let modalLanguage = document.getElementById("modal-language");
-  modalLanguage.parentNode.removeChild(modalLanguage);
-  captureContainer.innerHTML += `<div id="modal-nickname" class="modal">
+  captureContainer.innerHTML +=
+    `<div id="modal-nickname" class="modal">
       <div class="modal-with-border">
         <div id="circle1" class="circles">        
         </div>
@@ -576,20 +372,19 @@ function portugueseRoute() {
         </div>
         <div id="circle4" class="circles">        
         </div>
-      <h2 class="modal-titles"> Insert your nickname
+      <h2 class="modal-titles"> Insira seu nome
       </h2>
       <div id="input-nickname" >
         <input type="text" name="nickname" id="user-input" value="Player1">           
       </div>
       <div>
-          <button id="play-game" class="btn-sec" onclick="showInstructions()"> Play </button>
+          <button id="play-game" class="btn-sec" onclick="showInstructions()"> Jogar </button>
       </div>
     </div>
     </div>`
   removeBtnBox = document.getElementById("modal-nickname");
-  captureModalConfigurations = document.getElementById("modal-configuration");
-};
-
+  captureModalConfigurations = document.getElementById("modal-configuration-sound");
+});
 
 function showInstructions() {
   let removeBtnBox = document.getElementById("modal-instructions");
@@ -608,22 +403,29 @@ function showInstructions() {
         </div>
         <div id="circle4" class="circles">        
         </div>
-        <h2 class="modal-titles"> Instructions
+        <h2 class="modal-titles"> Regras
         </h2>
-        <div id="text-instructions">
-         
-          <p>Hit corona vírus with alcohol spray to score</p>
-          <p>If you break the vacine you will lose and can continue using your mask, but think fast! You will have a short to use it!</p>
-          <p>Each level of dificulty clear you will win a mask</p>
+        <div id="text-instructions">  
+        <p>
+        O vírus sai aleatóriamente de um dos slots. O(a) jogador(a) deve acertar o spray de álcool 70 no vírus que está visível, utilizando o mouse para acumular pontos.
+        </p>
+        <p>
+        O(a) jogador(a) terá um minuto para acertar o máximo de coroninhas possível. O intervalo de tempo será constante para todas as fases, porém a velocidade em que os coroninhas aparecem, aumentará a medida que o(a) jogador(a) avançar os níveis.
+        </p>
+        <p>    
+        Caso o(a) jogador(a) não consiga acertar o coroninha antes dele sumir, ele(a) perderá uma vida.
+        Se perder todas as vidas o jogo é encerrado. Cada nível avançado irá restaurar uma das vidas, se o(a) jogador(a) estiver com as vidas completas ele(a) receberá um bônus na pontuação. O bônus será proporcional a dificuldade do nível.
+        Vence o jogo quem concluir os 5 níveis.
+        </p>
                   
         </div>
       <div>
-          <button id="play-game" class="btn-sec" onclick="gameStart()"> Game Start </button>
+          <button id="play-game" class="btn-sec" onclick="gameStart()"> Iniciar </button>
       </div>
     </div>
     </div>`
   removeBtnBox = document.getElementById("modal-instructions");
-  captureModalConfigurations = document.getElementById("modal-configuration");
+  captureModalConfigurations = document.getElementById("modal-configuration-sound");
 }
 
 let slotSequence = [];
@@ -635,18 +437,14 @@ function gameStart() {
   let userLifes = newGame.getLifeStatus();
   let modalInstructions = document.getElementById("modal-instructions");
   modalInstructions.parentNode.removeChild(modalInstructions);
-  captureContainer.innerHTML += `<header>      
-      <button id="help-button">
-        <img src="img/help-icon.png" />
-      </button>
-    </header>
+  captureContainer.innerHTML += `
     <div id="game-box">
       <section id="modal-ingame" class="modal">
       <section class="modal-with-border">
           <section class="background-with-crocodile">
             <div id="player-scoreboard">
-              <h4> Name: ${userName}</h4>
-              <h4 id="score">Score: 0 </h4>
+              <h4> Nome: ${userName}</h4>
+              <h4 id="score">Pontos: 0 </h4>
             </div>
             <div id="scoreboard-footer">
                 <section id="modal-next-level" class="invisible">
@@ -700,19 +498,14 @@ function gameStart() {
       </section>  
 
       <div id="right-box">
-        <section id="modal-ranking" class="modal">
+        <section id="modal-level" class="modal">
          
-          <section class="modal-with-border">
-            <p id="title-ranking"> Top 5 Score</p>
-            <div id="name-rank">
-              <h4>Nome</h4>
-             
+          <section class="modal-with-border">            
+            <div id="currentLevel">
+              <h4>Nível:1
+              </h4>             
             </div>
-            <hr></hr>
-            <div id="score-rank">
-              <h4>Pontuação</h4>
-            
-            </div>
+                       
           </section>
         </section>
         <section id="modal-info-game" class="modal">
@@ -738,7 +531,7 @@ function gameStart() {
         </section>
       </div>`
   removeBtnBox = document.getElementById("game-ingame");
-  captureModalConfigurations = document.getElementById("modal-configuration");
+  captureModalConfigurations = document.getElementById("modal-configuration-sound");
   let masks = document.getElementById("masks");
   for (let i = 1; i <= userLifes; i++) {
     masks.innerHTML += `<img src="img/icon-heart.png" id="mask${i}"/>`
@@ -837,7 +630,8 @@ function showVirus(level = newGame.getCurrentLevel()) {
 
 function hitVirus(id, level = newGame.getCurrentLevel()) {
   newGame.getScore();
-  let captureScore = document.getElementById("score")
+  let captureScore = document.getElementById("score");
+  let captureLevel = document.getElementById("currentlevel");
   let virusValue = newGame.getPointsByLevel(level);
   let captureVirus = document.getElementById(`virus${id}`);
   let captureHole = document.getElementById(`hole${id}`);
@@ -855,7 +649,7 @@ function hitVirus(id, level = newGame.getCurrentLevel()) {
   //playAudio(sprayClicksSound); //AtivarSom
   setTimeout(() => {
     //playAudio(increaseSound);  //AtivarSom
-    captureScore.innerHTML = `Score: ${newGame.getScore()}`;
+    captureScore.innerHTML = `Score: ${newGame.getScore()}`;    
   }, 300);
 
 }
@@ -871,6 +665,7 @@ function nextLevel() {
   nextLevelBtn.style.display = "block";
   //playAudio(gameWinSound); //AtivarSom
   newGame.levelAward(newGame.getCurrentLevel());
+
 
 }
 
@@ -919,17 +714,49 @@ function showGameLost() {
     </div>
   <h2 class="modal-titles"> Game Over
   </h2>
-  <div id="icon" class="sad-alligator">
+  <div id="icon" class="sad-croco">
     <img src="/img/sad-jacarezin.svg" alt="sad crocodile">
 
-    <p>Your Score: <br />
-        0000
+    <p>Pontuação final: <br />
+        <p class="modal-titles">${newGame.getScore()}</p>
     </p>
   </div>
   <div id="btn-retry-and-return">
-      <button id="btn-retry" class="retry" onclick="load_home()">Retry </button>
-      <button id="btn-return-start" class="return-start">Return to Start </button>
+      <button id="btn-return-start" class="return-start" onclick="restart()"> Reiniciar </button>
   </div>
 </div>
 </div>`
+}
+function restart() {
+  location.reload();
+}
+function showGameWin(){
+  let removeBtnBox = document.getElementById("game-box");
+  removeBtnBox.classList.add(`relative-with-blur`);
+  captureContainer.innerHTML += `
+  <div id="modal-gamewin" class="modal">
+      <div class="modal-with-border">
+        <div id="circle1" class="circles">        
+        </div>
+        <div id="circle2" class="circles">        
+        </div>
+        <div id="circle3" class="circles">        
+        </div>
+        <div id="circle4" class="circles">        
+        </div>
+      <h2 class="modal-titles"> You Won
+      </h2>
+      <div id="icon" class="happy-croco">
+        <img src="/img/happy-jacarezin.svg" alt="happy-alligator">
+
+        <p>Pontuação final: <br />
+        <p class="modal-titles">${newGame.getScore()}</p>
+        </p>
+      </div>
+      <div id="btn-retry-and-return">
+          <button id="btn-return-start" class="return-start" onclick="restart()">Reiniciar </button>
+      </div>
+    </div>
+    </div>`
+
 }
