@@ -188,7 +188,7 @@ h1,h2{
     font-size:1.563rem;
   }
   /* Instructions Page */
-  #modal-instructions, #modal-instructions-ingame, #modal-instructions-menu, #modal-ingame{
+  #modal-instructions, #modal-instructions-ingame, #modal-instructions-menu, #modal-ingame, #modal-gameover{
     display: flex;
     align-items: center;
     justify-content: center;    
@@ -335,7 +335,7 @@ h1,h2{
 }
 
 /* Configurations Modals */
-#modal-configuration{
+#modal-configuration, #modal-configuration-sound, #modal-configuration-shortcut, #modal-instructions-menun{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -409,18 +409,24 @@ p{
 
 .slot-with-label{
   display: flex;
-  width: 25%;
+  width: 45%;
   margin-top: 1.563rem;
+  
 }
 
 .slot{
-  width: 10%;
+  width: 70px;
   padding: 0.625rem;
   margin-right: 0.625rem;
+  color:#000023;
+  text-align: center;
+  
 }
 
 label{
   margin-top: 0.625rem;
+  padding-right: 20px;
+  
 }
 
 .save{
@@ -452,6 +458,13 @@ img{
 #btn-retry-and-return{
   display: flex;
   gap: 24px;
+}
+#modal-gameover{
+  width:50%;
+}
+#modal-gameover button{
+  font-size:1rem;
+  width: 21.875rem;
 }
 
 .retry{
@@ -533,4 +546,11 @@ img{
 }
 #normal{
   display:block;
+}
+#modal-gameover{
+  position: absolute;
+}
+.absolute-with-blur{
+  z-index: 1;
+  display: flex;
 }

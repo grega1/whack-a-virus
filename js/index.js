@@ -129,6 +129,7 @@ class Game {
   }
 
 };
+
 //Timer
 class Timer {
   constructor(_time, _currentTime, _timerInterval = 100, _callbackTimeout, _callbackTimeInterval, _internalTimer, _internalTimeout) {
@@ -297,6 +298,7 @@ function openSettings() {
   captureModalConfigurations.classList.add("absolute-with-blur");
   captureModalConfigurations.style.display = "flex";
   removeBtnBox.classList.add("relative-with-blur");
+<<<<<<< HEAD
 
 }
 function changeVol(volume, audio) {
@@ -307,8 +309,53 @@ function closeSettings() {
   captureModalConfigurations.style.display = "none";
   removeBtnBox.classList.remove("relative-with-blur");
   removeBtnBox.style.display = "flex";
+=======
+>>>>>>> 87bbeda8f5da489631fc114cd3c15d4197d8fe7b
 
 }
+function changeVol(volume, audio) {
+
+}
+function closeSettings() {
+  let captureModalConfigurations = document.getElementById("modal-configuration");
+  captureModalConfigurations.classList.remove("absolute-with-blur");
+  console.log("entrei")
+  captureModalConfigurations.style.display = "none";
+  let removeBtnBox = document.getElementById("btn-box");
+  try {
+    removeBtnBox.classList.remove("relative-with-blur");
+  } catch (error) {
+    let removeBtnBox = document.getElementById("modal-language");
+    removeBtnBox.classList.remove("relative-with-blur");
+  }
+  try {
+    
+    removeBtnBox.classList.remove("relative-with-blur");
+  } catch (error) {
+    let removeBtnBox = document.getElementById("modal-nickname");
+     removeBtnBox.classList.remove("relative-with-blur");
+  }
+  try {
+    removeBtnBox.classList.remove("relative-with-blur");
+  } catch (error) {
+    let removeBtnBox = document.getElementById("modal-instructions");
+    removeBtnBox.classList.remove("relative-with-blur");
+  }try{
+    removeBtnBox.classList.remove("relative-with-blur");
+  }catch (error) {
+    let removeBtnBox = document.getElementById("game-box");
+    removeBtnBox.classList.remove("relative-with-blur");
+  }
+}
+
+
+function closeSettingsSound() {
+  let modalSound = document.getElementById("modal-configuration-sound");
+  modalSound.style.display = "none";
+  let captureModalConfigurations = document.getElementById("modal-configuration");
+  captureModalConfigurations.style.display = "flex";
+}
+
 
 let captureSoundConfigurations = document.getElementById("btn-sound-configuration");
 let captureShorcutKeys = document.getElementById("btn-shortcut-key");
@@ -320,7 +367,7 @@ let captureSoundVol;
 function openConfigSound() {
   let captureModalConfigurations = document.getElementById("modal-configuration");
   captureModalConfigurations.style.display = "none";
-  captureContainer.innerHTML += `<section id="modal-configuration" class="modal">
+  captureContainer.innerHTML += `<section id="modal-configuration-sound" class="modal">
             
     <section class="modal-with-border">
         <div id="circle1" class="circles">
@@ -353,7 +400,11 @@ function openConfigSound() {
 
         </section>
 
+<<<<<<< HEAD
         <button id="btn-return-game" class="return-game" onclick="closeSettings()">Return to Main Menu</button>
+=======
+        <button id="btn-return-game" class="return-game" onclick="closeSettingsSound()">Return to Main Menu</button>
+>>>>>>> 87bbeda8f5da489631fc114cd3c15d4197d8fe7b
         
     </section>
     
@@ -367,12 +418,16 @@ function openConfigSound() {
     //localStorage.setItem('mainVolume',e.currentTarget.value / 100);  
   });
 };
+<<<<<<< HEAD
 
+=======
+//
+>>>>>>> 87bbeda8f5da489631fc114cd3c15d4197d8fe7b
 
 function openShortcutKeys() {
   let captureModalConfigurations = document.getElementById("modal-configuration");
   captureModalConfigurations.style.display = "none";
-  captureContainer.innerHTML += `<section id="modal-configuration" class="modal">
+  captureContainer.innerHTML += `<section id="modal-configuration-shortcut" class="modal">
             
             <section class="modal-with-border">
                 <div id="circle1" class="circles">
@@ -448,6 +503,10 @@ function openShortcutKeys() {
             </section>
             
         </section>`
+<<<<<<< HEAD
+=======
+  captureModalConfigurations = document.getElementById("modal-configuration-shortcut");
+>>>>>>> 87bbeda8f5da489631fc114cd3c15d4197d8fe7b
   //função que vai guardar e substituir as KeyUps
   let saveShortKeys = document.getElementById("btn-save");
   saveShortKeys.addEventListener('click', () => {
@@ -488,12 +547,17 @@ function openHelp() {
       </div>
     </div>
     </div>`
-
+  captureModalConfigurations = document.getElementById("modal-instructions-menu");
 }
 
 //Sequência do Jogo
 let pressStart = document.getElementById("pressStart");
 pressStart.addEventListener("click", () => {
+<<<<<<< HEAD
+=======
+  let removeBtnBox = document.getElementById("btn-box");
+  let newGame = new Game();
+>>>>>>> 87bbeda8f5da489631fc114cd3c15d4197d8fe7b
   removeBtnBox.parentNode.removeChild(removeBtnBox);
   captureContainer.innerHTML += `<div id="modal-language" class="modal">
        <div class="modal-with-border">
@@ -553,6 +617,7 @@ function portugueseRoute() {
 
 
 function showInstructions() {
+  let removeBtnBox = document.getElementById("modal-instructions");
   let captureName = document.getElementById("user-input").value;
   newGame.setName(captureName);
   //console.log(newGame.getName());
@@ -697,7 +762,11 @@ function gameStart() {
           </section>
         </section>
       </div>`
+<<<<<<< HEAD
   removeBtnBox = document.getElementById("modal-ingame");
+=======
+  removeBtnBox = document.getElementById("game-ingame");
+>>>>>>> 87bbeda8f5da489631fc114cd3c15d4197d8fe7b
   captureModalConfigurations = document.getElementById("modal-configuration");
   let masks = document.getElementById("masks");
   for (let i = 1; i <= userLifes; i++) {
@@ -705,6 +774,7 @@ function gameStart() {
   }
   //Substitui pela chamada da função  
   showVirus();
+<<<<<<< HEAD
 };
 
 
@@ -809,6 +879,98 @@ function showVirus(level = newGame.getCurrentLevel()) {
   }, 10000)
 };
 
+=======
+};
+
+//Movi a showVirus para o escopo global, para poder ser chamada pelo botão de troca de fases
+//Criei um parâmetro para receber o getCurrentLevel e substitui todas as passagens de parâmetro referentes ao nível por ele, para generalizar a função
+
+function showVirus(level = newGame.getCurrentLevel()) {
+  console.log("Nível " + level); //remover
+  newGame.setCurrentLevel(level);
+  const intervalByLevel = newGame.getIntervalByLevel(level);
+  console.log("Intervalo de tempo " + intervalByLevel / 1.5); //remover
+  //let life = newGame.getLifeStatus();
+
+
+  /*  let decreaseLife1 = document.getElementById(`mask1`);
+   let decreaseLife2 = document.getElementById(`mask2`);
+   let decreaseLife3 = document.getElementById(`mask3`)
+  */
+
+  let interval1 = setInterval(() => {
+    let drawRange = newGame.drawSlots(1, 9);
+    let captureVirus = document.getElementById(`virus${drawRange}`);
+    let captureHole = document.getElementById(`hole${drawRange}`);
+
+
+    captureVirus.classList.add("visible");
+    captureVirus.classList.remove("invisible");
+    captureHole.classList.add("invisible");
+    captureHole.classList.remove("visible");
+
+    /*captureVirus.addEventListener("click", () => {
+      if(hasClickProcessor){
+      let storageScore = newGame.increaseScore(virusValue);
+      //console.log(storageScore);
+      console.log('foi clicado');
+      newGame.setScore(storageScore);
+      captureScore.innerHTML = `Score: ${newGame.getScore()}`
+      console.log(newGame.getScore());
+      captureVirus.classList.remove("visible")
+      captureVirus.classList.add("invisible");
+      captureHole.classList.add("visible");
+      captureHole.classList.remove("invisible");
+      playAudio(sprayClicksSound);
+    })*/
+
+    setTimeout(() => {
+      let decreaseLife = document.getElementById(`masks`);
+      let remainLives = '';
+
+      if (captureVirus.classList.contains("visible") && decreaseLife.hasChildNodes()) {
+        newGame.setLifeStatus((newGame.getLifeStatus() - 1));
+        for (let i = 1; i <= newGame.getLifeStatus(); i++) {
+          remainLives += `<img src="img/icon-heart.png" id="mask${i}" />`
+        }
+        decreaseLife.innerHTML = remainLives;
+        console.log("Total de vidas: " + newGame.getLifeStatus());
+      }
+
+      captureVirus.classList.add("invisible");
+      captureVirus.classList.remove("visible");
+      captureHole.classList.add("visible");
+      captureHole.classList.remove("invisible");
+      //Precisamos colocar essa condição no lugar correto, pq ela está executando, mesmo quando o coroninha recebe click
+      if (newGame.getLifeStatus() <= 0) {
+        clearInterval(interval1);
+        clearTimeout(gameTimeout);
+        //console.log("Perdeu playboy!");
+        showGameLost(); // Inserir a chamada da tela de Game Over
+      }
+
+
+
+    }, (intervalByLevel / 1.5))
+
+  }, intervalByLevel);
+  //jogar dentro de uma variável e limpar no gameLost
+  let gameTimeout = setTimeout(() => {
+    clearInterval(interval1);
+    for (let i = 1; i <= 9; i++) {
+      let clearVirus = document.getElementById(`virus${[i]}`);
+      let clearHole = document.getElementById(`hole${[i]}`);
+      clearVirus.classList.add("invisible");
+      clearVirus.classList.remove("visible");
+      clearHole.classList.add("visible");
+      clearHole.classList.remove("invisible");
+      //console.log(i);      
+    }
+    nextLevel();
+  }, 10000)
+};
+
+>>>>>>> 87bbeda8f5da489631fc114cd3c15d4197d8fe7b
 function hitVirus(id, level = newGame.getCurrentLevel()) {
   newGame.getScore();
   let captureScore = document.getElementById("score")
@@ -848,7 +1010,17 @@ function nextLevel() {
 
 }
 
+<<<<<<< HEAD
 function startNextLevel() {
+=======
+//Restaura a tela de jogo e reinicia a partida de acordo com o novo nível
+function startNextLevel() {
+  /*let userLifes = newGame.getLifeStatus();
+  for (let i = 1; i <= userLifes; i++) {
+    masks.innerHTML += `<img src="img/icon-heart.png" id="mask${i}"/>`
+  }*/
+
+>>>>>>> 87bbeda8f5da489631fc114cd3c15d4197d8fe7b
 
   //Atualização das vidas na tela quando troca de nível.
   let upadateLives = document.getElementById(`masks`);
@@ -866,11 +1038,47 @@ function startNextLevel() {
   normalCrocodyle.style.display = "block";
   nextLevelModal.style.display = "none";
   nextLevelBtn.style.display = "none";
+<<<<<<< HEAD
+
+  newGame.setCurrentLevel(newGame.getCurrentLevel() + 1);
+  let incrementedLevel = newGame.getCurrentLevel();
+  showVirus(incrementedLevel);
+=======
+>>>>>>> 87bbeda8f5da489631fc114cd3c15d4197d8fe7b
 
   newGame.setCurrentLevel(newGame.getCurrentLevel() + 1);
   let incrementedLevel = newGame.getCurrentLevel();
   showVirus(incrementedLevel);
 
+}
+function showGameLost() {
+  let removeBtnBox = document.getElementById("game-box");
+  removeBtnBox.classList.add(`relative-with-blur`);
+  captureContainer.innerHTML += ` <div id="modal-gameover" class="modal">
+  <div class="modal-with-border">
+    <div id="circle1" class="circles">        
+    </div>
+    <div id="circle2" class="circles">        
+    </div>
+    <div id="circle3" class="circles">        
+    </div>
+    <div id="circle4" class="circles">        
+    </div>
+  <h2 class="modal-titles"> Game Over
+  </h2>
+  <div id="icon" class="sad-alligator">
+    <img src="/img/sad-jacarezin.svg" alt="sad crocodile">
+
+    <p>Your Score: <br />
+        0000
+    </p>
+  </div>
+  <div id="btn-retry-and-return">
+      <button id="btn-retry" class="retry" onclick="load_home()">Retry </button>
+      <button id="btn-return-start" class="return-start">Return to Start </button>
+  </div>
+</div>
+</div>`
 }
 
 function showGameLost() {
