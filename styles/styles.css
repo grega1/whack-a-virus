@@ -335,7 +335,7 @@ h1,h2{
 }
 
 /* Configurations Modals */
-#modal-configuration{
+#modal-configuration, #modal-configuration-sound, #modal-configuration-shortcut, #modal-instructions-menun{
   display: flex;
   align-items: center;
   justify-content: center;
