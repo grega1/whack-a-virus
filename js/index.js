@@ -81,7 +81,7 @@ class Game {
     /* let scoreOfPlayer = this.score;
     let updatedScore = scoreOfPlayer + _actionPoint;
     return updatedScore; */
-    this.score = this.score + parseInt(_actionPoint);    
+    this.score = this.score + parseInt(_actionPoint);
   }
 
   drawSlots(_firstSlot, _lastSlot) {
@@ -243,13 +243,13 @@ function playAudio(sound) {
   }*/
 }
 //ShortKeyUps
-let arrKeys=['Q','W','E','R','T','A','S','D','F'];
+let arrKeys = ['Q', 'W', 'E', 'R', 'T', 'A', 'S', 'D', 'F'];
 document.addEventListener('keydown', (event) => {
   const keyName = event.key;
-  if(arrKeys.indexOf(keyName) != -1){
-  	console.log('keydown event\n\n' + 'key: ' + keyName);
-     //count++;
-  } 
+  if (arrKeys.indexOf(keyName) != -1) {
+    console.log('keydown event\n\n' + 'key: ' + keyName);
+    //count++;
+  }
   console.log(arrKeys)
 });
 
@@ -290,6 +290,7 @@ function makeSettings() {
 
 };
 makeSettings();
+
 let btnReturnGame = document.getElementById("btn-return-game");
 let removeBtnBox = document.getElementById("btn-box");
 let captureModalConfigurations = document.getElementById("modal-configuration");
@@ -297,13 +298,13 @@ captureModalConfigurations.style.display = "none";
 function openSettings() {
   captureModalConfigurations.classList.add("absolute-with-blur");
   captureModalConfigurations.style.display = "flex";
-  removeBtnBox.classList.add("relative-with-blur"); 
-  
-}
-function changeVol(volume,audio){
+  removeBtnBox.classList.add("relative-with-blur");
 
 }
-function closeSettings(){
+function changeVol(volume, audio) {
+
+}
+function closeSettings() {
   console.log("entrei")
   captureModalConfigurations.style.display = "none";
   removeBtnBox.classList.remove("relative-with-blur");
@@ -359,13 +360,13 @@ function openConfigSound() {
     </section>
     
 </section>`
-let captureSoundMainVol = document.getElementById("main-volume");
+  let captureSoundMainVol = document.getElementById("main-volume");
   captureSoundVol = document.getElementById("sound-volume");
-let captureSoundEffectsVol = document.getElementById("sound-effects");
-captureSoundVol.addEventListener("change", function(e) {
-  let eventVol = e.currentTarget.value / 100;
-  mainMusic.volume= eventVol;
-  //localStorage.setItem('mainVolume',e.currentTarget.value / 100);  
+  let captureSoundEffectsVol = document.getElementById("sound-effects");
+  captureSoundVol.addEventListener("change", function (e) {
+    let eventVol = e.currentTarget.value / 100;
+    mainMusic.volume = eventVol;
+    //localStorage.setItem('mainVolume',e.currentTarget.value / 100);  
   });
 };
 //
@@ -450,13 +451,13 @@ function openShortcutKeys() {
             
         </section>`
   //função que vai guardar e substituir as KeyUps
-  let saveShortKeys= document.getElementById("btn-save");
-  saveShortKeys.addEventListener('click', () =>{  
+  let saveShortKeys = document.getElementById("btn-save");
+  saveShortKeys.addEventListener('click', () => {
     let slots = document.querySelectorAll('.slot');
-    let newSlots= slots.filter((slot) => slot.value !=""); //só retorna os campos preenchidos
+    let newSlots = slots.filter((slot) => slot.value != ""); //só retorna os campos preenchidos
     console.log(slots);
     console.log(newSlots);
-    for(let i=0; i<newSlots.length; i++){
+    for (let i = 0; i < newSlots.length; i++) {
       let captureData = newSlots[i].dataset.index;
       arrKeys[captureData] = newSlots[i].value;
     }
@@ -587,6 +588,7 @@ function showInstructions() {
   removeBtnBox = document.getElementById("modal-instructions");
   captureModalConfigurations = document.getElementById("modal-configuration");
 }
+
 let slotSequence = [];
 
 function gameStart() {
@@ -710,30 +712,31 @@ function gameStart() {
 
 //Movi a showVirus para o escopo global, para poder ser chamada pelo botão de troca de fases
 //Criei um parâmetro para receber o getCurrentLevel e substitui todas as passagens de parâmetro referentes ao nível por ele, para generalizar a função
+
 function showVirus(level = newGame.getCurrentLevel()) {
   console.log("Nível " + level); //remover
   newGame.setCurrentLevel(level);
   const intervalByLevel = newGame.getIntervalByLevel(level);
   console.log("Intervalo de tempo " + intervalByLevel / 1.5); //remover
   //let life = newGame.getLifeStatus();
- 
 
- /*  let decreaseLife1 = document.getElementById(`mask1`);
-  let decreaseLife2 = document.getElementById(`mask2`);
-  let decreaseLife3 = document.getElementById(`mask3`)
- */
+
+  /*  let decreaseLife1 = document.getElementById(`mask1`);
+   let decreaseLife2 = document.getElementById(`mask2`);
+   let decreaseLife3 = document.getElementById(`mask3`)
+  */
 
   let interval1 = setInterval(() => {
     let drawRange = newGame.drawSlots(1, 9);
     let captureVirus = document.getElementById(`virus${drawRange}`);
     let captureHole = document.getElementById(`hole${drawRange}`);
-    
-    
-      captureVirus.classList.add("visible");
-      captureVirus.classList.remove("invisible");
-      captureHole.classList.add("invisible");
-      captureHole.classList.remove("visible");
-    
+
+
+    captureVirus.classList.add("visible");
+    captureVirus.classList.remove("invisible");
+    captureHole.classList.add("invisible");
+    captureHole.classList.remove("visible");
+
     /*captureVirus.addEventListener("click", () => {
       if(hasClickProcessor){
       let storageScore = newGame.increaseScore(virusValue);
@@ -748,12 +751,12 @@ function showVirus(level = newGame.getCurrentLevel()) {
       captureHole.classList.remove("invisible");
       playAudio(sprayClicksSound);
     })*/
-    
+
     setTimeout(() => {
       let decreaseLife = document.getElementById(`masks`);
       let remainLives = '';
-  
-      if(captureVirus.classList.contains("visible") && decreaseLife.hasChildNodes()) {    
+
+      if (captureVirus.classList.contains("visible") && decreaseLife.hasChildNodes()) {
         newGame.setLifeStatus((newGame.getLifeStatus() - 1));
         for (let i = 1; i <= newGame.getLifeStatus(); i++) {
           remainLives += `<img src="img/icon-heart.png" id="mask${i}" />`
@@ -761,18 +764,18 @@ function showVirus(level = newGame.getCurrentLevel()) {
         decreaseLife.innerHTML = remainLives;
         console.log("Total de vidas: " + newGame.getLifeStatus());
       }
-      
+
       captureVirus.classList.add("invisible");
       captureVirus.classList.remove("visible");
       captureHole.classList.add("visible");
-      captureHole.classList.remove("invisible");   
+      captureHole.classList.remove("invisible");
       //Precisamos colocar essa condição no lugar correto, pq ela está executando, mesmo quando o coroninha recebe click
       if (newGame.getLifeStatus() <= 0) {
         clearInterval(interval1);
         clearTimeout(gameTimeout);
         //console.log("Perdeu playboy!");
         showGameLost(); // Inserir a chamada da tela de Game Over
-      } 
+      }
 
 
 
@@ -781,22 +784,22 @@ function showVirus(level = newGame.getCurrentLevel()) {
   }, intervalByLevel);
   //jogar dentro de uma variável e limpar no gameLost
   let gameTimeout = setTimeout(() => {
-    clearInterval(interval1);   
-     for (let i = 1; i <= 9; i++) {
+    clearInterval(interval1);
+    for (let i = 1; i <= 9; i++) {
       let clearVirus = document.getElementById(`virus${[i]}`);
       let clearHole = document.getElementById(`hole${[i]}`);
       clearVirus.classList.add("invisible");
       clearVirus.classList.remove("visible");
       clearHole.classList.add("visible");
-      clearHole.classList.remove("invisible"); 
+      clearHole.classList.remove("invisible");
       //console.log(i);      
-    } 
-    nextLevel();  
+    }
+    nextLevel();
   }, 10000)
 };
 
-function hitVirus(id, level = newGame.getCurrentLevel()) {  
-  newGame.getScore();  
+function hitVirus(id, level = newGame.getCurrentLevel()) {
+  newGame.getScore();
   let captureScore = document.getElementById("score")
   let virusValue = newGame.getPointsByLevel(level);
   let captureVirus = document.getElementById(`virus${id}`);
@@ -806,17 +809,17 @@ function hitVirus(id, level = newGame.getCurrentLevel()) {
   //  console.log(storageScore);
   //  console.log('foi clicado');
   //  newGame.setScore(storageScore);
-    
-    //console.log(newGame.getScore());
-    captureVirus.classList.remove("visible")
-    captureVirus.classList.add("invisible");
-    captureHole.classList.add("visible");
-    captureHole.classList.remove("invisible");
-    //playAudio(sprayClicksSound); //AtivarSom
-    setTimeout(() => {
-      //playAudio(increaseSound);  //AtivarSom
-      captureScore.innerHTML = `Score: ${newGame.getScore()}`;
-    }, 300);
+
+  //console.log(newGame.getScore());
+  captureVirus.classList.remove("visible")
+  captureVirus.classList.add("invisible");
+  captureHole.classList.add("visible");
+  captureHole.classList.remove("invisible");
+  //playAudio(sprayClicksSound); //AtivarSom
+  setTimeout(() => {
+    //playAudio(increaseSound);  //AtivarSom
+    captureScore.innerHTML = `Score: ${newGame.getScore()}`;
+  }, 300);
 
 }
 
@@ -831,7 +834,7 @@ function nextLevel() {
   nextLevelBtn.style.display = "block";
   //playAudio(gameWinSound); //AtivarSom
   newGame.levelAward(newGame.getCurrentLevel());
-  
+
 }
 
 //Restaura a tela de jogo e reinicia a partida de acordo com o novo nível
@@ -840,14 +843,14 @@ function startNextLevel() {
   for (let i = 1; i <= userLifes; i++) {
     masks.innerHTML += `<img src="img/icon-heart.png" id="mask${i}"/>`
   }*/
- 
+
 
   //Atualização das vidas na tela quando troca de nível.
   let upadateLives = document.getElementById(`masks`);
-  let remainLives = ''; 
+  let remainLives = '';
   for (let i = 1; i <= newGame.getLifeStatus(); i++) {
     remainLives += `<img src="img/icon-heart.png" id="mask${i}" />`
-  }  
+  }
   upadateLives.innerHTML = remainLives;
 
   const happyCrocodyle = document.getElementById("happy");
@@ -860,13 +863,13 @@ function startNextLevel() {
   nextLevelBtn.style.display = "none";
 
   newGame.setCurrentLevel(newGame.getCurrentLevel() + 1);
-  let incrementedLevel = newGame.getCurrentLevel();  
+  let incrementedLevel = newGame.getCurrentLevel();
   showVirus(incrementedLevel);
-    
+
 }
-function showGameLost(){
+function showGameLost() {
   removeBtnBox.classList.add(`relative-with-blur`);
-  captureContainer.innerHTML +=` <div id="modal-gameover" class="modal">
+  captureContainer.innerHTML += ` <div id="modal-gameover" class="modal">
   <div class="modal-with-border">
     <div id="circle1" class="circles">        
     </div>
