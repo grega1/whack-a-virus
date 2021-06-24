@@ -468,6 +468,7 @@ function gameStart() {
     }
     startLevel();
 
+
 };
 
 function showVirus() {
@@ -618,7 +619,7 @@ function showGameLost() {
   <h2 class="modal-titles"> Game Over
   </h2>
   <div id="icon" class="sad-croco">
-    <img src="/img/sad-jacarezin.svg" alt="sad crocodile">
+    <img src="./img/sad-jacarezin.svg" alt="sad crocodile">
 
     <p>Pontuação final: <br />
         <p class="modal-titles">${newGame.getScore()}</p>
@@ -629,6 +630,7 @@ function showGameLost() {
   </div>
 </div>
 </div>`
+
 }
 
 function showGameWin() {
@@ -648,7 +650,7 @@ function showGameWin() {
       <h2 class="modal-titles"> You Won
       </h2>
       <div id="icon" class="happy-croco">
-        <img src="/img/happy-jacarezin.svg" alt="happy-alligator">
+        <img src="./img/happy-jacarezin.svg" alt="happy-alligator">
 
         <p>Pontuação final: <br />
         <p class="modal-titles">${newGame.getScore()}</p>
@@ -659,6 +661,7 @@ function showGameWin() {
       </div>
     </div>
     </div>`
+    playAudio(gameWinSound);
 }
 
 function restart() {
