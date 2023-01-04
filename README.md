@@ -51,7 +51,8 @@ Quando o usuário sobrevive ao tempo de jogo sem perder suas vidas é permitido 
 </div>
 
 <br/>
-### 5. Ao perder:
+
+### 6. Ao perder:
 
 Ao perder todas as vidas o jogo é encerrado e um modal indicando o fim do jogo e a pontuação final do jogador aparece, além isso é ao a opção e jogar novamente.
 
