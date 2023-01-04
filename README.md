@@ -1,4 +1,4 @@
-# whack-a-virus
+# Whack-a-virus
 Jogo estilo Whack a Mole
 
 Este jogo consiste em clicar nos coroninhas todas as vezes que ele aparecer.
