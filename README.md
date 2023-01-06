@@ -61,3 +61,4 @@ Ao perder todas as vidas o jogo é encerrado e um modal indicando o fim do jogo 
 </div>
 
 <br/>
+

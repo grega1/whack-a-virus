@@ -1,0 +1,634 @@
+@import url('http://fonts.cdnfonts.com/css/eight-bit-dragon');
+@import url('http://fonts.cdnfonts.com/css/super-legend-boy');
+@font-face {
+    font-family: '8BIT WONDER Nominal';
+    font-style: normal;
+    font-weight: normal;
+    src: local('8BIT WONDER Nominal'), url('../fonts/8-BIT WONDER.woff') format('woff');
+}
+
+* {
+    font-family: "Super Legend Boy";
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url(../img/background.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h1,
+h2 {
+    font-family: "8BIT WONDER Nominal";
+}
+
+
+/* Principal Game Page */
+
+#container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#settings-button {
+    background: transparent;
+    border: none;
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    ;
+}
+
+#help-button {
+    background: transparent;
+    border: none;
+    position: fixed;
+    margin-left: 1.25rem;
+    margin-top: 9.375rem;
+}
+
+#btn-box {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    bottom: 20%;
+    align-items: center;
+}
+
+#principal-title {
+    font-size: 5rem;
+    margin-top: 6.25rem;
+}
+
+#pressStart {
+    position: relative;
+    width: 25rem;
+    height: 3rem;
+    background: none;
+    border-radius: 3.125rem;
+    color: #F223EE;
+    font-size: 1.5rem;
+    border-color: #FFFFFF;
+}
+
+#pressStart:hover {
+    background-color: #F223EE;
+    color: #F2EA23;
+    border: none;
+    transition: 0.3s;
+}
+
+.modal-with-border {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    align-self: center;
+    width: 90%;
+    height: 46.875rem;
+    background-color: none;
+    border: 4px solid #E35C17;
+    border-radius: 1.563rem;
+    position: relative;
+}
+
+.circles {
+    height: 1rem;
+    width: 1rem;
+    border-radius: 50%;
+    background-color: #E35C17;
+    position: absolute
+}
+
+#circle1 {
+    left: 1.875rem;
+    top: 1.875rem;
+}
+
+#circle2 {
+    right: 1.875rem;
+    top: 1.875rem;
+}
+
+#circle3 {
+    left: 1.875rem;
+    bottom: 1.875rem;
+}
+
+#circle4 {
+    right: 1.875rem;
+    bottom: 1.875rem;
+}
+
+#language {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#language img {
+    margin-right: 1.875rem;
+    width: 9.375rem;
+}
+
+#language label {
+    display: flex;
+    align-items: center;
+}
+
+#language input[type="radio"] {
+    display: none;
+}
+
+#flag-EN,
+#flag-ptBR {
+    -ms-interpolation-mode: nearest-neighbor;
+    image-rendering: pixelated;
+}
+
+.modal-titles {
+    text-shadow: 3px 3px 3px #F33123;
+    font-size: 2.375rem;
+}
+
+.btn-sec {
+    width: 20rem;
+    height: 4rem;
+    background-color: #233679;
+    color: #FFFFFF;
+    border-radius: 25px;
+    font-size: 1.25rem;
+    border: none
+}
+
+.btn-sec:hover {
+    background-color: #233679;
+    opacity: 0.7;
+}
+
+
+/* Nickname Page */
+
+#modal-nickname {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3%;
+    align-self: center;
+    position: relative;
+    width: 80%;
+    height: 50rem;
+    background: #000023;
+    border-radius: 25px;
+}
+
+#input-nickname input {
+    width: 31.25rem;
+    height: 3.75rem;
+    background-color: #A79DE1;
+    border: none;
+    border-radius: 25px;
+    text-align: center;
+    font-size: 1.563rem;
+}
+
+
+/* Instructions Page */
+
+#modal-instructions,
+#modal-instructions-ingame,
+#modal-instructions-menu,
+#modal-ingame,
+#modal-gameover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    position: relative;
+    width: 80%;
+    height: 50rem;
+    background: #000023;
+    border-radius: 25px;
+}
+
+#text-instructions p {
+    font-family: "Super Legend Boy";
+    align-items: center;
+    justify-content: center;
+    padding: 40px 40px 0 40px;
+}
+
+#back-to-menu {
+    width: 25rem;
+}
+
+
+/* GamePage */
+
+#game-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    width: 79.938rem;
+    background-color: #000023;
+    height: 50rem;
+    gap: 24px;
+}
+
+#right-box {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    height: 46.875rem;
+    padding-right: 1.063rem;
+}
+
+#modal-ingame .modal-with-border {
+    height: 46.875rem;
+    background-color: #E35C17;
+    cursor: url(../img/alcool-click.svg), grabbing;
+    cursor: url(../img/alcool.svg) 4 12, url(../img/alcool.svg), auto;
+}
+
+#modal-level {
+    width: 22rem;
+    height: 12.5rem;
+    background-color: #000023;
+    border-radius: 25px;
+    font-size: 2rem;
+}
+
+#modal-level .modal-with-border {
+    width: 21.875rem;
+    height: 12.375rem;
+}
+
+#modal-info-game {
+    width: 22rem;
+    height: 34.938rem;
+    background-color: #000023;
+    border-radius: 25px;
+}
+
+#modal-info-game .modal-with-border {
+    width: 21.875rem;
+    height: 33.375rem;
+}
+
+.background-with-crocodile {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+    height: 18.938rem;
+    background-color: #963200;
+    border-radius: 25px 25px 0 0;
+    align-items: flex-end;
+}
+
+.background-with-crocodile img {
+    width: 18.344rem;
+    height: 5.688rem;
+}
+
+#game-section {
+    display: flex;
+    width: 100%;
+    height: 27.438rem;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding-left: 7.5rem;
+    padding-top: 2.75rem;
+}
+
+#game-section .spots {
+    width: 9.375;
+    height: 5.75rem;
+}
+
+#modal-level .modal-with-border {
+    display: flex;
+    flex-direction: row;
+}
+
+#btn-next-level {
+    background: transparent;
+    border: transparent;
+    display: none;
+}
+
+#btn-next-level img {
+    background: transparent;
+    -ms-interpolation-mode: nearest-neighbor;
+    image-rendering: pixelated;
+}
+
+#masks img {
+    -ms-interpolation-mode: nearest-neighbor;
+    image-rendering: pixelated;
+}
+
+
+/* Game Manipulation Styles */
+
+.spots {}
+
+.virus {
+    margin-top: -2.375rem;
+}
+
+.visible {
+    display: block;
+}
+
+.invisible {
+    display: none;
+}
+
+.relative-with-blur {
+    z-index: 0;
+    filter: blur(8px);
+}
+
+
+/* Configurations Modals */
+
+#modal-configuration,
+#modal-configuration-sound,
+#modal-configuration-shortcut,
+#modal-instructions-menun {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3%;
+    align-self: center;
+    position: relative;
+    width: 40%;
+    height: 50rem;
+    background: #000023;
+    border-radius: 25px;
+    position: absolute;
+}
+
+.main-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.main-menu button {
+    width: 21.875rem;
+    height: 3.125rem;
+    background-color: #000023;
+    color: #FFFFFF;
+    border: 1px solid #EAE9E9;
+    border-radius: 25px;
+    font-size: 1.563rem;
+}
+
+.return-game {
+    width: 21.875rem;
+    height: 3.75rem;
+    background-color: #233679;
+    color: #FFFFFF;
+    border-radius: 15px;
+    font-size: 1.563rem;
+    border: none;
+}
+
+
+/* Ajustes de sons */
+
+.sound-menu {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+}
+
+.slider {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.625rem;
+    appearance: none;
+    width: 25rem;
+    height: 0.313rem;
+    background: #f221ef;
+}
+
+
+/* Teclas de atalho */
+
+p {
+    text-align: center;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    margin-left: 2.813rem;
+}
+
+.slot-with-label {
+    display: flex;
+    width: 45%;
+    margin-top: 1.563rem;
+}
+
+.slot {
+    width: 70px;
+    padding: 0.625rem;
+    margin-right: 0.625rem;
+    color: #000023;
+    text-align: center;
+}
+
+label {
+    margin-top: 0.625rem;
+    padding-right: 20px;
+}
+
+.save {
+    width: 21.875rem;
+    height: 3.125rem;
+    background-color: #000023;
+    color: #FFFFFF;
+    border: 1px solid #EAE9E9;
+    border-radius: 15px;
+    font-size: 1.563rem;
+}
+
+.btns {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+}
+
+
+/* Game over */
+
+img {
+    margin-bottom: 3.125rem;
+}
+
+.sad-croco {
+    font-size: larger;
+}
+
+#btn-retry-and-return {
+    display: flex;
+    gap: 24px;
+}
+
+#modal-gameover {
+    width: 50%;
+}
+
+#modal-gameover button {
+    font-size: 1rem;
+    width: 21.875rem;
+}
+
+.retry {
+    width: 21.875rem;
+    height: 3.75rem;
+    background-color: #233679;
+    color: #FFFFFF;
+    border-radius: 15px;
+    font-size: 1.563;
+    border: none
+}
+
+.return-start {
+    width: 21.875;
+    height: 3.75rem;
+    background-color: #233679;
+    color: #FFFFFF;
+    border-radius: 15px;
+    font-size: 1.563rem;
+    border: none
+}
+
+
+/* Next lvl */
+
+.background-with-crocodile {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#player-scoreboard {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    font-size: xx-large;
+}
+
+#modal-next-level {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3%;
+    align-self: center;
+    width: 21.875rem;
+    height: 6.875rem;
+    background: #000023;
+    border-radius: 25px;
+}
+
+.orange-stroke {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    align-self: center;
+    width: 95%;
+    height: 5.625rem;
+    background-color: none;
+    border: 4px solid #E35C17;
+    border-radius: 20px;
+}
+
+.happy-crocodile {
+    align-self: flex-end;
+    margin-bottom: 0;
+}
+
+#scoreboard-footer {
+    display: flex;
+    gap: 80px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#modal-next-level {
+    display: none;
+}
+
+#happy {
+    display: none;
+}
+
+#normal {
+    display: block;
+}
+
+#modal-gameover {
+    position: absolute;
+}
+
+.absolute-with-blur {
+    z-index: 1;
+    display: flex;
+}
+
+#modal-instructions {
+    text-align: justify;
+    font-size: 1.25rem;
+    line-height: 2rem;
+}
+
+.sad-croco {
+    font-size: 2rem;
+    line-height: 3rem;
+}
+
+
+/* Game-WinPage */
+
+#modal-gamewin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3%;
+    align-self: center;
+    position: absolute;
+    width: 80%;
+    height: 50rem;
+    background: #000023;
+    border-radius: 1.563rem;
+}
+
+#modal-gamewin .modal-with-border {
+    background-image: url('../img/fireworks.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#time-input {
+    background-color: #000023;
+    border: none;
+    gap: 20px;
+    margin-top: 20px;
+}

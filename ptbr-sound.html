@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/conf-style.css">
+    <link rel="shortcut icon" href="favicon/favicon.ico" type="image/x-icon">
+    <title>Sons</title>
+</head>
+<body>
+    <section id="container">
+        <header>
+            <button id="settings-button">
+                <img src="/img/settings-btn.svg" alt="">
+            </button>
+        </header>
+
+        <section id="modal-configuration" class="modal">
+            
+            <section class="modal-with-border">
+                <div id="circle1" class="circles">
+                </div>
+                <div id="circle2" class="circles">
+                </div>
+                <div id="circle3" class="circles">
+                </div>
+                <div id="circle4" class="circles">
+                </div>
+
+                <h3>Sons</h3>
+
+                <section id="sound-configuration" class="sound-menu">
+
+                    <div id="slider-main-volume">
+                        <label for="main-volume">Volume Principal:</label>
+                        <input type="range" min="1" max="100" value="50" class="slider" id="main-volume">
+                      </div>
+
+                      <div id="slider-sound-volume">
+                        <label for="sound-volume">Volume do Som:</label>
+                        <input type="range" min="1" max="100" value="50" class="slider" id="sound-volume">
+                      </div>
+
+                      <div id="slider-sound-effects">
+                        <label for="sound-effects">Sound Effects:</label>
+                        <input type="range" min="1" max="100" value="50" class="slider" id="sound-effects">
+                    </div>
+
+                </section>
+
+                <button id="btn-return-game" class="return-game">Voltar para o Menu</button>
+                
+            </section>
+            
+        </section>
+
+    </section>
+    
+</body>
+</html>

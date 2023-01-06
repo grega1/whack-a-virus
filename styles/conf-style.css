@@ -1,0 +1,140 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: "8BIT WONDER",monospace,sans-serif;
+    color: #fff
+}
+body{
+    background-image: url(/img/background.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h3{
+    text-shadow: 3px 3px 3px #E35C17;
+}
+
+#container{
+    display: flex;
+    flex-direction: column;
+  }
+
+/* modal configuration */
+
+#settings-button{
+    background: none;
+    border: none;
+    position: fixed;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+#modal-configuration{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top:3%;
+    align-self: center;
+    position: relative;
+    width: 50%;
+    height: 800px;
+    background:#000023;
+    border-radius: 25px;
+}
+
+
+.main-menu{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.main-menu button{
+    width: 350px;
+    height: 50px;
+    background-color:#000023;
+    color: #FFFFFF;
+    border: 1px solid #EAE9E9;
+    border-radius: 25px;
+    font-size:25px;
+
+}
+
+.return-game{
+    width: 350px;
+    height: 60px;
+    background-color:#233679;
+    color: #FFFFFF;
+    border-radius: 15px;
+    font-size:25px;
+    border: none
+}
+
+/* Ajustes de sons */
+
+.sound-menu{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+
+}
+
+.slider{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    appearance: none;
+    width: 400px;
+    height: 5px;
+    background: #f221ef;
+}
+
+/* Teclas de atalho */
+
+
+
+p{
+    text-align: center;
+}
+
+.row{
+    display: flex;
+    justify-content: center;
+    margin-left: 45px;
+}
+
+.slot-with-label{
+    display: flex;
+    width: 25%;
+    margin-top: 25px;
+}
+
+.slot{
+    width: 10%;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+label{
+    margin-top: 10px;
+}
+
+.save{
+    width: 350px;
+    height: 50px;
+    background-color:#000023;
+    color: #FFFFFF;
+    border: 1px solid #EAE9E9;
+    border-radius: 15px;
+    font-size:25px;
+    font-size: 25px;
+}
+
+.btns{
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+}
+
