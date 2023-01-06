@@ -9,7 +9,7 @@ O jogo possui 5 níveis que vão aumentando a dificuldade a medida que cada nív
 Consiste em uma tela com dois botões sendo eles o botão de retirar o som e o botão principal que leva para o jogo
 
 <div align="center">
-<img src="img/game.png" align="center" style="width:100%" />
+<img src="img/inicial.png" align="center" style="width:100%" />
 </div>
 
 <br/>
